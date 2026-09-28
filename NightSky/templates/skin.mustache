@@ -1,0 +1,60 @@
+<a class="wiki-skip-link" href="#content">{{msg-nightsky-skip}}</a>
+<div id="mw-wrapper" class="wiki-page-wrap">
+  <aside id="mw-navigation" class="wiki-sidebar-column" aria-label="{{msg-navigation-heading}}" {{{html-user-language-attributes}}}>
+    <div id="p-logo" role="banner">
+      <a class="wiki-logo-box" href="{{link-mainpage}}">
+        {{#data-logos}}
+          {{#icon}}<img src="{{.}}" alt="" width="120" height="120">{{/icon}}
+          {{^icon}}{{#1x}}<img src="{{.}}" alt="" width="120" height="120">{{/1x}}{{/icon}}
+        {{/data-logos}}
+        <span class="wiki-logo-name">{{msg-sitetitle}}</span>
+      </a>
+    </div>
+    <button id="nightsky-menu-toggle" type="button" hidden aria-expanded="true" aria-controls="nightsky-sidebar">{{msg-navigation-heading}}</button>
+    <div id="nightsky-sidebar" class="wiki-sidebar">
+      {{#data-search-box}}
+      <form id="p-search" class="wiki-sidebar-block" action="{{form-action}}" role="search">
+        <h2 class="wiki-sidebar-head"><label for="searchInput">{{msg-search}}</label></h2>
+        <div class="wiki-sidebar-search">
+          <input type="hidden" name="title" value="{{page-title}}">
+          {{{html-input}}}<button id="searchButton" type="submit" name="fulltext" value="1">{{msg-search}}</button>
+        </div>
+      </form>
+      {{/data-search-box}}
+      {{#data-portlets-sidebar.data-portlets-first}}{{>Portlet}}{{/data-portlets-sidebar.data-portlets-first}}
+      {{#data-portlets-sidebar.array-portlets-rest}}{{>Portlet}}{{/data-portlets-sidebar.array-portlets-rest}}
+      {{#data-portlets}}
+        {{#data-languages}}{{>Portlet}}{{/data-languages}}
+        {{#data-user-page}}{{>UserPage}}{{/data-user-page}}
+        {{#data-notifications}}{{>Notifications}}{{/data-notifications}}
+        {{#data-user-interface-preferences}}{{>Preferences}}{{/data-user-interface-preferences}}
+        {{#data-user-menu}}{{>Portlet}}{{/data-user-menu}}
+      {{/data-portlets}}
+    </div>
+  </aside>
+  <div class="wiki-content-column">
+    <div class="wiki-topbar" aria-label="{{msg-nightsky-page-tools}}" role="navigation" {{{html-user-language-attributes}}}>
+      {{#data-portlets}}
+        {{#data-associated-pages}}{{>AssociatedPages}}{{/data-associated-pages}}
+        {{#data-variants}}{{>Tabs}}{{/data-variants}}
+        {{#data-views}}{{>Tabs}}{{/data-views}}
+        {{#data-actions}}{{>Tabs}}{{/data-actions}}
+      {{/data-portlets}}
+    </div>
+    {{#html-site-notice}}<div id="siteNotice" class="wiki-site-notice">{{{html-site-notice}}}</div>{{/html-site-notice}}
+    <main id="content" class="mw-body wiki-container" tabindex="-1">
+      {{{html-user-message}}}
+      <div class="mw-indicators">{{#array-indicators}}<div id="{{id}}" class="{{class}}">{{{html}}}</div>{{/array-indicators}}</div>
+      {{{html-title-heading}}}
+      <div id="siteSub">{{msg-tagline}}</div>
+      <div id="bodyContent" class="mw-body-content">
+        <div id="contentSub">{{{html-subtitle}}}{{{html-undelete-link}}}</div>
+        {{{html-body-content}}}
+        <div class="visualClear"></div>
+        {{{html-categories}}}
+      </div>
+      {{{html-after-content}}}
+    </main>
+  </div>
+</div>
+{{#data-footer}}{{>Footer}}{{/data-footer}}

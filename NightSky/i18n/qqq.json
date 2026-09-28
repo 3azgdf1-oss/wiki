@@ -1,0 +1,13 @@
+{
+  "@metadata": {
+    "authors": []
+  },
+  "skinname-nightsky": "Name shown in skin preferences.",
+  "nightsky-desc": "Description on Special:Version.",
+  "nightsky-skip": "Keyboard link that skips navigation.",
+  "nightsky-page-tools": "Accessible label for page action navigation.",
+  "nightsky-associated-pages": "Accessible heading for the page and discussion menu.",
+  "nightsky-user-page": "Accessible heading for the your account menu.",
+  "nightsky-notifications": "Accessible heading for the notifications menu.",
+  "nightsky-preferences": "Accessible heading for the preferences menu."
+}

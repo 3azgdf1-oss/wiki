@@ -1,0 +1,23 @@
+<div class="wiki-lead">Welcome to the community knowledge base. Browse the guides or help improve an article.</div>
+<div class="card-grid">
+<div class="card">
+=== Getting started ===
+Learn the basics and find your way around.
+
+[[Help:Contents|Read the guide]]
+</div>
+<div class="card">
+=== Community ===
+Meet contributors and help maintain the wiki.
+
+[[Project:Community portal|Community portal]]
+</div>
+</div>
+== Reference ==
+{| class="wikitable"
+! Topic !! Description
+|-
+| [[Help:Editing|Editing]] || Learn how to contribute
+|-
+| [[Special:RecentChanges|Recent changes]] || See the latest updates
+|}

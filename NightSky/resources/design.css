@@ -1,0 +1,2705 @@
+/* Adapted from the supplied stylesheet. External fonts are optional; see README. */
+
+
+
+html:has(body.skin-nightsky) { 
+    --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-heading: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-ui: "Inter", system-ui, sans-serif;
+    --font-mono: "JetBrains Mono", "Consolas", monospace;
+
+    /* ── Industrial / spec-sheet palette (Saturn Drums ref) ── */
+    --amber: #6868d4;
+    --amber-bright: #8a8ae8;
+    --amber-dim: rgba(104, 104, 212, 0.14);
+    --amber-subtle: rgba(104, 104, 212, 0.07);
+    --amber-border: rgba(104, 104, 212, 0.42);
+
+    --orange: var(--amber);
+    --orange-bright: var(--amber-bright);
+    --orange-dim: var(--amber-dim);
+    --orange-subtle: var(--amber-subtle);
+    --orange-border: var(--amber-border);
+    --orange-glow: rgba(104, 104, 212, 0.28);
+
+    --purple-primary: var(--amber);
+    --purple-muted: var(--amber-dim);
+    --purple-subtle: var(--amber-subtle);
+
+    --bg-body: #030303;
+    --bg-content: #08080a;
+    --bg-surface: #0a0a0c;
+    --bg-navbar: #030303;
+    --bg-footer: #030303;
+    --bg-sidebar: #08080a;
+    --bg-block-head: #060608;
+    --panel-bg: linear-gradient(180deg, #0c0c0e 0%, #08080a 100%);
+    --panel-bg-flat: #08080a;
+
+    --border-subtle: #16161c;
+    --border-light: #1e1e26;
+    --border-medium: #26262e;
+    --border-bright: #3a3a44;
+
+    --text-main: #d8d8dc;
+    --text-bright: #ffffff;
+    --text-secondary: #91919c;
+    --text-muted: #94949c;
+    --text-spec: #94949c;
+
+    --link-color: #e0e0e4;
+    --link-hover: var(--amber-bright);
+    --link-visited: #888890;
+
+    --accent-blue: var(--amber-bright);
+    --accent-green: #7a7a84;
+    --accent-red: #c87070;
+    --accent-orange: var(--amber);
+    --accent-cyan: #7a7a84;
+    --accent-purple: var(--amber-bright);
+
+    --bg-tip: rgba(255, 255, 255, 0.02);
+    --bg-important: rgba(255, 255, 255, 0.02);
+    --bg-warning: rgba(255, 255, 255, 0.02);
+    --bg-note: rgba(255, 255, 255, 0.02);
+
+    --border-tip: var(--border-light);
+    --border-important: var(--border-light);
+    --border-warning: var(--border-light);
+    --border-note: var(--border-light);
+
+    --layout-max: 1320px;
+    --sidebar-width: 210px;
+
+    --glass-bg: #08080a;
+    --glass-bg-strong: #060608;
+    --glass-border: var(--border-light);
+    --glass-border-bright: var(--border-bright);
+    --glass-highlight: rgba(255, 255, 255, 0.03);
+    --glass-blur: 0px;
+    --radius-sm: 0;
+    --radius-md: 0;
+    --radius-lg: 0;
+    --radius-pill: 0;
+
+    --ease-out: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+ }
+
+
+
+/* Shared panel surface — matte industrial panels */
+
+
+.skin-nightsky .glass,
+.skin-nightsky .wiki-sidebar,
+.skin-nightsky .wiki-container,
+.skin-nightsky .wiki-block,
+.skin-nightsky .card,
+.skin-nightsky .wiki-site-notice,
+.skin-nightsky .search-results-box,
+.skin-nightsky footer { 
+    background: var(--panel-bg);
+    border: 1px solid var(--border-light);
+    box-shadow: inset 0 1px 0 var(--glass-highlight);
+ }
+
+
+
+/* ── Reset ── */
+
+
+.skin-nightsky *,
+.skin-nightsky *::before,
+.skin-nightsky *::after {  box-sizing: border-box;  }
+
+
+
+html:has(body.skin-nightsky) { 
+    scroll-behavior: smooth;
+    font-size: 14px;
+ }
+
+
+
+body.skin-nightsky { 
+    background-color: var(--bg-body);
+    background-image:
+        radial-gradient(ellipse 120% 80% at 0% 0%, rgba(30, 30, 36, 0.35) 0%, transparent 55%),
+        radial-gradient(ellipse 80% 60% at 100% 100%, rgba(20, 20, 24, 0.4) 0%, transparent 50%),
+        linear-gradient(165deg, #030303 0%, #050505 40%, #080808 100%);
+    background-attachment: fixed;
+    color: var(--text-main);
+    font-family: var(--font-body);
+    font-size: 0.92rem;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+ }
+
+
+
+.skin-nightsky .wiki-body--nightsky { 
+    background-color: var(--bg-body);
+    background-image:
+        radial-gradient(ellipse 120% 80% at 0% 0%, rgba(30, 30, 36, 0.35) 0%, transparent 55%),
+        radial-gradient(ellipse 80% 60% at 100% 100%, rgba(20, 20, 24, 0.4) 0%, transparent 50%),
+        linear-gradient(165deg, #030303 0%, #050505 40%, #080808 100%);
+    background-attachment: fixed;
+ }
+
+
+
+.skin-nightsky ::selection { 
+    background: var(--amber-dim);
+    color: var(--text-bright);
+ }
+
+
+
+/* ═══════════════════════════════════════════
+   IMAGEBOARD / MEDIAWIKI SHELL LAYOUT
+   ═══════════════════════════════════════════ */
+
+
+.skin-nightsky .wiki-page-wrap { 
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    width: 100%;
+    max-width: var(--layout-max);
+    margin: 0 auto;
+    padding: 1.25rem 1rem 1.5rem;
+    flex: 1;
+ }
+
+
+
+.skin-nightsky .wiki-sidebar { 
+    width: 100%;
+    border-radius: var(--radius-md);
+    font-size: 0.82rem;
+    overflow: hidden;
+ }
+
+
+
+.skin-nightsky .wiki-sidebar-block { 
+    border-bottom: 1px solid var(--border-light);
+ }
+
+
+
+.skin-nightsky .wiki-sidebar-head,
+.skin-nightsky .wiki-block-head { 
+    background: var(--bg-block-head);
+    border-bottom: 1px solid var(--border-light);
+    border-left: none;
+    padding: 0.55rem 0.85rem 0.45rem;
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    font-weight: 500;
+    color: var(--text-spec);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    margin: 0;
+    line-height: 1.55;
+ }
+
+
+
+.skin-nightsky .wiki-sidebar-head { 
+    padding: 0.55rem 0.75rem 0.45rem;
+ }
+
+
+
+.skin-nightsky .wiki-sidebar ul { 
+    list-style: none;
+    margin: 0;
+    padding: 0;
+ }
+
+
+
+.skin-nightsky .wiki-sidebar li a { 
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.5rem 0.85rem;
+    margin: 0;
+    border-bottom: 1px solid var(--border-subtle);
+    border-radius: 0;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.78rem;
+    font-weight: 500;
+    line-height: 1.35;
+    letter-spacing: 0.01em;
+    transition: color 0.12s var(--ease-out), background 0.12s var(--ease-out);
+ }
+
+
+
+.skin-nightsky .wiki-sidebar-icon { 
+    width: 0.95rem;
+    height: 0.95rem;
+    flex-shrink: 0;
+    opacity: 0.8;
+ }
+
+
+
+.skin-nightsky .wiki-sidebar li a:hover .wiki-sidebar-icon { 
+    opacity: 1;
+ }
+
+
+
+.skin-nightsky .wiki-sidebar li:last-child a { 
+    margin-bottom: 0;
+    border-bottom: none;
+ }
+
+
+
+.skin-nightsky .wiki-sidebar-block:last-child { 
+    border-bottom: none;
+ }
+
+
+
+.skin-nightsky .wiki-sidebar li a:hover { 
+    background: rgba(255, 255, 255, 0.02);
+    color: var(--text-bright);
+ }
+
+
+
+.skin-nightsky .wiki-sidebar li a.active { 
+    background: var(--amber-subtle);
+    color: var(--text-bright);
+    border-left: 2px solid var(--amber);
+    padding-left: calc(0.85rem - 2px);
+ }
+
+
+
+.skin-nightsky .wiki-content-column { 
+    flex: 1;
+    min-width: 0;
+    width: 100%;
+ }
+
+
+
+/* Content blocks */
+
+
+.skin-nightsky .wiki-block { 
+    margin-bottom: 1rem;
+    border-radius: 0;
+    overflow: hidden;
+ }
+
+
+
+.skin-nightsky .wiki-block-body { 
+    padding: 1rem 0.95rem 1.1rem;
+    font-size: 0.84rem;
+    line-height: 1.65;
+    color: var(--text-main);
+ }
+
+
+
+.skin-nightsky .wiki-block-body p:last-child,
+.skin-nightsky .wiki-block-body ul:last-child { 
+    margin-bottom: 0;
+ }
+
+
+
+.skin-nightsky .wiki-block-body ul,
+.skin-nightsky .wiki-block-body ol { 
+    margin: 0.25rem 0 0.4rem;
+    padding-left: 1.35rem;
+ }
+
+
+
+.skin-nightsky .wiki-block-body li { 
+    margin-bottom: 0.12rem;
+ }
+
+
+
+.skin-nightsky .wiki-block-grid { 
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+ }
+
+
+
+.skin-nightsky .wiki-site-notice { 
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.76rem;
+    font-family: var(--font-mono);
+    color: var(--text-secondary);
+    text-align: left;
+    letter-spacing: 0.02em;
+    line-height: 1.55;
+    border-top: 1px solid var(--amber-border);
+    border-bottom: 1px solid var(--border-light);
+ }
+
+
+
+.skin-nightsky .wiki-site-notice strong { 
+    color: var(--amber-bright);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.68rem;
+ }
+
+
+
+/* ═══════════════════════════════════════════
+   SIDEBAR COLUMN + LOGO BOX (monobook style:
+   logo sits top-left, above the sidebar)
+   ═══════════════════════════════════════════ */
+
+
+.skin-nightsky .wiki-sidebar-column { 
+    width: var(--sidebar-width);
+    flex-shrink: 0;
+    margin-right: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+ }
+
+
+
+.skin-nightsky .wiki-logo-box { 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    padding: 0.6rem 0.4rem 0.5rem;
+    text-decoration: none;
+    perspective: 900px;
+ }
+
+
+
+.skin-nightsky .wiki-logo-box img { 
+    width: 100%;
+    max-width: 120px;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.35));
+    transition: filter 0.2s var(--ease-out);
+    animation: wikiLogoCoinSpin 10s linear infinite;
+    transform-style: preserve-3d;
+    transform-origin: center center;
+    backface-visibility: visible;
+ }
+
+
+
+.skin-nightsky .wiki-logo-box:hover img { 
+    filter: drop-shadow(0 4px 16px rgba(104, 104, 212, 0.35));
+ }
+
+
+
+.skin-nightsky .wiki-logo-name { 
+    width: 100%;
+    max-width: 100%;
+    white-space: normal;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    font-weight: 600;
+    line-height: 1.45;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    overflow-wrap: break-word;
+    position: relative;
+    padding: 0.35rem 0.15rem 0.25rem;
+    background: linear-gradient(105deg,
+            #ffffff 0%,
+            #d4d4ff 22%,
+            #6868d4 48%,
+            #a8a8f0 72%,
+            #ffffff 100%);
+    background-size: 220% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    filter:
+        drop-shadow(0 0 10px rgba(104, 104, 212, 0.65)) drop-shadow(0 0 22px rgba(104, 104, 212, 0.35)) drop-shadow(0 1px 0 rgba(0, 0, 0, 0.9));
+    animation: wikiTitleShimmer 7s ease-in-out infinite;
+ }
+
+
+
+@keyframes wikiTitleShimmer {
+
+    0%,
+    100% {
+        background-position: 0% center;
+    }
+
+    50% {
+        background-position: 100% center;
+    }
+}
+
+
+
+@keyframes wikiLogoCoinSpin {
+    from {
+        transform: rotateY(0deg);
+    }
+
+    to {
+        transform: rotateY(360deg);
+    }
+}
+
+
+
+@keyframes wikiLogoBob {
+
+    0%,
+    100% {
+        translate: 0 0;
+    }
+
+    50% {
+        translate: 0 -6px;
+        /* or whatever your original value was */
+    }
+}
+
+
+
+@media  (prefers-reduced-motion: reduce) {
+
+    
+.skin-nightsky .wiki-logo-box img { 
+        animation: none;
+     }
+
+
+    
+.skin-nightsky .wiki-logo-name { 
+        animation: none;
+        background-position: 0% center;
+     }
+
+
+    
+.skin-nightsky .central-feature .member-name,
+.skin-nightsky .wiki-title-shimmer { 
+        animation: none;
+        background-position: 0% center;
+     }
+
+
+}
+
+
+
+/* ═══════════════════════════════════════════
+   CONTENT TOPBAR (MediaWiki page-tab strip,
+   fully integrated with the sidebar shell)
+   ═══════════════════════════════════════════ */
+
+
+.skin-nightsky .wiki-topbar { 
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0 0 0.65rem;
+    margin-bottom: 0;
+ }
+
+
+
+.skin-nightsky .wiki-topbar-tabs { 
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+ }
+
+
+
+.skin-nightsky .wiki-topbar-tabs>li>a { 
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 500;
+    color: var(--text-spec);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    padding: 0.5rem 1.1rem;
+    background: var(--panel-bg-flat);
+    border: 1px solid var(--border-light);
+    border-radius: 0;
+    box-shadow: none;
+    transition: color 0.12s var(--ease-out), background 0.12s var(--ease-out), border-color 0.12s var(--ease-out);
+ }
+
+
+
+.skin-nightsky .wiki-topbar-tabs>li>a:hover { 
+    color: var(--text-bright);
+    background: #0e0e12;
+    border-color: var(--border-bright);
+ }
+
+
+
+.skin-nightsky .wiki-topbar-tabs>li>a.active { 
+    color: var(--text-bright);
+    background: #0e0e12;
+    border-color: var(--border-bright);
+    box-shadow: inset 0 -2px 0 var(--amber);
+ }
+
+
+
+/* Sidebar search block */
+
+
+.skin-nightsky .wiki-sidebar-search { 
+    padding: 0.5rem 0.65rem 0.65rem;
+ }
+
+
+
+/* ═══════════════════════════════════════════
+   MAIN CONTENT AREA
+   ═══════════════════════════════════════════ */
+
+
+.skin-nightsky .wiki-container { 
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 1.5rem 1.75rem 1.75rem;
+    border-radius: 0;
+    animation: none;
+ }
+
+
+
+.skin-nightsky .wiki-page-title { 
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+    font-weight: 800;
+    color: var(--text-bright);
+    border-bottom: 1px solid var(--border-light);
+    padding-bottom: 0.65rem;
+    margin: 0 0 0.5rem;
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+    text-shadow: none;
+ }
+
+
+
+.skin-nightsky .wiki-lead { 
+    font-size: 0.84rem;
+    color: var(--text-secondary);
+    margin-bottom: 1.25rem;
+    padding: 0.85rem 0;
+    line-height: 1.7;
+    border-radius: 0;
+    border-bottom: 1px solid var(--border-subtle);
+    text-align: justify;
+ }
+
+
+
+/* ═══════════════════════════════════════════
+   TYPOGRAPHY
+   ═══════════════════════════════════════════ */
+
+
+.skin-nightsky h1,
+.skin-nightsky h2,
+.skin-nightsky h3,
+.skin-nightsky h4,
+.skin-nightsky h5,
+.skin-nightsky h6 { 
+    font-family: var(--font-heading);
+    color: var(--text-bright);
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+    line-height: 1.35;
+ }
+
+
+
+.skin-nightsky h1 { 
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    font-weight: 800;
+    border-bottom: 1px solid var(--border-light);
+    padding-bottom: 0.35rem;
+    margin-bottom: 0.65rem;
+    letter-spacing: -0.03em;
+    color: var(--text-bright);
+    background: none;
+    -webkit-text-fill-color: unset;
+ }
+
+
+
+.skin-nightsky h2 { 
+    font-size: clamp(1rem, 1.8vw, 1.25rem);
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-top: 1.5rem;
+    margin-bottom: 0.55rem;
+    color: var(--text-bright);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+ }
+
+
+
+.skin-nightsky h3 { 
+    font-size: 0.92rem;
+    margin-top: 0.65rem;
+    margin-bottom: 0.25rem;
+    color: var(--text-bright);
+ }
+
+
+
+.skin-nightsky h4,
+.skin-nightsky .wiki-detail { 
+    font-size: 0.88rem;
+    margin-top: 0.5rem;
+    color: var(--text-muted);
+    font-style: normal;
+ }
+
+
+
+.skin-nightsky .wiki-detail { 
+    font-family: var(--font-heading);
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+    line-height: 1.35;
+ }
+
+
+.skin-nightsky main p a,
+.skin-nightsky .wiki-detail a,
+.skin-nightsky .wiki-hatnote a {  text-decoration: underline;  }
+
+
+
+.skin-nightsky p { 
+    margin-bottom: 0.9rem;
+ }
+
+
+
+.skin-nightsky a { 
+    color: var(--link-color);
+    text-decoration: none;
+    transition: color 0.12s var(--ease-out);
+ }
+
+
+
+.skin-nightsky a:hover { 
+    color: var(--link-hover);
+    text-decoration: underline;
+ }
+
+
+
+.skin-nightsky a:visited { 
+    color: var(--link-visited);
+ }
+
+
+
+.skin-nightsky hr { 
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border-medium), transparent);
+    margin: 1.75rem 0;
+ }
+
+
+
+.skin-nightsky ul,
+.skin-nightsky ol { 
+    margin-bottom: 0.9rem;
+    padding-left: 1.5rem;
+ }
+
+
+
+.skin-nightsky li { 
+    margin-bottom: 0.2rem;
+ }
+
+
+
+.skin-nightsky code { 
+    font-family: var(--font-mono);
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-light);
+    padding: 0.15em 0.4em;
+    border-radius: 0;
+    font-size: 0.9em;
+    color: var(--text-secondary);
+ }
+
+
+
+.skin-nightsky pre { 
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-light);
+    border-radius: 0;
+    padding: 1rem;
+    overflow-x: auto;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    line-height: 1.5;
+ }
+
+
+
+.skin-nightsky pre code { 
+    background: none;
+    border: none;
+    padding: 0;
+    color: var(--text-main);
+ }
+
+
+
+.skin-nightsky blockquote { 
+    border-left: 3px solid var(--border-medium);
+    padding: 0.5rem 1rem;
+    margin: 1rem 0;
+    color: var(--text-secondary);
+    background-color: rgba(24, 26, 27, 0.02);
+    font-style: italic;
+ }
+
+
+
+/* ═══════════════════════════════════════════
+   CARDS
+   ═══════════════════════════════════════════ */
+
+
+.skin-nightsky .card-grid { 
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+    gap: 0.65rem;
+    margin: 0.65rem 0;
+ }
+
+
+
+.skin-nightsky .card { 
+    padding: 1rem 0.95rem;
+    border-radius: 0;
+    transition: border-color 0.12s var(--ease-out), background 0.12s var(--ease-out);
+    display: flex;
+    flex-direction: column;
+ }
+
+
+
+.skin-nightsky .card:hover { 
+    border-color: var(--amber-border);
+    background: linear-gradient(180deg, #0e0e12 0%, #08080a 100%);
+    box-shadow: inset 0 1px 0 rgba(104, 104, 212, 0.1);
+    transform: none;
+ }
+
+
+
+.skin-nightsky .card h3 { 
+    font-size: 0.92rem;
+    color: var(--text-bright);
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 0.45rem;
+    border-bottom: none;
+    letter-spacing: -0.02em;
+ }
+
+
+
+.skin-nightsky .card p { 
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.65rem;
+    line-height: 1.6;
+ }
+
+
+
+.skin-nightsky .card a { 
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    font-weight: 500;
+    color: var(--amber-bright);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-top: auto;
+    text-decoration: none;
+ }
+
+
+
+.skin-nightsky .card a::after { 
+    content: " →";
+ }
+
+
+
+.skin-nightsky .card a:hover { 
+    color: var(--link-hover);
+    letter-spacing: 0;
+ }
+
+
+
+/* ═══════════════════════════════════════════
+   CALLOUTS / ADMONITIONS
+   ═══════════════════════════════════════════ */
+
+
+.skin-nightsky .callout { 
+    padding: 0.65rem 0.85rem;
+    margin: 0.5rem 0;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-medium);
+    border-left-width: 3px;
+    font-size: 0.84rem;
+    position: relative;
+    background: var(--panel-bg);
+    box-shadow: none;
+ }
+
+
+
+.skin-nightsky .callout strong { 
+    font-family: var(--font-ui);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-right: 0.3rem;
+ }
+
+
+
+.skin-nightsky .callout-tip { 
+    background-color: var(--bg-tip);
+    border-left-color: var(--border-tip);
+ }
+
+
+
+.skin-nightsky .callout-tip strong { 
+    color: var(--accent-green);
+ }
+
+
+
+.skin-nightsky .callout-important { 
+    background-color: var(--bg-important);
+    border-left-color: var(--border-important);
+ }
+
+
+
+.skin-nightsky .callout-important strong { 
+    color: var(--accent-orange);
+ }
+
+
+
+.skin-nightsky .callout-warning { 
+    background-color: var(--bg-warning);
+    border-left-color: var(--border-warning);
+ }
+
+
+
+.skin-nightsky .callout-warning strong { 
+    color: var(--accent-red);
+ }
+
+
+
+.skin-nightsky .callout-note { 
+    background-color: var(--bg-note);
+    border-left-color: var(--border-note);
+ }
+
+
+
+.skin-nightsky .callout-note strong { 
+    color: var(--accent-blue);
+ }
+
+
+
+/* ═══════════════════════════════════════════
+   TABLE OF CONTENTS — polished wiki style
+   ═══════════════════════════════════════════ */
+
+
+.skin-nightsky .toc-box { 
+    background-color: transparent;
+    border: none;
+    border-top: 1px solid var(--border-light);
+    border-bottom: 1px solid var(--border-light);
+    border-radius: 0;
+    padding: 0;
+    display: inline-block;
+    min-width: 220px;
+    max-width: 420px;
+    margin: 0.75rem 0 1.5rem 0;
+    overflow: hidden;
+ }
+
+
+
+.skin-nightsky .toc-title { 
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 0.58rem;
+    color: var(--text-spec);
+    text-align: left;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    padding: 0.55rem 0.5rem 0.45rem;
+    margin-bottom: 0;
+    background: var(--bg-block-head);
+    border-bottom: 1px solid var(--border-light);
+ }
+
+
+
+.skin-nightsky .toc-box>ul { 
+    padding: 0.6rem 1rem 0.75rem 1rem;
+    margin: 0;
+ }
+
+
+
+.skin-nightsky .toc-box ul { 
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    counter-reset: toc-counter;
+ }
+
+
+
+.skin-nightsky .toc-box>ul>li { 
+    counter-increment: toc-counter;
+ }
+
+
+
+.skin-nightsky .toc-box li { 
+    margin: 0.15rem 1rem;
+    font-size: 0.85rem;
+    line-height: 1.5;
+ }
+
+
+
+.skin-nightsky .toc-box a { 
+    color: var(--link-color);
+    text-decoration: none;
+    display: inline-block;
+    padding: 0.1rem 0;
+    transition: color 0.12s var(--ease-out);
+ }
+
+
+
+.skin-nightsky .toc-box a:hover { 
+    color: var(--link-hover);
+    text-decoration: underline;
+ }
+
+
+
+/* ── Tree-line connectors for nested items ── */
+
+
+.skin-nightsky .toc-box ul ul { 
+    padding-left: 0;
+    margin-top: 0.1rem;
+    margin-left: 0.45rem;
+    list-style: none;
+    border-left: none;
+ }
+
+
+
+.skin-nightsky .toc-box>ul>li { 
+    position: relative;
+ }
+
+
+
+/* Parent li that contains a nested ul gets a vertical line */
+
+
+.skin-nightsky .toc-box li:has(> ul) { 
+    position: relative;
+ }
+
+
+
+.skin-nightsky .toc-box ul ul li { 
+    font-size: 0.82rem;
+    margin: 0.1rem 0;
+    padding-left: 1.4rem;
+    position: relative;
+ }
+
+
+
+/* Vertical trunk line running alongside nested items */
+
+
+.skin-nightsky .toc-box ul ul li::before { 
+    content: "├";
+    position: absolute;
+    left: 0.15rem;
+    top: 0;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--border-bright);
+    user-select: none;
+ }
+
+
+
+/* Last nested item gets the └ (╰) connector */
+
+
+.skin-nightsky .toc-box ul ul li:last-child::before { 
+    content: "╰";
+ }
+
+
+
+/* Vertical line connecting items — runs through parent li */
+
+
+.skin-nightsky .toc-box ul ul li::after { 
+    content: "";
+    position: absolute;
+    left: calc(0.15rem + 0.35em);
+    top: 0;
+    bottom: 0;
+    width: 0;
+    border-left: 1px solid var(--border-light);
+ }
+
+
+
+/* Hide the continuation line on the last item */
+
+
+.skin-nightsky .toc-box ul ul li:last-child::after { 
+    display: none;
+ }
+
+
+
+/* ═══════════════════════════════════════════
+   WIKI THUMBNAIL IMAGES
+   ═══════════════════════════════════════════ */
+
+
+.skin-nightsky .wiki-thumb { 
+    margin-bottom: 1rem;
+    max-width: 300px;
+    width: 100%;
+ }
+
+
+
+.skin-nightsky .thumb-right { 
+    float: right;
+    margin-left: 1.5rem;
+ }
+
+
+
+.skin-nightsky .thumb-left { 
+    float: left;
+    margin-right: 1.5rem;
+ }
+
+
+
+.skin-nightsky .thumb-inner { 
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-light);
+    padding: 6px;
+    border-radius: 0;
+    box-shadow: none;
+ }
+
+
+
+.skin-nightsky .wiki-thumb img { 
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 0;
+ }
+
+
+
+.skin-nightsky .thumb-caption { 
+    padding: 5px 4px 2px;
+    font-size: 0.75rem;
+    line-height: 1.4;
+    color: var(--text-muted);
+    font-style: italic;
+ }
+
+
+
+/* ═══════════════════════════════════════════
+   WIKI VIDEO EMBEDS (lazy-loaded)
+   ═══════════════════════════════════════════ */
+
+
+.skin-nightsky .wiki-video { 
+    margin: 1.25rem 0;
+    width: 100%;
+ }
+
+
+
+.skin-nightsky .wiki-video .thumb-inner { 
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-light);
+    padding: 6px;
+    border-radius: 0;
+    box-shadow: none;
+ }
+
+
+
+.skin-nightsky .wiki-video video,
+.skin-nightsky .wiki-video .lazy-video { 
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 0;
+    background-color: #000;
+ }
+
+
+
+/* ═══════════════════════════════════════════
+   TABLES
+   ═══════════════════════════════════════════ */
+
+
+.skin-nightsky .wiki-table { 
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.25rem 0;
+    font-size: 0.8rem;
+    font-family: var(--font-mono);
+    background-color: transparent;
+    border: none;
+    border-top: 1px solid var(--border-light);
+    border-bottom: 1px solid var(--border-light);
+ }
+
+
+
+.skin-nightsky .wiki-table th { 
+    background-color: transparent;
+    color: var(--text-spec);
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 0.62rem;
+    text-align: left;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    padding: 0.65rem 0.5rem;
+    border: none;
+    border-bottom: 1px solid var(--border-medium);
+ }
+
+
+
+.skin-nightsky .wiki-table td { 
+    padding: 0.55rem 0.5rem;
+    border: none;
+    border-bottom: 1px solid var(--border-subtle);
+    color: var(--text-main);
+    vertical-align: middle;
+ }
+
+
+
+.skin-nightsky .wiki-table tr:last-child td { 
+    border-bottom: none;
+ }
+
+
+
+.skin-nightsky .wiki-table tr:hover { 
+    background-color: rgba(255, 255, 255, 0.015);
+ }
+
+
+
+.skin-nightsky .table-responsive { 
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+ }
+
+
+
+/* ═══════════════════════════════════════════
+   FOOTER
+   ═══════════════════════════════════════════ */
+
+
+.skin-nightsky footer { 
+    text-align: center;
+    padding: 1.1rem 1.5rem;
+    margin-top: auto;
+    border-top: 1px solid var(--border-subtle);
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.06em;
+    position: relative;
+    z-index: 10;
+    border-radius: 0;
+    margin-left: 0.75rem;
+    margin-right: 0.75rem;
+ }
+
+
+
+.skin-nightsky footer a { 
+    color: var(--link-color);
+ }
+
+
+
+.skin-nightsky footer strong { 
+    font-family: var(--font-ui);
+    color: var(--text-secondary);
+ }
+
+
+
+.skin-nightsky .credits-container { 
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 0.6rem;
+ }
+
+
+
+.skin-nightsky .credit-category { 
+    font-size: 0.78rem;
+ }
+
+
+
+/* ═══════════════════════════════════════════
+   SEARCH
+   ═══════════════════════════════════════════ */
+
+
+.skin-nightsky .search-container { 
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+ }
+
+
+
+.skin-nightsky #searchInput { 
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    width: 100%;
+    height: 34px;
+    padding: 0 0.7rem;
+    border-radius: 0;
+    border: 1px solid var(--border-light);
+    background: var(--panel-bg-flat);
+    color: var(--text-main);
+    letter-spacing: 0.04em;
+    transition: border-color 0.12s var(--ease-out), box-shadow 0.12s var(--ease-out);
+ }
+
+
+
+.skin-nightsky #searchInput:focus { 
+    border-color: var(--amber);
+    outline: none;
+    box-shadow: inset 0 0 0 1px var(--amber-dim);
+ }
+
+
+
+.skin-nightsky #searchInput::placeholder { 
+    color: var(--text-muted);
+ }
+
+
+
+.skin-nightsky .search-results-box { 
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    border-radius: var(--radius-md);
+    max-height: 280px;
+    overflow-y: auto;
+    background: var(--panel-bg-flat);
+ }
+
+
+
+.skin-nightsky .search-results-box[hidden] {  display: none;  }
+
+
+.skin-nightsky .search-message {  padding: 10px;  }
+
+
+.skin-nightsky .search-item[aria-selected="true"] {  background: var(--amber-dim);  }
+
+
+.skin-nightsky .wiki-media-pending {  padding: 1rem; color: var(--text-muted);  }
+
+
+
+.skin-nightsky .wiki-skip-link { 
+    position: fixed;
+    top: 0.5rem;
+    left: 0.5rem;
+    z-index: 1000000;
+    padding: 0.6rem 1rem;
+    background: var(--bg-surface);
+    transform: translateY(-200%);
+ }
+
+
+.skin-nightsky .wiki-skip-link:focus {  transform: none;  }
+
+
+.skin-nightsky :where(a, button, input, [tabindex]):focus-visible { 
+    outline: 2px solid var(--amber-bright);
+    outline-offset: 3px;
+ }
+
+
+.skin-nightsky button {  color: var(--text-main);  }
+
+
+.skin-nightsky .search-message button,
+.skin-nightsky #registry-status button { 
+    background: var(--bg-surface);
+    border: 1px solid var(--border-bright);
+    padding: 0.35rem 0.65rem;
+    cursor: pointer;
+    font: inherit;
+ }
+
+
+.skin-nightsky main,
+.skin-nightsky footer,
+.skin-nightsky .search-results-box,
+.skin-nightsky .wiki-preview-popup {  overflow-wrap: anywhere;  }
+
+
+.skin-nightsky .thumb-inner iframe {  max-width: 100%; border: 0;  }
+
+
+
+.skin-nightsky .search-item:hover { 
+    background: rgba(255, 255, 255, 0.04);
+ }
+
+
+
+.skin-nightsky .search-item { 
+    display: block;
+    padding: 8px 12px;
+    text-decoration: none;
+    color: var(--text-main);
+    border-bottom: 1px solid var(--border-light);
+    transition: background-color 0.1s var(--ease-out);
+ }
+
+
+
+.skin-nightsky .search-item:last-child { 
+    border-bottom: none;
+ }
+
+
+
+.skin-nightsky .search-item strong { 
+    display: block;
+    font-family: var(--font-ui);
+    font-size: 0.82rem;
+    color: var(--link-color);
+ }
+
+
+
+.skin-nightsky .search-item span { 
+    display: block;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+ }
+
+
+
+.skin-nightsky .search-item .wiki-categories { 
+    margin-top: 6px;
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    flex-wrap: wrap;
+    pointer-events: none;
+ }
+
+
+
+/* ═══════════════════════════════════════════
+   INFOBOX SIDEBAR
+   ═══════════════════════════════════════════ */
+
+
+.skin-nightsky .infobox { 
+    float: right;
+    width: 265px;
+    margin: 0 0 1.25rem 1.5rem;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-medium);
+    border-radius: 0;
+    font-size: 0.85rem;
+    overflow: hidden;
+ }
+
+
+
+.skin-nightsky .infobox-title { 
+    background: var(--bg-block-head);
+    color: var(--text-bright);
+    text-align: center;
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 0.62rem;
+    padding: 0.55rem 0.75rem;
+    border-bottom: 1px solid var(--border-light);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+ }
+
+
+
+.skin-nightsky .infobox-image { 
+    padding: 5px;
+    text-align: center;
+    background-color: var(--bg-content);
+ }
+
+
+
+.skin-nightsky .infobox-image img { 
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 0;
+ }
+
+
+
+.skin-nightsky .infobox-image-caption { 
+    padding-top: 3px;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    font-style: italic;
+ }
+
+
+
+.skin-nightsky .infobox table { 
+    width: 100%;
+    border-collapse: collapse;
+ }
+
+
+
+.skin-nightsky .infobox th,
+.skin-nightsky .infobox td { 
+    padding: 5px 10px;
+    border-top: 1px solid var(--border-light);
+    vertical-align: top;
+    text-align: left;
+    color: var(--text-main);
+    font-size: 0.8rem;
+ }
+
+
+
+.skin-nightsky .infobox th { 
+    width: 45%;
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 0.62rem;
+    background-color: transparent;
+    color: var(--text-spec);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+ }
+
+
+
+.skin-nightsky .infobox tr:hover { 
+    background-color: rgba(255, 255, 255, 0.02);
+ }
+
+
+
+/* ── Status badges ── */
+
+
+.skin-nightsky .status-badge { 
+    display: inline-block;
+    padding: 1px 7px;
+    border-radius: 0;
+    font-family: var(--font-ui);
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+ }
+
+
+
+.skin-nightsky .status-active,
+.skin-nightsky .status-patched,
+.skin-nightsky .status-countered { 
+    background-color: rgba(255, 255, 255, 0.06);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-medium);
+ }
+
+
+
+.skin-nightsky .status-high,
+.skin-nightsky .status-medium,
+.skin-nightsky .status-low { 
+    background: #1a1a1a;
+    color: var(--text-secondary);
+    border: 1px solid var(--border-medium);
+ }
+
+
+
+/* ═══════════════════════════════════════════
+   SECTION / ARTICLE CLEAR
+   ═══════════════════════════════════════════ */
+
+
+.skin-nightsky section,
+.skin-nightsky article { 
+    clear: both;
+    overflow: hidden;
+ }
+
+
+
+/* ═══════════════════════════════════════════════════════════════
+   INSERTABLE WIKI COMPONENTS
+   Drop these class names into your HTML for instant wiki styling.
+   ═══════════════════════════════════════════════════════════════ */
+
+
+
+/* ── Hatnote ──
+   Small italic note at the top of an article.
+   Usage: <div class="wiki-hatnote">This article is about X. For Y, see <a>Z</a>.</div>
+*/
+
+
+.skin-nightsky .wiki-hatnote { 
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+    padding-left: 0.5rem;
+    border-left: 2px solid var(--border-light);
+ }
+
+
+
+/* ── Stub / WIP marker ──
+   Usage: <div class="wiki-stub">This article is a stub. You can help by expanding it.</div>
+*/
+
+
+.skin-nightsky .wiki-stub { 
+    background-color: var(--bg-surface);
+    border: 1px dashed var(--border-bright);
+    border-radius: 0;
+    padding: 0.6rem 1rem;
+    margin: 1.25rem 0;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    text-align: center;
+    font-style: italic;
+ }
+
+
+
+.skin-nightsky .wiki-stub::before { 
+    content: "STUB PAGE";
+    display: block;
+    font-weight: bold;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.25rem;
+ }
+
+
+
+/* ── Blockquote with attribution ──
+   Usage:
+   <figure class="wiki-quote">
+       <blockquote>Quote text here.</blockquote>
+       <figcaption>— Author, <cite>Source</cite></figcaption>
+   </figure>
+*/
+
+
+.skin-nightsky .wiki-quote { 
+    margin: 1.25rem 0;
+    padding: 0;
+ }
+
+
+
+.skin-nightsky .wiki-quote blockquote { 
+    border-left: 3px solid var(--border-bright);
+    background-color: rgba(255, 255, 255, 0.02);
+    padding: 0.75rem 1.1rem;
+    margin: 0;
+    font-style: italic;
+    color: var(--text-main);
+    font-size: 0.95rem;
+    border-radius: 0;
+ }
+
+
+
+.skin-nightsky .wiki-quote figcaption { 
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-top: 0.35rem;
+    padding-left: 1.1rem;
+ }
+
+
+
+/* ── Image gallery grid ──
+   Usage:
+   <div class="wiki-gallery">
+       <figure><img src="..."><figcaption>Caption</figcaption></figure>
+       <figure><img src="..."><figcaption>Caption</figcaption></figure>
+   </div>
+*/
+
+
+.skin-nightsky .wiki-gallery { 
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 0.75rem;
+    margin: 1.25rem 0;
+ }
+
+
+
+.skin-nightsky .wiki-gallery figure { 
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-light);
+    border-radius: 0;
+    padding: 4px;
+    margin: 0;
+    transition: border-color 0.15s var(--ease-out);
+ }
+
+
+
+.skin-nightsky .wiki-gallery figure:hover { 
+    border-color: var(--border-bright);
+ }
+
+
+
+.skin-nightsky .wiki-gallery img { 
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 0;
+ }
+
+
+
+.skin-nightsky .wiki-gallery figcaption { 
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    padding: 4px 4px 2px;
+    font-style: italic;
+    text-align: center;
+ }
+
+
+
+/* ── Definition list ──
+   Usage:
+   <dl class="wiki-dl">
+       <dt>Term</dt>
+       <dd>Definition</dd>
+   </dl>
+*/
+
+
+.skin-nightsky .wiki-dl { 
+    margin: 1rem 0;
+ }
+
+
+
+.skin-nightsky .wiki-dl dt { 
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-bright);
+    margin-top: 0.75rem;
+    margin-bottom: 0.15rem;
+ }
+
+
+
+.skin-nightsky .wiki-dl dt::after { 
+    content: "";
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--border-medium);
+    margin-top: 2px;
+ }
+
+
+
+.skin-nightsky .wiki-dl dd { 
+    margin-left: 1rem;
+    padding-left: 0.75rem;
+    border-left: 2px solid var(--border-light);
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+ }
+
+
+
+/* ── Category tags ──
+   Usage:
+   <div class="wiki-categories">
+       <span class="wiki-cat">Shredders</span>
+       <span class="wiki-cat">PvP</span>
+   </div>
+*/
+
+
+
+.skin-nightsky .wiki-categories::before { 
+    content: "Categories:";
+    font-family: var(--font-ui);
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-right: 0.3rem;
+ }
+
+
+
+.skin-nightsky .wiki-cat { 
+    font-family: var(--font-ui);
+    font-size: 0.72rem;
+    padding: 3px 10px;
+    border-radius: 0;
+    background-color: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-light);
+    color: var(--link-color);
+    cursor: default;
+    transition: background-color 0.2s var(--ease-smooth), border-color 0.2s var(--ease-smooth);
+ }
+
+
+
+.skin-nightsky .wiki-cat:hover { 
+    background-color: var(--purple-subtle);
+    border-color: var(--border-medium);
+    box-shadow: none;
+ }
+
+
+
+/* ── Breadcrumbs ──
+   Usage:
+   <nav class="wiki-breadcrumb">
+       <a href="/">Home</a> <a href="/pages/shredderhub.html">ShredderHub</a> <span>Armor Info</span>
+   </nav>
+*/
+
+
+.skin-nightsky .wiki-container::before { 
+    display: none;
+ }
+
+
+
+.skin-nightsky .wiki-container::after { 
+    content: "";
+    display: table;
+    clear: both;
+ }
+
+
+
+.skin-nightsky .wiki-breadcrumb { 
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    color: var(--text-muted);
+    margin-bottom: 1.25rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+ }
+
+
+
+.skin-nightsky .wiki-breadcrumb a { 
+    color: var(--text-muted);
+    text-decoration: none;
+ }
+
+
+
+.skin-nightsky .wiki-breadcrumb a:hover { 
+    color: var(--amber-bright);
+    text-decoration: none;
+ }
+
+
+
+.skin-nightsky .wiki-breadcrumb a::after { 
+    content: "/";
+    color: var(--border-bright);
+    margin: 0 0.3rem;
+ }
+
+
+
+.skin-nightsky .wiki-breadcrumb span { 
+    color: var(--text-secondary);
+ }
+
+
+
+/* ── "See also" / related articles box ──
+   Usage:
+   <div class="wiki-see-also">
+       <strong>See also</strong>
+       <ul><li><a href="...">Article</a></li></ul>
+   </div>
+*/
+
+
+.skin-nightsky .wiki-see-also { 
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-light);
+    border-radius: 0;
+    padding: 0.75rem 1rem;
+    margin: 1.25rem 0;
+ }
+
+
+
+.skin-nightsky .wiki-see-also strong { 
+    font-family: var(--font-heading);
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    display: block;
+    margin-bottom: 0.4rem;
+ }
+
+
+
+.skin-nightsky .wiki-see-also ul { 
+    margin: 0;
+    padding-left: 1.25rem;
+ }
+
+
+
+.skin-nightsky .wiki-see-also li { 
+    font-size: 0.85rem;
+    margin-bottom: 0.15rem;
+ }
+
+
+
+/* ── Keyboard shortcut / key badge ──
+   Usage: Press <kbd class="wiki-key">E</kbd> to activate.
+*/
+
+
+.skin-nightsky .wiki-key { 
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    padding: 1px 6px;
+    border-radius: 0;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-medium);
+    border-bottom-width: 2px;
+    color: var(--text-bright);
+    box-shadow: 0 1px 0 var(--border-light);
+ }
+
+
+
+/* ── Inline stat indicator ──
+   Usage: <span class="wiki-stat wiki-stat-high">High</span>
+*/
+
+
+.skin-nightsky .wiki-stat { 
+    font-family: var(--font-ui);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 1px 6px;
+    border-radius: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+ }
+
+
+
+.skin-nightsky .wiki-stat-high,
+.skin-nightsky .wiki-stat-medium,
+.skin-nightsky .wiki-stat-low { 
+    color: var(--text-secondary);
+    background-color: rgba(255, 255, 255, 0.05);
+ }
+
+
+
+/* ── Article last-edited line ──
+   Usage: <div class="wiki-last-edited">Last edited on 19 May 2026 by platform2</div>
+*/
+
+
+.skin-nightsky .wiki-last-edited { 
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    text-align: right;
+    margin-top: 2rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--border-subtle);
+    font-style: italic;
+ }
+
+
+
+/* ═══════════════════════════════════════════
+   PAGE BACKGROUND IMAGE (subtle)
+   ═══════════════════════════════════════════ */
+
+
+/* Push all wiki-container children above the background overlay */
+
+
+.skin-nightsky .wiki-container>* { 
+    position: relative;
+    z-index: 1;
+ }
+
+
+
+/* ═══════════════════════════════════════════
+   FILM GRAIN + DEPTH (industrial matte)
+   ═══════════════════════════════════════════ */
+
+
+body.skin-nightsky::before,
+body.skin-nightsky::after { 
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+ }
+
+
+
+body.skin-nightsky::before { 
+    background:
+        radial-gradient(ellipse 70% 50% at 85% 20%, rgba(104, 104, 212, 0.06) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 40% at 10% 90%, rgba(255, 255, 255, 0.02) 0%, transparent 50%);
+ }
+
+
+
+body.skin-nightsky::after { 
+    opacity: 0.045;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 180px 180px;
+ }
+
+
+
+/* Ensure shell & footer render above ambient layers */
+
+
+.skin-nightsky .wiki-page-wrap { 
+    position: relative;
+    z-index: 2;
+ }
+
+
+
+.skin-nightsky footer { 
+    position: relative;
+    z-index: 10;
+ }
+
+
+
+.skin-nightsky .wiki-container { 
+    position: relative;
+    z-index: 2;
+ }
+
+
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════ */
+
+
+@media  (max-width: 768px) {
+
+    
+html:has(body.skin-nightsky) { 
+        font-size: 13px;
+     }
+
+
+    
+.skin-nightsky .wiki-page-wrap { 
+        flex-direction: column;
+        padding: 0.35rem;
+     }
+
+
+    
+.skin-nightsky .wiki-sidebar-column { 
+        width: 100%;
+        margin-right: 0;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: stretch;
+        margin-bottom: 0.35rem;
+     }
+
+
+    
+.skin-nightsky .wiki-logo-box { 
+        flex: 0 0 auto;
+        padding: 0.4rem;
+     }
+
+
+    
+.skin-nightsky .wiki-logo-box img { 
+        max-width: 72px;
+     }
+
+
+    
+.skin-nightsky .wiki-sidebar { 
+        flex: 1 1 220px;
+        width: auto;
+        margin-right: 0;
+     }
+
+
+    
+.skin-nightsky .wiki-block-grid { 
+        grid-template-columns: 1fr;
+     }
+
+
+    
+.skin-nightsky .wiki-topbar { 
+        flex-direction: column;
+        align-items: center;
+     }
+
+
+    
+.skin-nightsky .wiki-topbar-tabs>li>a { 
+        padding: 0.28rem 0.5rem;
+     }
+
+
+    
+.skin-nightsky .wiki-site-logo { 
+        font-size: 0.72rem;
+        white-space: normal;
+     }
+
+
+    
+.skin-nightsky .wiki-container { 
+        padding: 0.55rem 0.65rem;
+     }
+
+
+    
+.skin-nightsky .wiki-thumb,
+.skin-nightsky .infobox { 
+        float: none;
+        max-width: 100%;
+        width: 100%;
+        margin: 0 0 1rem 0;
+     }
+
+
+    
+.skin-nightsky .toc-box { 
+        display: block;
+        max-width: 100%;
+     }
+
+
+    
+.skin-nightsky .wiki-gallery { 
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+     }
+
+
+    
+/* Smaller triangles on mobile */
+
+    
+body.skin-nightsky::before,
+body.skin-nightsky::after { 
+        opacity: 0.20;
+     }
+
+
+    
+body.skin-nightsky::before { 
+        clip-path: polygon(0% 0%, 0% 100%, 30% 50%);
+     }
+
+
+    
+body.skin-nightsky::after { 
+        clip-path: polygon(100% 0%, 100% 100%, 70% 50%);
+     }
+
+
+}
+
+
+
+/* ═══════════════════════════════════════════
+   SCROLLBAR CUSTOMIZATION
+   ═══════════════════════════════════════════ */
+
+
+
+/* Firefox support */
+
+
+.skin-nightsky * { 
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-medium) var(--bg-body);
+ }
+
+
+
+/* Webkit browser support (Chrome, Safari, Edge, Opera) */
+
+
+.skin-nightsky ::-webkit-scrollbar { 
+    width: 8px;
+    height: 8px;
+ }
+
+
+
+.skin-nightsky ::-webkit-scrollbar-track { 
+    background: var(--bg-body);
+ }
+
+
+
+.skin-nightsky ::-webkit-scrollbar-thumb { 
+    background: var(--border-medium);
+    border-radius: 0;
+    border: 2px solid var(--bg-body);
+ }
+
+
+
+.skin-nightsky ::-webkit-scrollbar-thumb:hover { 
+    background: var(--border-bright);
+ }
+
+
+
+/* Specific scrollbar styling for search results box */
+
+
+.skin-nightsky .search-results-box::-webkit-scrollbar-track { 
+    background: var(--bg-surface);
+ }
+
+
+
+.skin-nightsky .search-results-box::-webkit-scrollbar-thumb { 
+    border: 2px solid var(--bg-surface);
+ }
+
+
+
+
+
+.skin-nightsky .credits-container { 
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    /* Generous spacing between top coder and the bottom row */
+    font-family: sans-serif;
+    width: 100%;
+ }
+
+
+
+/* Centered Main Coder Styling */
+
+
+.skin-nightsky .credit-category.central-feature { 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 5px;
+ }
+
+
+
+.skin-nightsky .central-feature .credit-member { 
+    margin-left: 0;
+ }
+
+
+
+/* Flex row: Now centers the columns and keeps them tightly grouped */
+
+
+.skin-nightsky .credits-row { 
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    /* Brings the columns to the center together */
+    align-items: flex-start;
+    gap: 60px;
+    /* Adjust this number to make the gap wider or narrower */
+    flex-wrap: wrap;
+ }
+
+
+
+/* Base style for the side-by-side categories */
+
+
+.skin-nightsky .credits-row .credit-category { 
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    /* Removed flex: 1 so they don't stretch aggressively */
+    min-width: 200px;
+ }
+
+
+
+/* Member layout within columns */
+
+
+.skin-nightsky .credit-member { 
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+ }
+
+
+
+.skin-nightsky .central-feature .member-name { 
+    display: inline-block;
+    font-weight: 700;
+    font-size: 1.02rem;
+    letter-spacing: 0.03em;
+    background: linear-gradient(105deg,
+            #ffffff 0%,
+            #d4d4ff 20%,
+            #6868d4 50%,
+            #a8a8f0 75%,
+            #ffffff 100%);
+    background-size: 220% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    filter:
+        drop-shadow(0 0 8px rgba(104, 104, 212, 0.55)) drop-shadow(0 0 18px rgba(104, 104, 212, 0.28));
+    animation: wikiContributorShimmer 8s ease-in-out infinite;
+    transition: filter 0.2s var(--ease-out), transform 0.2s var(--ease-out);
+ }
+
+
+
+.skin-nightsky .credits-row .member-name,
+.skin-nightsky .contributor-name { 
+    display: inline;
+    font-weight: 500;
+    letter-spacing: normal;
+    color: var(--text-bright);
+    -webkit-text-fill-color: unset;
+    background: none;
+    filter: none;
+    animation: none;
+    transform: none;
+ }
+
+
+
+.skin-nightsky .central-feature .member-name:hover { 
+    filter:
+        drop-shadow(0 0 12px rgba(104, 104, 212, 0.75)) drop-shadow(0 0 26px rgba(104, 104, 212, 0.4));
+    transform: translateY(-1px);
+ }
+
+
+
+@keyframes wikiContributorShimmer {
+
+    0%,
+    100% {
+        background-position: 0% center;
+    }
+
+    50% {
+        background-position: 100% center;
+    }
+}
+
+
+
+.skin-nightsky .credit-note { 
+    color: var(--text-muted);
+    font-size: 0.85em;
+ }
+
+
+
+.skin-nightsky .wiki-glow-purple { 
+    font-weight: bold;
+    color: var(--text-bright);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    animation: none;
+ }
+
+
+
+@keyframes purplePulse {
+
+    0%,
+    100% {
+        text-shadow: 0 0 4px rgba(255, 255, 255, 0.4);
+        color: var(--text-bright);
+    }
+}
+
+
+
+.skin-nightsky .wiki-title-shimmer { 
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    background: linear-gradient(105deg,
+            #ffffff 0%,
+            #c8c8ff 25%,
+            #6868d4 55%,
+            #b0b0f8 80%,
+            #ffffff 100%);
+    background-size: 220% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    filter:
+        drop-shadow(0 0 10px rgba(104, 104, 212, 0.6)) drop-shadow(0 0 22px rgba(104, 104, 212, 0.32));
+    animation: wikiContributorShimmer 7s ease-in-out infinite;
+ }
+
+
+
+.skin-nightsky .wiki-stat-number { 
+    font-family: "Courier New", monospace;
+    font-size: 1.25em;
+    font-weight: 900;
+    color: var(--text-bright);
+    background: none;
+    -webkit-text-fill-color: unset;
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: inline-block;
+ }
+
+
+
+/* Micro-interaction: Pops out slightly when hovered */
+
+
+.skin-nightsky .wiki-stat-number:hover { 
+    transform: scale(1.15);
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+ }
+
+
+
+.skin-nightsky .wiki-ambient-reflection { 
+    display: inline-block;
+ }
+
+
+
+.skin-nightsky .wiki-site-logo-wrap { 
+    line-height: 1;
+ }
+
+
+
+.skin-nightsky .wiki-logo-box .wiki-logo-name { 
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    white-space: normal;
+    overflow: visible;
+ }
+
+
+
+
+
+
+.skin-nightsky .wiki-site-logo { 
+    text-decoration: none;
+    display: inline-block;
+    line-height: 1.15;
+    white-space: nowrap;
+    background: linear-gradient(100deg, #c4c4ff 0%, #7575e0 30%, #e8e8ff 50%, #7575e0 70%, #5858c8 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 10px rgba(104, 104, 212, 0.35));
+    transition: filter 0.2s var(--ease-out);
+    animation: wikiLogoGradient 5s ease-in-out infinite alternate;
+ }
+
+
+
+@keyframes wikiLogoGradient {
+    0% {
+        background-position: 0% center;
+    }
+
+    100% {
+        background-position: 100% center;
+    }
+}
+
+
+
+
+.skin-nightsky .wiki-keyword-reveal { 
+    color: var(--link-color);
+    font-weight: 600;
+    text-decoration: none;
+    position: relative;
+    display: inline-block;
+ }
+
+
+
+.skin-nightsky .wiki-keyword-glow { 
+    font-weight: 600;
+    color: var(--text-bright);
+    text-shadow: none;
+ }
+
+
+
+/* ═══════════════════════════════════════════
+   HUB CATEGORY BOXES
+   Grouped card containers with transparent
+   background images for the ShredderHub page.
+   ═══════════════════════════════════════════ */
+
+
+
+.skin-nightsky .hub-category { 
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--border-medium);
+    border-radius: 0;
+    padding: 1.75rem 1.5rem 1.5rem;
+    margin-bottom: 1.75rem;
+    background: var(--panel-bg);
+
+    /* Entrance animation */
+    animation: hubFadeIn 0.5s var(--ease-out) both;
+ }
+
+
+
+.skin-nightsky .hub-category:nth-child(2) { 
+    animation-delay: 0.08s;
+ }
+
+
+
+.skin-nightsky .hub-category:nth-child(3) { 
+    animation-delay: 0.16s;
+ }
+
+
+
+.skin-nightsky .hub-category:nth-child(4) { 
+    animation-delay: 0.24s;
+ }
+
+
+
+.skin-nightsky .hub-category:nth-child(5) { 
+    animation-delay: 0.32s;
+ }
+
+
+
+@keyframes hubFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
+/* ── Semi-transparent background image ── */
+
+
+.skin-nightsky .hub-category::before { 
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: var(--hub-bg-image);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.08;
+    pointer-events: none;
+    z-index: 0;
+    transition: opacity 0.4s var(--ease-out), transform 0.6s var(--ease-out);
+ }
+
+

@@ -1,0 +1,88 @@
+{
+  "name": "NightSky",
+  "version": "1.1.0",
+  "type": "skin",
+  "namemsg": "skinname-nightsky",
+  "descriptionmsg": "nightsky-desc",
+  "requires": {
+    "MediaWiki": ">= 1.46.0"
+  },
+  "ValidSkinNames": {
+    "nightsky": {
+      "class": "MediaWiki\\Skin\\SkinMustache",
+      "args": [
+        {
+          "name": "nightsky",
+          "responsive": true,
+          "supportsMwHeading": true,
+          "menus": [
+            "associated-pages",
+            "views",
+            "actions",
+            "variants",
+            "notifications",
+            "user-interface-preferences",
+            "user-page",
+            "user-menu"
+          ],
+          "messages": [
+            "sitetitle",
+            "search",
+            "tagline",
+            "navigation-heading",
+            "nightsky-skip",
+            "nightsky-page-tools",
+            "nightsky-associated-pages",
+            "nightsky-user-page",
+            "nightsky-notifications",
+            "nightsky-preferences"
+          ],
+          "styles": [
+            "skins.nightsky.styles"
+          ],
+          "scripts": [
+            "skins.nightsky"
+          ]
+        }
+      ]
+    }
+  },
+  "MessagesDirs": {
+    "NightSky": [
+      "i18n"
+    ]
+  },
+  "ResourceModules": {
+    "skins.nightsky.styles": {
+      "class": "MediaWiki\\ResourceLoader\\SkinModule",
+      "features": {
+        "normalize": true,
+        "elements": true,
+        "content-tables": true,
+        "content-links": true,
+        "content-media": true,
+        "content-links-external": true,
+        "interface-category": true,
+        "toc": true
+      },
+      "styles": [
+        "resources/design.css",
+        "resources/mediawiki.css"
+      ],
+      "targets": [
+        "desktop",
+        "mobile"
+      ]
+    },
+    "skins.nightsky": {
+      "scripts": [
+        "resources/navigation.js"
+      ]
+    }
+  },
+  "ResourceFileModulePaths": {
+    "localBasePath": "",
+    "remoteSkinPath": "NightSky"
+  },
+  "manifest_version": 2
+}

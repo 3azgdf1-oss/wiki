@@ -1,15 +1,18 @@
 {
   "name": "NightSky",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "type": "skin",
   "namemsg": "skinname-nightsky",
   "descriptionmsg": "nightsky-desc",
   "requires": {
     "MediaWiki": ">= 1.46.0"
   },
+  "AutoloadNamespaces": {
+    "MediaWiki\\Skins\\NightSky\\": "includes/"
+  },
   "ValidSkinNames": {
     "nightsky": {
-      "class": "MediaWiki\\Skin\\SkinMustache",
+      "class": "MediaWiki\\Skins\\NightSky\\SkinNightSky",
       "args": [
         {
           "name": "nightsky",
@@ -29,6 +32,7 @@
             "sitetitle",
             "search",
             "tagline",
+            "toolbox",
             "navigation-heading",
             "nightsky-skip",
             "nightsky-page-tools",
@@ -47,6 +51,9 @@
       ]
     }
   },
+  "SkinLessImportPaths": {
+    "nightsky": "resources/mediawiki.less"
+  },
   "MessagesDirs": {
     "NightSky": [
       "i18n"
@@ -58,25 +65,31 @@
       "features": {
         "normalize": true,
         "elements": true,
+        "accessibility": true,
         "content-tables": true,
         "content-links": true,
         "content-media": true,
         "content-links-external": true,
+        "interface-core": true,
         "interface-category": true,
+        "interface-indicators": true,
+        "interface-edit-section-links": true,
+        "interface-user-message": true,
+        "i18n-ordered-lists": true,
+        "i18n-headings": true,
         "toc": true
       },
       "styles": [
+        "resources/tokens.css",
         "resources/design.css",
-        "resources/mediawiki.css"
-      ],
-      "targets": [
-        "desktop",
-        "mobile"
+        "resources/mediawiki.css",
+        "resources/content.css"
       ]
     },
     "skins.nightsky": {
       "scripts": [
-        "resources/navigation.js"
+        "resources/navigation.js",
+        "resources/contrast.js"
       ]
     }
   },

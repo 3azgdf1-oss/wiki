@@ -1,123 +1,227 @@
-/* Native MediaWiki integration; loaded after the adapted design. */
-body.skin-nightsky { color-scheme: dark; margin: 0; }
-.skin-nightsky .wiki-topbar { justify-content: flex-start; gap: .4rem .7rem; }
-.skin-nightsky .wiki-topbar-tabs { justify-content: flex-start; gap: .3rem; }
+/**
+ * Native MediaWiki integration. Loaded after design.css and tokens.css.
+ *
+ * Rule of thumb used throughout: whenever a surface colour is set, its text colour is set with it.
+ * Most unreadable spots in 1.1.0 came from one half of that pair being inherited.
+ */
+
+body.skin-nightsky { margin: 0; }
+
+/* ── Page tabs (top of the content column) ── */
+.skin-nightsky .wiki-topbar { justify-content: flex-start; gap: 0.4rem 0.7rem; }
+.skin-nightsky .wiki-topbar-tabs { justify-content: flex-start; gap: 0.3rem; }
 .skin-nightsky .wiki-topbar-tabs li { margin: 0; }
-.skin-nightsky .wiki-topbar-tabs > li > a { padding: .55rem .75rem; font-size: .72rem; }
-.skin-nightsky .wiki-topbar-tabs .selected a { color: white; border-color: var(--border-bright); box-shadow: inset 0 -2px var(--amber); }
-.skin-nightsky .wiki-sidebar-head { font-size: .7rem; }
-.skin-nightsky .wiki-sidebar li a { font-size: .86rem; min-height: 34px; }
-.skin-nightsky .wiki-sidebar .selected a { border-inline-start: 2px solid var(--amber); color: white; }
+.skin-nightsky .wiki-topbar-tabs > li > a { padding: 0.55rem 0.75rem; font-size: 0.72rem; }
+.skin-nightsky .wiki-topbar-tabs > li.new > a { color: var(--color-link-red, #eb9494); }
+.skin-nightsky .wiki-topbar-tabs .selected a {
+	color: var(--text-bright);
+	border-color: var(--border-bright);
+	box-shadow: inset 0 -2px var(--amber);
+}
+
+/* ── Navigation and tools portlets ── */
+.skin-nightsky .wiki-sidebar-head { font-size: 0.7rem; }
+.skin-nightsky .wiki-sidebar li a { font-size: 0.86rem; min-height: 34px; }
+.skin-nightsky .wiki-sidebar .selected a { border-inline-start: 2px solid var(--amber); color: var(--text-bright); }
+/* core marks a portlet with nothing in it "emptyPortlet" (the pre-1.2.0 rule looked for a class core never emits) */
+.skin-nightsky .emptyPortlet,
 .skin-nightsky .mw-portlet-empty { display: none; }
-.skin-nightsky .mw-portlet-body .mw-portlet-body { padding-inline-start: .6rem; }
-.skin-nightsky .mw-portlet-after { padding: .5rem; }
-.skin-nightsky #firstHeading { font-size: clamp(1.75rem, 3.5vw, 2.5rem); line-height: 1.1; letter-spacing: -.04em; margin: 0 0 .5rem; padding-bottom: .65rem; }
-.skin-nightsky #siteSub, .skin-nightsky #contentSub { color: var(--text-secondary); font-size: .83rem; }
+.skin-nightsky .mw-portlet-body .mw-portlet-body { padding-inline-start: 0.6rem; }
+.skin-nightsky .after-portlet,
+.skin-nightsky .before-portlet { padding: 0.5rem; }
+.skin-nightsky .wiki-sidebar li:not(:has(a)) { padding: 0.5rem 0.85rem; color: var(--text-secondary); }
+.skin-nightsky #p-logo img[src*="/resources/assets/change-your-logo"] { display: none; }
+.skin-nightsky .wiki-logo-name { font-size: 0.82rem; padding: 1rem 0.4rem; }
+/* The default MediaWiki "Help about MediaWiki" link. SkinNightSky removes it server-side; this keeps
+   it hidden if a gadget or hook adds it back. */
+.skin-nightsky #n-help-mediawiki { display: none; }
+
+/* On narrower screens the Tools column sits under the article, so its links flow in rows */
+@media (max-width: 1100px) {
+	.skin-nightsky .wiki-tools ul { display: flex; flex-wrap: wrap; }
+	.skin-nightsky .wiki-tools li { flex: 1 1 160px; margin: 0; }
+}
+
+/* ── Title, subtitle, indicators ── */
+.skin-nightsky #firstHeading {
+	font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+	line-height: 1.1;
+	letter-spacing: -0.04em;
+	margin: 0 0 0.5rem;
+	padding-bottom: 0.65rem;
+}
+.skin-nightsky #siteSub,
+.skin-nightsky #contentSub { color: var(--text-secondary); font-size: 0.83rem; }
 .skin-nightsky #siteSub { margin-bottom: 1.25rem; }
-.skin-nightsky #contentSub:empty { display: none; }
+.skin-nightsky #mw-content-subtitle:not(:empty) { margin: 0 0 1rem; }
+.skin-nightsky .mw-indicators { float: right; margin-inline-start: 1rem; position: relative; z-index: 1; }
+.skin-nightsky .mw-indicators:empty { display: none; }
+.skin-nightsky .usermessage { color: var(--text-bright); }
+
+/* ── Article text ── */
 .skin-nightsky .mw-parser-output { font-size: 1rem; line-height: 1.65; }
 .skin-nightsky .mw-parser-output h2 { font-size: 1.35rem; }
 .skin-nightsky .mw-parser-output h3 { font-size: 1.1rem; }
-.skin-nightsky .mw-heading { border-color: var(--border-light); }
-.skin-nightsky .mw-heading h2, .skin-nightsky .mw-heading h3 { display: inline-block; }
-.skin-nightsky .mw-editsection { font-size: .75rem; font-weight: normal; margin-inline-start: 1rem; }
-.skin-nightsky .mw-parser-output a.new { color: #eb9494; }
-.skin-nightsky .mw-parser-output a:visited { color: #b2a7d8; }
+.skin-nightsky .mw-heading { color: var(--text-bright); border-color: var(--border-light); }
+.skin-nightsky .mw-heading h2,
+.skin-nightsky .mw-heading h3 { display: inline-block; }
+/* core draws the rule on the .mw-heading wrapper; the h1 rule from design.css would double it */
+.skin-nightsky .mw-heading1 > h1 { border-bottom: 0; padding-bottom: 0; }
+.skin-nightsky .mw-editsection { font-size: 0.75rem; font-weight: normal; margin-inline-start: 1rem; }
+.skin-nightsky .mw-editsection-bracket,
+.skin-nightsky .mw-editsection-divider { color: var(--text-secondary); }
+.skin-nightsky .mw-editsection a { text-decoration: none; }
+/* long words and URLs wrap, but never shrink a table column to one character (see content.css) */
+.skin-nightsky .wiki-container { overflow-wrap: break-word; }
+
+/* Links: red links keep their colour once visited, and external links use the link colour */
+.skin-nightsky .mw-parser-output a.new,
+.skin-nightsky .mw-parser-output a.new:visited { color: var(--color-link-red, #eb9494); }
+.skin-nightsky .mw-parser-output a.external,
+.skin-nightsky .mw-parser-output a.extiw { color: var(--link-color); }
+.skin-nightsky .mw-parser-output a:visited { color: var(--link-visited); }
+.skin-nightsky .mw-parser-output a.mw-selflink { color: var(--text-bright); font-weight: 600; }
+.skin-nightsky .mw-body-content .error { color: var(--color-error); }
+
+/* Images */
 .skin-nightsky .mw-parser-output img { max-width: 100%; height: auto; }
 .skin-nightsky .mw-parser-output .mw-file-element { object-fit: contain; }
-.skin-nightsky .mw-parser-output .wikitable { background: var(--bg-surface); color: var(--text-main); border: 1px solid var(--border-medium); border-collapse: collapse; overflow-wrap: normal; }
-.skin-nightsky .mw-parser-output .wikitable > tr > *,
-.skin-nightsky .mw-parser-output .wikitable > * > tr > * { border: 1px solid var(--border-medium); padding: .6rem .7rem; }
-.skin-nightsky .mw-parser-output .wikitable > tr > th,
-.skin-nightsky .mw-parser-output .wikitable > * > tr > th { background: #101014; color: var(--text-bright); }
-.skin-nightsky .toc, .skin-nightsky .catlinks,
-.skin-nightsky .thumbinner, .skin-nightsky .mw-parser-output figure[typeof~="mw:File/Thumb"],
-.skin-nightsky .mw-parser-output figure[typeof~="mw:File/Frame"] { background: var(--bg-surface); border-color: var(--border-light); color: var(--text-main); }
-.skin-nightsky .toc { padding: .8rem 1rem; margin: 1rem 0; }
+.skin-nightsky .mw-parser-output figure[typeof~="mw:File/Thumb"] > :not(figcaption) .mw-file-element,
+.skin-nightsky .mw-parser-output figure[typeof~="mw:File/Frame"] > :not(figcaption) .mw-file-element { border-color: var(--border-medium); }
+.skin-nightsky .mw-parser-output figure[typeof~="mw:File/Thumb"] > figcaption,
+.skin-nightsky .mw-parser-output figure[typeof~="mw:File/Frame"] > figcaption { color: var(--text-secondary); }
+
+/* ── Tables ──
+   Use background-color, never the background shorthand, on cells: the shorthand would reset
+   background-repeat/position and break core's sort-arrow icons on sortable tables.
+   Global on purpose: special pages (Version, Statistics, group rights ...) use .wikitable outside
+   .mw-parser-output and were left with core's light table. */
+.skin-nightsky .wikitable {
+	background-color: var(--bg-surface);
+	color: var(--text-main);
+	border: 1px solid var(--border-medium);
+	border-collapse: collapse;
+}
+.skin-nightsky .wikitable > tr > *,
+.skin-nightsky .wikitable > * > tr > * { border: 1px solid var(--border-medium); padding: 0.6rem 0.7rem; }
+.skin-nightsky .wikitable > tr > th,
+.skin-nightsky .wikitable > * > tr > th { background-color: var(--background-color-neutral); color: var(--text-bright); }
+.skin-nightsky .wikitable caption { color: var(--text-secondary); }
+
+/* ── Boxes that core paints with its own surface ── */
+.skin-nightsky .toc,
+.skin-nightsky .toccolours,
+.skin-nightsky .catlinks,
+.skin-nightsky .thumbinner,
+.skin-nightsky .mw-parser-output figure[typeof~="mw:File/Thumb"],
+.skin-nightsky .mw-parser-output figure[typeof~="mw:File/Frame"] {
+	background-color: var(--bg-surface);
+	border-color: var(--border-light);
+	color: var(--text-main);
+}
+.skin-nightsky .toccolours { padding: 0.6rem 0.8rem; }
+.skin-nightsky .toc { padding: 0.8rem 1rem; margin: 1rem 0; }
 .skin-nightsky .toc h2 { font-size: 1rem; margin: 0; }
 .skin-nightsky .toc ul { list-style: none; padding-inline-start: 1rem; }
-.skin-nightsky .catlinks { clear: both; margin-top: 1.5rem; padding: .75rem; font-size: .86rem; }
+.skin-nightsky .toc .tocnumber { color: var(--text-muted); }
+.skin-nightsky .toc a { text-decoration: none; }
+.skin-nightsky .toc a:hover { text-decoration: underline; }
+.skin-nightsky .toctogglelabel { color: var(--color-link, #b0b0f4); }
+/* Headings written inside cards make MediaWiki generate a table of contents in the first card, and a
+   main page never wants one. (Add __NOTOC__ to a page to suppress it anywhere else.) */
+.skin-nightsky .card .toc,
+.skin-nightsky.page-Main_Page .toc { display: none; }
+.skin-nightsky .catlinks { clear: both; margin-top: 1.5rem; padding: 0.75rem; font-size: 0.86rem; }
 .skin-nightsky .catlinks ul { display: inline; padding: 0; }
-.skin-nightsky .catlinks li { display: inline-block; margin-inline-start: .5rem; }
+.skin-nightsky .catlinks li { display: inline-block; margin-inline-start: 0.5rem; }
 .skin-nightsky .visualClear { clear: both; }
-.skin-nightsky #searchInput { min-width: 0; font-size: .85rem; }
-.skin-nightsky #searchButton { width: 100%; margin-top: .4rem; padding: .5rem; background: var(--amber-dim); border: 1px solid var(--amber-border); color: var(--text-bright); cursor: pointer; }
-.skin-nightsky #wpTextbox1 { background: #101014; color: var(--text-main); border-color: var(--border-medium); font-family: var(--font-mono); }
-.skin-nightsky .mw-body input:not([type=checkbox]):not([type=radio]):not([type=submit]):not([type=button]),
-.skin-nightsky .mw-body textarea, .skin-nightsky .mw-body select { background-color: #101014; color: #eeeef2; border-color: #4b4b58; }
-/* White third-party UI surfaces keep a legible foreground. */
-.skin-nightsky .oo-ui-window, .skin-nightsky .oo-ui-menuSelectWidget,
-.skin-nightsky .suggestions { color: #202122; color-scheme: light; }
-.skin-nightsky .oo-ui-window a, .skin-nightsky .oo-ui-menuSelectWidget a,
-.skin-nightsky .suggestions a { color: #36c; }
-.skin-nightsky #footer { max-width: var(--layout-max); width: calc(100% - 2rem); margin: auto auto 1rem; font-size: .75rem; }
-.skin-nightsky #footer ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; gap: .5rem 1rem; padding: 0; margin: .6rem 0 0; }
-.skin-nightsky #footer p { margin-bottom: .4rem; }
-.skin-nightsky .nightsky-visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-.skin-nightsky .wiki-logo-name { color: #c4c4ff; }
-.skin-nightsky .wiki-logo-box img { animation: none; }
-.skin-nightsky .wiki-container > * { z-index: auto; }
-.skin-nightsky .wiki-container, .skin-nightsky .wiki-page-wrap { z-index: auto; }
-.skin-nightsky .wiki-page-wrap { isolation: isolate; }
-@media (max-width: 768px) {
-  .skin-nightsky .wiki-sidebar-column { flex-direction: column; }
-  .skin-nightsky .wiki-sidebar { flex: auto; width: 100%; }
-  .skin-nightsky .wiki-logo-box { flex-direction: row; justify-content: flex-start; gap: .75rem; }
-  .skin-nightsky .wiki-logo-box img { width: 48px; max-height: 60px; object-fit: contain; }
-  .skin-nightsky .wiki-logo-name { width: auto; text-align: start; }
-  .skin-nightsky .wiki-sidebar ul { display: flex; flex-wrap: wrap; }
-  .skin-nightsky .wiki-sidebar li { flex: 1 1 140px; margin: 0; }
-  .skin-nightsky .wiki-sidebar li a { min-height: 44px; }
-  .skin-nightsky .wiki-topbar { align-items: stretch; }
-  .skin-nightsky .wiki-topbar-tabs > li > a { min-height: 44px; display: flex; align-items: center; }
-  .skin-nightsky .wiki-container { padding: 1.1rem; }
-  .skin-nightsky .mw-parser-output { overflow-x: auto; }
-}
-@media (prefers-reduced-motion: reduce) {
-  html:has(body.skin-nightsky) { scroll-behavior: auto; }
-  .skin-nightsky *, .skin-nightsky *::before, .skin-nightsky *::after { animation: none !important; transition: none !important; }
-}
-@media print {
-  body.skin-nightsky { background: white !important; color: black; display: block; }
-  body.skin-nightsky::before, body.skin-nightsky::after,
-  .skin-nightsky #mw-navigation, .skin-nightsky .wiki-topbar, .skin-nightsky #siteNotice,
-  .skin-nightsky .wiki-skip-link, .skin-nightsky .mw-editsection { display: none !important; }
-  .skin-nightsky .wiki-page-wrap { display: block; padding: 0; max-width: none; }
-  .skin-nightsky .wiki-container, .skin-nightsky #footer { border: 0; padding: 0; width: 100%; }
-  .skin-nightsky #content *, .skin-nightsky #footer * { color: black !important; background: transparent !important; box-shadow: none !important; text-shadow: none !important; -webkit-text-fill-color: currentColor !important; }
-  .skin-nightsky #content { background: white; color: black; }
-  .skin-nightsky .mw-parser-output { overflow: visible; }
-}
+/* Wide content (a 40-column table, a fixed-width block, an image) scrolls inside the article instead of
+   stretching the whole page under the tools column. Before 1.2.0 this only happened on phones. The
+   padding/negative margin leaves room for focus outlines at the edges of the scroll box. */
+.skin-nightsky .mw-body-content { min-width: 0; }
+.skin-nightsky #bodyContent { overflow-x: auto; padding-inline: 6px; margin-inline: -6px; }
 
-/* NightSky 1.1: verified against MediaWiki 1.46. */
-.skin-nightsky #p-logo img[src*="/resources/assets/change-your-logo"] { display: none; }
-.skin-nightsky .wiki-logo-name { font-size: .82rem; padding: 1rem .4rem; }
-.skin-nightsky .wiki-sidebar li:not(:has(a)) { padding: .5rem .85rem; color: var(--text-secondary); }
+/* ── Native form controls (OOUI and Codex widgets take their colours from tokens.css) ── */
+.skin-nightsky #searchInput { min-width: 0; font-size: 0.85rem; }
+.skin-nightsky #searchButton {
+	width: 100%;
+	margin-top: 0.4rem;
+	padding: 0.5rem;
+	background: var(--amber-dim);
+	border: 1px solid var(--amber-border);
+	color: var(--text-bright);
+	cursor: pointer;
+}
+.skin-nightsky #searchButton:hover { background: var(--amber-border); }
+.skin-nightsky #wpTextbox1 {
+	background: var(--background-color-neutral);
+	color: var(--text-main);
+	border-color: var(--border-medium);
+	font-family: var(--font-mono);
+	font-size: 14px;
+	line-height: 1.55;
+	padding: 0.75rem;
+}
+.skin-nightsky .mw-body input:not([type=checkbox], [type=radio], [type=submit], [type=button], [type=reset], [type=file], [type=image], [type=range], [type=color]),
+.skin-nightsky .mw-body textarea,
+.skin-nightsky .mw-body select {
+	background-color: var(--background-color-neutral);
+	color: var(--color-base);
+	border-color: var(--border-color-interactive);
+}
+.skin-nightsky .mw-body input::placeholder,
+.skin-nightsky .mw-body textarea::placeholder { color: var(--color-placeholder); opacity: 1; }
+.skin-nightsky .mw-body input[type="submit"],
+.skin-nightsky .mw-body input[type="button"],
+.skin-nightsky .mw-body input[type="reset"],
+.skin-nightsky .mw-body button:not([class*="oo-ui"], [class*="cdx"]) {
+	background-color: var(--background-color-interactive);
+	color: var(--color-base);
+	border: 1px solid var(--border-color-interactive);
+	padding: 0.4rem 0.9rem;
+	cursor: pointer;
+}
+.skin-nightsky .mw-body input[type="submit"]:hover,
+.skin-nightsky .mw-body input[type="button"]:hover,
+.skin-nightsky .mw-body button:not([class*="oo-ui"], [class*="cdx"]):hover { background-color: var(--background-color-interactive--hover); }
+
+/* ── Message boxes ── */
 .skin-nightsky #content .cdx-message,
 .skin-nightsky #content .mw-message-box,
 .skin-nightsky #content .warningbox,
 .skin-nightsky #content .errorbox,
-.skin-nightsky #content .successbox { background: #17171f; color: #ededf4; border: 1px solid #555567; }
+.skin-nightsky #content .successbox {
+	background: var(--background-color-notice-subtle);
+	color: var(--color-emphasized);
+	border: 1px solid var(--border-color-notice);
+	padding: 0.6rem 0.9rem;
+	margin: 0.75rem 0;
+}
 .skin-nightsky #content .cdx-message--warning,
-.skin-nightsky #content .warningbox { background: #262014; border-color: #9a773b; color: #f3e9d4; }
+.skin-nightsky #content .mw-message-box-warning,
+.skin-nightsky #content .warningbox { background: var(--background-color-warning-subtle); border-color: var(--border-color-warning); color: #f3e9d4; }
 .skin-nightsky #content .cdx-message--error,
-.skin-nightsky #content .errorbox { background: #2d191d; border-color: #a65e6c; color: #f8d9dd; }
+.skin-nightsky #content .mw-message-box-error,
+.skin-nightsky #content .errorbox { background: var(--background-color-error-subtle); border-color: var(--border-color-error); color: #f8d9dd; }
 .skin-nightsky #content .cdx-message--success,
-.skin-nightsky #content .successbox { background: #132a23; border-color: #588979; color: #ddf2e8; }
+.skin-nightsky #content .mw-message-box-success,
+.skin-nightsky #content .successbox { background: var(--background-color-success-subtle); border-color: var(--border-color-success); color: #ddf2e8; }
 .skin-nightsky #content .cdx-message a,
 .skin-nightsky #content .mw-message-box a,
 .skin-nightsky #content .warningbox a,
 .skin-nightsky #content .errorbox a,
 .skin-nightsky #content .successbox a { color: #ccc4ff; text-decoration: underline; }
-.skin-nightsky #content .cdx-message a:hover { color: white; }
+.skin-nightsky #content .cdx-message a:hover { color: var(--text-bright); }
 .skin-nightsky #content .cdx-message__icon { color: inherit; }
 .skin-nightsky #content .cdx-message__icon svg { fill: currentColor; }
+
+/* ── Search results, diffs, history, data tables ── */
 .skin-nightsky .mw-search-results { padding-inline-start: 0; }
 .skin-nightsky .mw-search-results li { margin-block-end: 1rem; }
 .skin-nightsky .searchresult { color: var(--text-main); }
 .skin-nightsky .mw-search-result-data { color: #b3b3c1; }
 .skin-nightsky .mw-search-results a { color: #bdbdf8; }
-.skin-nightsky #wpTextbox1 { font-size: 14px; line-height: 1.55; padding: .75rem; }
+.skin-nightsky .results-info { color: var(--text-secondary); }
 .skin-nightsky .diff { color: var(--text-main); background: transparent; }
 .skin-nightsky .diff td.diff-context { background: #17171d; color: #d8d8dc; border-color: #444452; }
 .skin-nightsky .diff td.diff-deletedline { background: #30261a; color: #f7e4c7; border-color: #9c783c; }
@@ -125,27 +229,183 @@ body.skin-nightsky { color-scheme: dark; margin: 0; }
 .skin-nightsky .diff .diff-deletedline .diffchange { background: #69451e; color: #fff0d8; }
 .skin-nightsky .diff .diff-addedline .diffchange { background: #254c71; color: #e9f5ff; }
 .skin-nightsky .diff .diffchange { text-decoration: none; }
-.skin-nightsky #content .mw-datatable { background: #101014; color: var(--text-main); }
-.skin-nightsky #content .mw-datatable th { background: #20202a; color: white; }
+.skin-nightsky #content .mw-datatable { background: var(--background-color-neutral); color: var(--text-main); }
+.skin-nightsky #content .mw-datatable th { background: #20202a; color: var(--text-bright); }
 .skin-nightsky #content .mw-datatable td { border-color: #393946; }
 .skin-nightsky #content .mw-datatable tr:hover td { background: #252532; }
-.skin-nightsky #content .mw-history-legend { background: #15151c; border-color: #393946; }
+.skin-nightsky #content .mw-history-legend { background: #15151c; border-color: #393946; color: var(--text-main); }
 .skin-nightsky #pagehistory li.selected { background: #20202d; border-color: #6868d4; }
-.skin-nightsky .mw-body-content { min-width: 0; }
 .skin-nightsky .table-responsive { overflow-x: auto; }
+
+/* ── Recent changes: core breaks table cells with word-break:break-all (T331086), which splits
+   ordinary words ("Pr/oject"). overflow-wrap:anywhere protects against long titles the same way. ── */
+.skin-nightsky .mw-changeslist td.mw-changeslist-line-inner,
+.skin-nightsky .mw-changeslist table.mw-enhanced-rc td:last-child,
+.skin-nightsky .mw-title { word-break: normal; overflow-wrap: anywhere; }
+
+/* ── OOUI icons ──
+   OOUI draws its icons as dark SVG background images that no token can recolour, so on a dark
+   surface they vanish. Invert lightness and keep the hue (grey icons turn light, blue stays blue).
+   Icons on filled progressive/destructive buttons are already light. A checkbox's check mark shares
+   its <span> with the box background, so that span is left alone (inverting it would turn the dark
+   box white). ── */
+.skin-nightsky .oo-ui-iconElement-icon:not(.oo-ui-checkboxInputWidget-checkIcon),
+.skin-nightsky .oo-ui-indicatorElement-indicator { filter: invert(1) hue-rotate(180deg); }
+.skin-nightsky .oo-ui-buttonElement-framed.oo-ui-flaggedElement-primary .oo-ui-iconElement-icon,
+.skin-nightsky .oo-ui-buttonElement-framed.oo-ui-flaggedElement-primary .oo-ui-indicatorElement-indicator,
+.skin-nightsky .oo-ui-buttonElement-framed.oo-ui-flaggedElement-progressive.oo-ui-widget-enabled:hover .oo-ui-iconElement-icon { filter: none; }
+
+/* ── Search suggestions (jquery.suggestions) ──
+   Plain CSS with literal #fff / #000 / #a2a9b1 / #2a4b8d, so no token can reach it. 1.1.0 kept the box
+   white and forced dark text on it; here it follows the dark surfaces like everything else. ── */
+.skin-nightsky .suggestions-results,
+.skin-nightsky .suggestions-special {
+	background-color: var(--background-color-neutral);
+	border-color: var(--border-color-interactive);
+	color: var(--color-base);
+}
+.skin-nightsky .suggestions-result,
+.skin-nightsky .suggestions a.mw-searchSuggest-link,
+.skin-nightsky .suggestions a.mw-searchSuggest-link:hover,
+.skin-nightsky .suggestions a.mw-searchSuggest-link:active,
+.skin-nightsky .suggestions a.mw-searchSuggest-link:focus { color: var(--color-base); }
+.skin-nightsky .suggestions .special-label { color: var(--color-subtle); }
+.skin-nightsky .suggestions .special-query { color: var(--color-emphasized); }
+.skin-nightsky .suggestions-special .special-hover { background-color: var(--background-color-interactive--hover); }
+.skin-nightsky .suggestions-result-current,
+.skin-nightsky .suggestions-result-current a.mw-searchSuggest-link,
+.skin-nightsky .suggestions-result-current a.mw-searchSuggest-link:hover,
+.skin-nightsky .suggestions-result-current .special-label,
+.skin-nightsky .suggestions-result-current .special-query { background-color: var(--background-color-progressive); color: #fff; }
+
+/* Account creation: the "benefit" sub-headings are written as color:#000 */
+.skin-nightsky .mw-benefit-subheading { color: var(--color-emphasized); }
+.skin-nightsky .mw-benefit-text,
+.skin-nightsky .mw-benefit-item { color: var(--color-base); }
+
+/* Unchecked checkboxes and radios: OOUI fills them with --background-color-base-fixed, which stays
+   white on purpose in every theme. Fit the unchecked state to the dark inputs next to it. */
+.skin-nightsky .oo-ui-radioInputWidget [type='radio']:not(:checked, :disabled) + span,
+.skin-nightsky .oo-ui-checkboxInputWidget [type='checkbox']:not(:checked, :disabled) + span {
+	background-color: var(--background-color-neutral);
+}
+
+/* Disabled framed buttons: OOUI writes --color-inverted text on the disabled surface, which is
+   white-on-grey in a light theme and dark-on-dark here (a greyed-out "Save" at 1.2:1). */
+.skin-nightsky .oo-ui-buttonElement-framed.oo-ui-widget-disabled > .oo-ui-buttonElement-button {
+	color: var(--color-disabled-emphasized);
+}
+
+/* ── CodeEditor (Ace, Monokai theme) ──
+   Monokai is already dark, so only the parts the official palette leaves dim are lifted: comments
+   (3.0:1), keywords (3.9:1), the gutter numbers and the status bar (2.9-4.4:1). ── */
+body.skin-nightsky .ace-monokai .ace_comment { color: #aaa68c; }
+body.skin-nightsky .ace-monokai .ace_keyword,
+body.skin-nightsky .ace-monokai .ace_storage { color: #ff6b9a; }
+body.skin-nightsky .ace_gutter,
+body.skin-nightsky .ace_gutter-cell,
+body.skin-nightsky .codeEditor-status,
+body.skin-nightsky .codeEditor-status-worker,
+body.skin-nightsky .codeEditor-status-worker > span { color: #b4b6ae; }
+
+/* ── Footer ── */
+.skin-nightsky #footer { max-width: var(--layout-max); width: calc(100% - 2rem); margin: auto auto 1rem; font-size: 0.75rem; }
+.skin-nightsky #footer ul {
+	list-style: none;
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: 0.5rem 1rem;
+	padding: 0;
+	margin: 0.6rem 0 0;
+}
+.skin-nightsky #footer ul:first-child { margin-top: 0; }
+.skin-nightsky #footer-info { flex-direction: column; align-items: center; gap: 0.3rem; }
+.skin-nightsky #footer li { margin: 0; }
+.skin-nightsky #footer-icons img { display: block; }
+/* The "Powered by MediaWiki" badge is a dark-on-transparent image; give it a light plate to stay legible */
+.skin-nightsky #footer-icons a { display: inline-block; background: #e6e6ee; padding: 3px 6px; line-height: 0; border-radius: 2px; }
+
+.skin-nightsky .nightsky-visually-hidden {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+}
+
+/* ── Mobile navigation toggle (navigation.js reveals the button; no-JS keeps the menu open) ── */
 .skin-nightsky #nightsky-menu-toggle { display: none; }
 .skin-nightsky #nightsky-menu-toggle[hidden]::after { content: none; }
+
 @media (max-width: 768px) {
- .skin-nightsky #nightsky-menu-toggle:not([hidden]) { display: block; min-height: 44px; width: 100%; background: #13131b; border: 1px solid #48485c; color: #e4e4f4; font: inherit; cursor: pointer; text-align: start; padding: .7rem; }
- .skin-nightsky #nightsky-menu-toggle::after { content: '+'; float: right; }
- .skin-nightsky #nightsky-menu-toggle[aria-expanded="true"]::after { content: '\2212'; }
- .skin-nightsky #nightsky-sidebar.nightsky-nav-collapsed { display: none; }
- .skin-nightsky #bodyContent { overflow-x: auto; }
- .skin-nightsky .wiki-topbar { flex-direction: row; align-items: center; }
- .skin-nightsky .mw-body input, .skin-nightsky .mw-body select, .skin-nightsky .mw-body textarea { max-width: 100%; }
+	.skin-nightsky #nightsky-menu-toggle:not([hidden]) {
+		display: block;
+		min-height: 44px;
+		width: 100%;
+		background: #13131b;
+		border: 1px solid #48485c;
+		color: #e4e4f4;
+		font: inherit;
+		cursor: pointer;
+		text-align: start;
+		padding: 0.7rem;
+	}
+	.skin-nightsky #nightsky-menu-toggle::after { content: '+'; float: right; }
+	.skin-nightsky #nightsky-menu-toggle[aria-expanded="true"]::after { content: '\2212'; }
+	.skin-nightsky #nightsky-sidebar.nightsky-nav-collapsed { display: none; }
+
+	.skin-nightsky .wiki-sidebar { flex: auto; width: 100%; }
+	.skin-nightsky .wiki-logo-box { flex-direction: row; justify-content: flex-start; gap: 0.75rem; }
+	.skin-nightsky .wiki-logo-box img { width: 48px; max-height: 60px; object-fit: contain; }
+	.skin-nightsky .wiki-logo-name { width: auto; text-align: start; }
+	.skin-nightsky .wiki-sidebar ul { display: flex; flex-wrap: wrap; }
+	.skin-nightsky .wiki-sidebar li { flex: 1 1 140px; margin: 0; }
+	.skin-nightsky .wiki-sidebar li a { min-height: 44px; }
+	.skin-nightsky .wiki-topbar { flex-direction: row; align-items: center; }
+	.skin-nightsky .wiki-topbar-tabs > li > a { min-height: 44px; display: flex; align-items: center; }
+	.skin-nightsky .wiki-container { padding: 1.1rem; }
+	.skin-nightsky #footer { width: calc(100% - 0.7rem); }
+	.skin-nightsky .mw-body input,
+	.skin-nightsky .mw-body select,
+	.skin-nightsky .mw-body textarea { max-width: 100%; }
 }
+
+/* ── Motion ── */
+@media (prefers-reduced-motion: reduce) {
+	:root { scroll-behavior: auto; }
+	.skin-nightsky *,
+	.skin-nightsky *::before,
+	.skin-nightsky *::after { animation: none !important; transition: none !important; }
+}
+
+/* ── Print: plain black on white ── */
 @media print {
- .skin-nightsky #footer { background: white; color: black; }
- .skin-nightsky #content .cdx-message { background: white; color: black; border-color: #666; }
- .skin-nightsky #content .cdx-message a { color: black; }
+	body.skin-nightsky { background: white !important; color: black; display: block; }
+	body.skin-nightsky::before,
+	body.skin-nightsky::after,
+	.skin-nightsky #mw-navigation,
+	.skin-nightsky #mw-tools,
+	.skin-nightsky .wiki-topbar,
+	.skin-nightsky #siteNotice,
+	.skin-nightsky .wiki-skip-link,
+	.skin-nightsky .mw-editsection { display: none !important; }
+	.skin-nightsky .wiki-page-wrap { display: block; padding: 0; max-width: none; }
+	.skin-nightsky .wiki-container,
+	.skin-nightsky #footer { border: 0; padding: 0; width: 100%; }
+	.skin-nightsky #content *,
+	.skin-nightsky #footer * {
+		color: black !important;
+		background: transparent !important;
+		box-shadow: none !important;
+		text-shadow: none !important;
+		-webkit-text-fill-color: currentColor !important;
+	}
+	.skin-nightsky #content { background: white; color: black; }
+	.skin-nightsky #footer { background: white; color: black; }
+	.skin-nightsky #content .cdx-message { background: white; color: black; border-color: #666; }
+	.skin-nightsky #content .cdx-message a { color: black; }
 }

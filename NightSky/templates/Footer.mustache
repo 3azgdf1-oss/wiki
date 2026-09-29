@@ -1,6 +1,5 @@
 <footer id="footer" class="mw-footer" role="contentinfo" {{{html-user-language-attributes}}}>
-  {{#data-last-modified}}<p class="skin-last-modified" data-time="{{time}}">{{text}}</p>{{/data-last-modified}}
-  {{#data-copyright}}<div id="copyright">{{{html}}}</div>{{/data-copyright}}
+  {{#data-info}}{{>FooterList}}{{/data-info}}
   {{#data-places}}{{>FooterList}}{{/data-places}}
   {{#data-icons}}{{>FooterList}}{{/data-icons}}
 </footer>

@@ -1,0 +1,399 @@
+/**
+ * Article content: code, infoboxes and the common Wikipedia template classes.
+ * Loaded last so it can override styles that templates bring with them (TemplateStyles sheets and
+ * Common.css copied from Wikipedia hard-code light colours such as #f8f9fa).
+ */
+
+/* ═══════════════════════════════════════════
+   CODE
+   ═══════════════════════════════════════════ */
+
+.skin-nightsky code,
+.skin-nightsky kbd,
+.skin-nightsky samp,
+.skin-nightsky tt {
+	font-family: var(--font-mono);
+	background-color: var(--bg-surface);
+	border: 1px solid var(--border-light);
+	padding: 0.15em 0.4em;
+	border-radius: 0;
+	font-size: 0.9em;
+	color: var(--text-secondary);
+}
+.skin-nightsky kbd { color: var(--text-main); border-bottom-width: 2px; }
+
+.skin-nightsky pre,
+.skin-nightsky .mw-code {
+	background-color: var(--bg-surface);
+	color: var(--text-main); /* core sets black here; 1.1.0 left it, giving black-on-black code */
+	border: 1px solid var(--border-light);
+	border-radius: 0;
+	padding: 1rem;
+	overflow-x: auto;
+	margin-bottom: 1rem;
+	font-family: var(--font-mono);
+	font-size: 0.9rem;
+	line-height: 1.5;
+}
+.skin-nightsky pre code,
+.skin-nightsky pre kbd,
+.skin-nightsky pre samp {
+	background: none;
+	border: none;
+	padding: 0;
+	color: inherit;
+	font-size: inherit;
+}
+
+/* SyntaxHighlight (Pygments). The extension ships a night palette that is switched on by the
+   skin-theme-clientpref-night class SkinNightSky puts on <html>; here it is only fitted to the
+   NightSky surfaces. The <pre> inside must keep the extension's margin:0, otherwise the wrapper's
+   own background shows as a strip under the block. */
+body.skin-nightsky .mw-highlight {
+	background: var(--bg-surface);
+	color: var(--text-main);
+	border: 1px solid var(--border-light);
+}
+body.skin-nightsky div.mw-highlight { margin: 1em 0 1.25rem; }
+.skin-nightsky .mw-highlight pre {
+	background: transparent;
+	color: inherit;
+	border: 0;
+	margin: 0;
+	padding: 1rem;
+}
+.skin-nightsky code.mw-highlight { padding: 0.15em 0.4em; }
+.skin-nightsky .mw-highlight-lines pre { padding-inline-start: 3.5em; }
+.skin-nightsky .mw-highlight .linenos,
+.skin-nightsky .mw-highlight .lineno { color: var(--text-muted); user-select: none; }
+.skin-nightsky .mw-highlight-copy-button { font-family: var(--font-ui); }
+
+/* ═══════════════════════════════════════════
+   INFOBOX
+   Wikipedia's Module:Infobox emits <table class="infobox"> with th.infobox-above, td.infobox-image,
+   th.infobox-label + td.infobox-data, th.infobox-header, td.infobox-full-data and td.infobox-below.
+   1.1.0 styled a different, div-based markup: it forced label cells to 45% width in tiny uppercase
+   mono type, gave the whole box a fixed 265px, hid overflow, and (via overflow-wrap:anywhere on
+   <main>) broke words such as "example.co/m" in the middle. Both markups are styled below.
+   ═══════════════════════════════════════════ */
+
+.skin-nightsky table.infobox {
+	float: right;
+	clear: right;
+	box-sizing: border-box;
+	width: min(22em, 100%);
+	margin: 0.25rem 0 1.25rem 1.5rem;
+	padding: 0;
+	background: var(--bg-surface);
+	color: var(--text-main);
+	border: 1px solid var(--border-medium);
+	border-collapse: collapse;
+	border-spacing: 0;
+	font-size: 0.85rem;
+	line-height: 1.5;
+	overflow-wrap: normal;
+	word-break: normal;
+}
+
+.skin-nightsky table.infobox > caption,
+.skin-nightsky table.infobox .infobox-title,
+.skin-nightsky table.infobox .infobox-above {
+	background: var(--bg-block-head);
+	color: var(--text-bright);
+	border: 0;
+	border-bottom: 1px solid var(--border-light);
+	padding: 0.65rem 0.75rem;
+	font-family: var(--font-heading);
+	font-size: 1.1rem;
+	font-weight: 700;
+	line-height: 1.25;
+	letter-spacing: -0.01em;
+	text-align: center;
+	text-transform: none;
+	overflow-wrap: break-word;
+}
+
+.skin-nightsky table.infobox .infobox-subheader {
+	padding: 0.4rem 0.75rem;
+	color: var(--text-secondary);
+	text-align: center;
+	background: transparent;
+	border-bottom: 1px solid var(--border-light);
+}
+
+.skin-nightsky table.infobox .infobox-image {
+	padding: 0.6rem;
+	background: var(--bg-content);
+	color: var(--text-secondary);
+	text-align: center;
+	border-bottom: 1px solid var(--border-light);
+}
+.skin-nightsky table.infobox .infobox-image img,
+.skin-nightsky table.infobox .infobox-image .mw-file-element { max-width: 100%; height: auto; }
+.skin-nightsky table.infobox .infobox-caption,
+.skin-nightsky table.infobox .infobox-image-caption {
+	margin-top: 0.4rem;
+	font-size: 0.78rem;
+	line-height: 1.4;
+	font-style: italic;
+	color: var(--text-muted);
+	text-align: center;
+}
+
+.skin-nightsky table.infobox .infobox-header {
+	background: var(--bg-block-head);
+	color: var(--text-bright);
+	border: 0;
+	border-top: 1px solid var(--border-light);
+	border-bottom: 1px solid var(--border-light);
+	padding: 0.5rem 0.75rem 0.4rem;
+	font-family: var(--font-mono);
+	font-size: 0.66rem;
+	font-weight: 500;
+	letter-spacing: 0.14em;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+.skin-nightsky table.infobox .infobox-label,
+.skin-nightsky table.infobox .infobox-data,
+.skin-nightsky table.infobox .infobox-full-data,
+.skin-nightsky table.infobox .infobox-below {
+	padding: 0.4rem 0.75rem;
+	border: 0;
+	border-top: 1px solid var(--border-subtle);
+	vertical-align: top;
+	color: var(--text-main);
+	background: transparent;
+}
+.skin-nightsky table.infobox .infobox-label {
+	width: 34%;
+	min-width: 5.5rem;
+	font-family: var(--font-mono);
+	font-size: 0.66rem;
+	font-weight: 500;
+	line-height: 1.6;
+	letter-spacing: 0.08em;
+	text-align: left;
+	text-transform: uppercase;
+	color: var(--text-spec);
+	background: transparent;
+	overflow-wrap: normal;
+}
+/* Values may be long URLs or unbroken tokens: let only THEM break, so they can never widen the box */
+.skin-nightsky table.infobox .infobox-data,
+.skin-nightsky table.infobox .infobox-full-data { text-align: left; overflow-wrap: anywhere; }
+.skin-nightsky table.infobox .infobox-full-data,
+.skin-nightsky table.infobox .infobox-below { text-align: center; }
+.skin-nightsky table.infobox .infobox-below { color: var(--text-secondary); }
+.skin-nightsky table.infobox tr:hover > .infobox-label,
+.skin-nightsky table.infobox tr:hover > .infobox-data { background: rgba(255, 255, 255, 0.02); }
+
+/* Rows written by hand with plain th/td (older infobox templates) */
+.skin-nightsky table.infobox th,
+.skin-nightsky table.infobox td { vertical-align: top; }
+.skin-nightsky table.infobox ul,
+.skin-nightsky table.infobox ol { margin: 0; padding-inline-start: 1.1rem; }
+.skin-nightsky table.infobox li { margin-bottom: 0; }
+.skin-nightsky table.infobox .plainlist ul,
+.skin-nightsky table.infobox .plainlist ol { padding-inline-start: 0; list-style: none; }
+.skin-nightsky table.infobox p { margin: 0 0 0.4rem; }
+.skin-nightsky table.infobox .navbar { font-size: 100%; }
+/* nested "subbox" tables inside an infobox */
+.skin-nightsky table.infobox table.infobox-subbox { width: 100%; float: none; margin: 0; border: 0; background: transparent; }
+
+/* The original div-based infobox (kept for pages that use it) */
+.skin-nightsky div.infobox {
+	float: right;
+	width: min(265px, 100%);
+	margin: 0 0 1.25rem 1.5rem;
+	background-color: var(--bg-surface);
+	color: var(--text-main);
+	border: 1px solid var(--border-medium);
+	border-radius: 0;
+	font-size: 0.85rem;
+}
+.skin-nightsky div.infobox > .infobox-title {
+	background: var(--bg-block-head);
+	color: var(--text-bright);
+	text-align: center;
+	font-family: var(--font-mono);
+	font-weight: 500;
+	font-size: 0.62rem;
+	padding: 0.55rem 0.75rem;
+	border-bottom: 1px solid var(--border-light);
+	text-transform: uppercase;
+	letter-spacing: 0.14em;
+}
+.skin-nightsky div.infobox > .infobox-image { padding: 5px; text-align: center; background-color: var(--bg-content); }
+.skin-nightsky div.infobox > .infobox-image img { width: 100%; height: auto; display: block; border-radius: 0; }
+.skin-nightsky div.infobox .infobox-image-caption { padding-top: 3px; font-size: 0.7rem; color: var(--text-muted); font-style: italic; }
+.skin-nightsky div.infobox table { width: 100%; border-collapse: collapse; }
+.skin-nightsky div.infobox th,
+.skin-nightsky div.infobox td { padding: 5px 10px; border-top: 1px solid var(--border-light); vertical-align: top; text-align: left; color: var(--text-main); font-size: 0.8rem; }
+.skin-nightsky div.infobox th {
+	width: 38%;
+	font-family: var(--font-mono);
+	font-weight: 500;
+	font-size: 0.62rem;
+	background-color: transparent;
+	color: var(--text-spec);
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+}
+.skin-nightsky div.infobox td { overflow-wrap: anywhere; }
+.skin-nightsky div.infobox tr:hover { background-color: rgba(255, 255, 255, 0.02); }
+
+@media (max-width: 768px) {
+	.skin-nightsky table.infobox,
+	.skin-nightsky div.infobox { float: none; clear: both; width: 100%; margin: 0 0 1rem; }
+}
+
+/* ═══════════════════════════════════════════
+   COMMON WIKIPEDIA TEMPLATE CLASSES
+   Wikipedia keeps these in Common.css / TemplateStyles pages. A wiki that copies the templates but
+   not the stylesheets gets them unstyled; a wiki that copies the light stylesheets gets white boxes.
+   Both cases end up readable here.
+   ═══════════════════════════════════════════ */
+
+.skin-nightsky .nowrap,
+.skin-nightsky .nowraplinks a { white-space: nowrap; }
+.skin-nightsky .plainlist ul,
+.skin-nightsky .plainlist ol { list-style: none; margin: 0; padding: 0; }
+.skin-nightsky .plainlist li { margin-bottom: 0; }
+.skin-nightsky .hlist ul,
+.skin-nightsky .hlist ol { list-style: none; margin: 0; padding: 0; }
+.skin-nightsky .hlist li { display: inline; margin: 0; white-space: nowrap; }
+.skin-nightsky .hlist li:not(:last-child)::after { content: " · "; font-weight: bold; }
+.skin-nightsky .hlist dl,
+.skin-nightsky .hlist dd,
+.skin-nightsky .hlist dt { display: inline; margin: 0; }
+.skin-nightsky .hlist dd:not(:last-child)::after { content: " · "; }
+.skin-nightsky .mw-collapsible-toggle { float: right; margin-inline-start: 1em; font-weight: normal; }
+.skin-nightsky .mw-collapsible-toggle a { color: var(--color-link, #b0b0f4); }
+
+/* Hatnotes and "for other uses" notes */
+body.skin-nightsky .hatnote {
+	margin: 0 0 0.9rem;
+	padding: 0.1rem 0 0.1rem 0.75rem;
+	border-left: 2px solid var(--border-bright);
+	font-size: 0.9rem;
+	font-style: italic;
+	color: var(--text-secondary);
+	background: transparent;
+}
+body.skin-nightsky .hatnote a { color: var(--link-color); }
+
+/* Message boxes (ambox / tmbox / cmbox / imbox / fmbox / ombox / mbox-small) */
+body.skin-nightsky table.ambox,
+body.skin-nightsky table.tmbox,
+body.skin-nightsky table.cmbox,
+body.skin-nightsky table.imbox,
+body.skin-nightsky table.fmbox,
+body.skin-nightsky table.ombox {
+	box-sizing: border-box;
+	width: auto;
+	max-width: 100%;
+	margin: 0.75rem 0;
+	background: var(--background-color-neutral);
+	color: var(--text-main);
+	border: 1px solid var(--border-medium);
+	border-left: 6px solid var(--border-color-progressive);
+}
+body.skin-nightsky table.ambox-content,
+body.skin-nightsky table.ambox-style,
+body.skin-nightsky table.ambox-move { border-left-color: var(--border-color-warning); }
+body.skin-nightsky table.ambox-delete,
+body.skin-nightsky table.ambox-speedy,
+body.skin-nightsky table.tmbox-delete { border-left-color: var(--border-color-error); }
+body.skin-nightsky table.ambox-notice,
+body.skin-nightsky table.tmbox-notice { border-left-color: var(--border-color-notice); }
+body.skin-nightsky table.ambox > tbody > tr > td,
+body.skin-nightsky table.tmbox > tbody > tr > td,
+body.skin-nightsky table.cmbox > tbody > tr > td,
+body.skin-nightsky table.imbox > tbody > tr > td,
+body.skin-nightsky table.fmbox > tbody > tr > td,
+body.skin-nightsky table.ombox > tbody > tr > td {
+	background: transparent;
+	color: inherit;
+	border: 0;
+	padding: 0.4rem 0.8rem;
+	vertical-align: middle;
+}
+body.skin-nightsky table.ambox .mbox-image { padding-inline-end: 0; width: 1%; }
+body.skin-nightsky .mbox-small { font-size: 0.85rem; }
+
+/* Navigation boxes */
+body.skin-nightsky .navbox,
+body.skin-nightsky .navbox-subgroup {
+	box-sizing: border-box;
+	width: 100%;
+	margin: 1.25rem 0 0;
+	padding: 1px;
+	background: var(--bg-surface);
+	color: var(--text-main);
+	border: 1px solid var(--border-medium);
+	font-size: 0.85rem;
+	text-align: center;
+	clear: both;
+}
+body.skin-nightsky .navbox table,
+body.skin-nightsky .navbox-inner { background: transparent; color: inherit; border-spacing: 0; width: 100%; }
+body.skin-nightsky .navbox-title,
+body.skin-nightsky .navbox-abovebelow,
+body.skin-nightsky th.navbox-group,
+body.skin-nightsky .navbox-subgroup .navbox-title {
+	background: var(--background-color-neutral);
+	color: var(--text-bright);
+	padding: 0.25rem 0.6rem;
+	font-weight: 600;
+}
+body.skin-nightsky .navbox-list { background: transparent; color: var(--text-main); padding: 0.25rem 0.6rem; }
+body.skin-nightsky th.navbox-group { width: 1%; text-align: right; white-space: nowrap; }
+body.skin-nightsky .navbox-even { background: rgba(255, 255, 255, 0.015); }
+body.skin-nightsky .navbox a { color: var(--link-color); }
+body.skin-nightsky .navbox-title a,
+body.skin-nightsky th.navbox-group a { color: var(--text-bright); }
+
+/* Vertical templates ("sidebar") and floated boxes */
+body.skin-nightsky table.sidebar {
+	box-sizing: border-box;
+	float: right;
+	clear: right;
+	width: min(22em, 100%);
+	margin: 0.25rem 0 1rem 1.5rem;
+	background: var(--bg-surface);
+	color: var(--text-main);
+	border: 1px solid var(--border-medium);
+	font-size: 0.85rem;
+}
+body.skin-nightsky table.sidebar th,
+body.skin-nightsky table.sidebar td { color: inherit; padding: 0.3rem 0.6rem; }
+body.skin-nightsky .sidebar-title,
+body.skin-nightsky .sidebar-heading,
+body.skin-nightsky .sidebar-above { background: var(--background-color-neutral); color: var(--text-bright); text-align: center; }
+
+/* References */
+body.skin-nightsky .references,
+body.skin-nightsky .reflist { font-size: 0.9rem; color: var(--text-main); }
+body.skin-nightsky .reference a,
+body.skin-nightsky .mw-cite-backlink a { text-decoration: none; }
+body.skin-nightsky .reference-text { overflow-wrap: anywhere; }
+body.skin-nightsky .cite-accessibility-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+body.skin-nightsky .citation-needed-content,
+body.skin-nightsky .noprint.Inline-Template { color: var(--text-secondary); }
+
+/* Links that should not carry the article-text underline */
+body.skin-nightsky .navbox a,
+body.skin-nightsky .sidebar a,
+body.skin-nightsky .hlist a,
+body.skin-nightsky .toc a,
+body.skin-nightsky .mw-heading a,
+body.skin-nightsky .reference a,
+body.skin-nightsky .mw-cite-backlink a,
+body.skin-nightsky table.infobox .infobox-label a,
+body.skin-nightsky table.infobox .infobox-header a { text-decoration: none; }
+body.skin-nightsky .navbox a:hover,
+body.skin-nightsky .sidebar a:hover,
+body.skin-nightsky .hlist a:hover,
+body.skin-nightsky .toc a:hover { text-decoration: underline; }

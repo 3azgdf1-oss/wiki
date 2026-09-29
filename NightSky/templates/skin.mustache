@@ -1,7 +1,7 @@
 <a class="wiki-skip-link" href="#content">{{msg-nightsky-skip}}</a>
-<div id="mw-wrapper" class="wiki-page-wrap">
+<div id="mw-wrapper" class="wiki-page-wrap{{#data-portlet-tools}} wiki-page-wrap--tools{{/data-portlet-tools}}">
   <aside id="mw-navigation" class="wiki-sidebar-column" aria-label="{{msg-navigation-heading}}" {{{html-user-language-attributes}}}>
-    <div id="p-logo" role="banner">
+    <div id="p-logo">
       <a class="wiki-logo-box" href="{{link-mainpage}}">
         {{#data-logos}}
           {{#icon}}<img src="{{.}}" alt="" width="120" height="120">{{/icon}}
@@ -17,7 +17,9 @@
         <h2 class="wiki-sidebar-head"><label for="searchInput">{{msg-search}}</label></h2>
         <div class="wiki-sidebar-search">
           <input type="hidden" name="title" value="{{page-title}}">
-          {{{html-input}}}<button id="searchButton" type="submit" name="fulltext" value="1">{{msg-search}}</button>
+          {{{html-input}}}
+          <button class="nightsky-visually-hidden" type="submit" name="go" value="Go" tabindex="-1" aria-hidden="true"></button>
+          <button id="searchButton" type="submit" name="fulltext" value="1">{{msg-search}}</button>
         </div>
       </form>
       {{/data-search-box}}
@@ -33,7 +35,7 @@
     </div>
   </aside>
   <div class="wiki-content-column">
-    <div class="wiki-topbar" aria-label="{{msg-nightsky-page-tools}}" role="navigation" {{{html-user-language-attributes}}}>
+    <div class="wiki-topbar" role="group" aria-label="{{msg-nightsky-page-tools}}" {{{html-user-language-attributes}}}>
       {{#data-portlets}}
         {{#data-associated-pages}}{{>AssociatedPages}}{{/data-associated-pages}}
         {{#data-variants}}{{>Tabs}}{{/data-variants}}
@@ -56,5 +58,12 @@
       {{{html-after-content}}}
     </main>
   </div>
+  {{#data-portlet-tools}}
+  <aside id="mw-tools" class="wiki-tools-column" aria-label="{{msg-toolbox}}" {{{html-user-language-attributes}}}>
+    <div class="wiki-sidebar wiki-tools">
+      {{>Portlet}}
+    </div>
+  </aside>
+  {{/data-portlet-tools}}
 </div>
 {{#data-footer}}{{>Footer}}{{/data-footer}}

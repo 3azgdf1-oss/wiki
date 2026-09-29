@@ -1,0 +1,173 @@
+/**
+ * NightSky design tokens.
+ *
+ * MediaWiki core, OOUI, Codex and many extensions style themselves with Wikimedia design tokens
+ * written as `var( --background-color-base, #fff )`: a CSS custom property with a LIGHT fallback.
+ * NightSky is a dark skin, so it must define every colour token itself. Before 1.2.0 it defined
+ * none, so every such component (Recent changes filters and legend, forms, buttons, message
+ * boxes, imported Wikipedia templates ...) fell back to its white surface while the skin still
+ * supplied near-white text, which is the unreadable "white box, grey text" seen on Recent changes.
+ *
+ * The values below map the NightSky palette (see the variables at the top of design.css) onto the
+ * complete Codex colour vocabulary, using Wikimedia's own dark mode as the reference for which
+ * token is a surface, a text colour, a border or a state. Change the palette in design.css and
+ * these follow; add a token here only if Wikimedia adds a new one.
+ *
+ * Every text token below is at least 4.5:1 against the surfaces it is used on
+ * (checked with dev/contrast-tokens.py).
+ */
+:root {
+	color-scheme: dark;
+
+	/* ---- Text and icon colours ---- */
+	--color-base: var(--text-main);
+	--color-base--hover: var(--text-bright);
+	--color-base--subtle: #a4a4af; /* deprecated alias of color-subtle */
+	--color-emphasized: var(--text-bright);
+	--color-neutral: #c4c4cc;
+	--color-subtle: #a4a4af;
+	--color-placeholder: #8a8a96;
+	--color-disabled: #8a8a98;
+	--color-disabled-emphasized: #92929e;
+	--color-inverted: #08080a; /* text on light or filled surfaces */
+
+	--color-progressive: #a8a8f2; /* accent: selected, focused and interactive text */
+	--color-progressive--hover: #c4c4fa;
+	--color-progressive--active: #dcdcff;
+	--color-progressive--focus: #8a8ae8;
+	--color-destructive: #eb9494;
+	--color-destructive--hover: #f4b0b0;
+	--color-destructive--active: #f9c8c8;
+	--color-destructive--focus: #8a8ae8;
+	--color-visited: #b2a7d8;
+	--color-visited--hover: #cbc2e8;
+	--color-visited--active: #ded8f2;
+	--color-destructive--visited: #c99391;
+	--color-destructive--visited--hover: #dcb5b3;
+	--color-destructive--visited--active: #e8cecd;
+	--color-error: #ff8c7e;
+	--color-error--hover: #ffab9f;
+	--color-error--active: #ffc8bf;
+	--color-warning: #d9a83c;
+	--color-success: #34c19a;
+	--color-notice: #a4a4af;
+	--color-icon-error: #ff8c7e;
+	--color-icon-warning: #d9a83c;
+	--color-icon-success: #34c19a;
+	--color-icon-notice: #8a8a96;
+	--color-icon-progressive: #8a8ae8;
+	--color-content-added: #6fd3ae;
+	--color-content-removed: #ff8c7e;
+
+	/* Links (aliases Wikimedia derives from the tokens above) */
+	--color-link: var(--color-progressive);
+	--color-link--hover: var(--color-progressive--hover);
+	--color-link--active: var(--color-progressive--active);
+	--color-link--focus: var(--color-progressive--focus);
+	--color-link--visited: var(--color-visited);
+	--color-link--visited--hover: var(--color-visited--hover);
+	--color-link--visited--active: var(--color-visited--active);
+	--color-link-red: var(--color-destructive);
+	--color-link-red--hover: var(--color-destructive--hover);
+	--color-link-red--active: var(--color-destructive--active);
+	--color-link-red--focus: var(--color-destructive--focus);
+	--color-link-red--visited: var(--color-destructive--visited);
+	--color-link-red--visited--hover: var(--color-destructive--visited--hover);
+	--color-link-red--visited--active: var(--color-destructive--visited--active);
+
+	/* ---- Surfaces ---- */
+	--background-color-base: var(--bg-content);
+	--background-color-neutral: #101014;
+	--background-color-neutral-subtle: var(--bg-surface);
+	--background-color-interactive: #18181e;
+	--background-color-interactive--hover: #22222a;
+	--background-color-interactive--active: #2c2c36;
+	--background-color-interactive-subtle: #101014;
+	--background-color-interactive-subtle--hover: #18181e;
+	--background-color-interactive-subtle--active: #22222a;
+	--background-color-disabled: #1e1e26;
+	--background-color-disabled-subtle: #14141a;
+	--background-color-inverted: #e4e4ec;
+
+	--background-color-progressive: #5a5ac8; /* filled primary buttons (white text 5.6:1) */
+	--background-color-progressive--hover: #4a4ab6;
+	--background-color-progressive--active: #3a3a98;
+	--background-color-progressive--focus: #5a5ac8;
+	--background-color-progressive-subtle: #17172e;
+	--background-color-progressive-subtle--hover: #1f1f42;
+	--background-color-progressive-subtle--active: #2a2a5c;
+	--background-color-destructive: #bf3c2c;
+	--background-color-destructive--hover: #a63325;
+	--background-color-destructive--active: #7a2519;
+	--background-color-destructive--focus: #5a5ac8;
+	--background-color-destructive-subtle: #2d191d;
+	--background-color-destructive-subtle--hover: #3d2027;
+	--background-color-destructive-subtle--active: #4d2830;
+	--background-color-error: #c2413a;
+	--background-color-error--hover: #a63630;
+	--background-color-error--active: #862a25;
+	--background-color-error-subtle: #2d191d;
+	--background-color-error-subtle--hover: #3d2027;
+	--background-color-error-subtle--active: #4d2830;
+	--background-color-warning-subtle: #262014;
+	--background-color-success-subtle: #132a23;
+	--background-color-notice-subtle: #17171f;
+	--background-color-content-added: #192a39;
+	--background-color-content-removed: #30261a;
+	--background-color-target-text: #2d2650;
+	--background-color-backdrop-light: rgba(0, 0, 0, 0.65);
+	--background-color-backdrop-dark: rgba(255, 255, 255, 0.65);
+	--background-color-button-quiet--hover: rgba(255, 255, 255, 0.06);
+	--background-color-button-quiet--active: rgba(255, 255, 255, 0.12);
+	--background-color-input-binary--checked: #5a5ac8;
+	--background-color-tab-list-item-framed--hover: rgba(255, 255, 255, 0.06);
+	--background-color-tab-list-item-framed--active: rgba(255, 255, 255, 0.1);
+
+	/* ---- Borders and rings ---- */
+	--border-color-base: var(--border-bright);
+	--border-color-emphasized: #d8d8dc;
+	--border-color-subtle: var(--border-medium);
+	--border-color-muted: var(--border-light);
+	--border-color-interactive: #62626f; /* control outlines: 3:1 against the page */
+	--border-color-interactive--hover: #a4a4af;
+	--border-color-interactive--active: #d8d8dc;
+	--border-color-disabled: #2c2c36;
+	--border-color-inverted: #08080a;
+	--border-color-progressive: #7a7ae0;
+	--border-color-progressive--hover: #a4a4f2;
+	--border-color-progressive--active: #c4c4fa;
+	--border-color-progressive--focus: #8a8ae8;
+	--border-color-destructive: #f08078;
+	--border-color-destructive--hover: #f4a49e;
+	--border-color-destructive--active: #f9c4c0;
+	--border-color-destructive--focus: #8a8ae8;
+	--border-color-error: #c8606f;
+	--border-color-error--hover: #e08090;
+	--border-color-error--active: #f0a0ae;
+	--border-color-warning: #9a773b;
+	--border-color-warning--hover: #c9962f;
+	--border-color-warning--active: #e0ae42;
+	--border-color-success: #588979;
+	--border-color-notice: #555567;
+	--border-color-content-added: #5286b3;
+	--border-color-content-removed: #9c783c;
+	--border-color-divider: var(--border-bright);
+	--border-color-input--hover: var(--border-color-interactive--hover);
+	--border-color-input-binary: var(--border-color-interactive);
+	--border-color-input-binary--hover: var(--border-color-progressive--hover);
+	--border-color-input-binary--active: var(--border-color-progressive--active);
+	--border-color-input-binary--focus: var(--border-color-progressive--focus);
+	--border-color-input-binary--checked: var(--border-color-progressive);
+	--outline-color-progressive--focus: #8a8ae8;
+	--box-shadow-color-base: #5a5a68;
+	--box-shadow-color-progressive--active: #c4c4fa;
+	--box-shadow-color-progressive--focus: #8a8ae8;
+	--box-shadow-color-progressive-selected: #8a8ae8;
+	--box-shadow-color-progressive-selected--hover: #a4a4f2;
+	--box-shadow-color-progressive-selected--active: #c4c4fa;
+	--box-shadow-color-destructive--focus: #8a8ae8;
+	--box-shadow-color-inverted: #000;
+	--box-shadow-color-alpha-base: rgba(0, 0, 0, 0.87);
+	--mix-blend-mode-blend: screen;
+	--accent-color-base: #6868d4;
+}

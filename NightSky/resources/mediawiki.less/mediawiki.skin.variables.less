@@ -1,12 +1,42 @@
+/**
+ * NightSky: LESS variables that core and extension style modules import.
+ *
+ * MediaWiki only reads this file when skin.json registers it:
+ *     "SkinLessImportPaths": { "nightsky": "resources/mediawiki.less" }
+ * (version 1.1.0 shipped this file but never registered it, so none of it was ever applied and
+ * every core module was compiled with MediaWiki's light-theme defaults.)
+ *
+ * The pattern is the one Vector uses: import the neutral defaults, import the Codex token theme
+ * (whose values are `var( --token, fallback )` references) and then override what differs.
+ * The actual dark values of those custom properties live in resources/tokens.css, so a
+ * palette change is made in one place and reaches LESS-compiled core CSS, OOUI, Codex and
+ * imported Wikipedia templates alike.
+ */
 @import 'mediawiki.skin.defaults.less';
-@background-color-base: #08080a;
-@background-color-neutral: #101014;
-@background-color-interactive: #18181e;
-@color-base: #d8d8dc;
-@color-emphasized: #ffffff;
-@color-subtle: #a4a4af;
-@color-link: #b0b0f4;
-@color-link--visited: #b2a7d8;
-@border-color-base: #3a3a44;
-@border-color-subtle: #26262e;
+@import 'mediawiki.skin.codex-design-tokens/theme-wikimedia-ui.less';
+
+// == Fonts ==
 @font-family-base: system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+// == Non-token colours (plain values in core, so they cannot follow the CSS custom properties) ==
+// Links on a near-black surface. Default MediaWiki blue (#0645ad) is only 2.3:1 here.
+@color-link: #b0b0f4;
+@color-link--hover: #d0d0ff;
+@color-link--active: #e4e4ff;
+@color-link--focus: #b0b0f4;
+@color-link--visited: #b2a7d8;
+@color-link--visited--hover: #cbc2e8;
+@color-link--visited--active: #ded8f2;
+@color-link-red: #eb9494;
+@color-link-red--hover: #f4b0b0;
+@color-link-red--active: #f9c8c8;
+@color-link-red--focus: #eb9494;
+@color-link-red--visited: #c99391;
+@color-link-red--visited--hover: #dcb5b3;
+@color-link-red--visited--active: #e8cecd;
+@color-link-new: @color-link-red;
+@color-link-new--visited: @color-link-red--visited;
+@color-link-external: #b0b0f4;
+@color-link-external--visited: #b2a7d8;
+@color-link-external--active: #e4e4ff;
+@accent-color-base: #6868d4;

@@ -1,3 +1,4 @@
+__NOTOC__
 <div class="wiki-lead">Welcome to the community knowledge base. Browse the guides or help improve an article.</div>
 <div class="card-grid">
 <div class="card">
@@ -14,7 +15,7 @@ Meet contributors and help maintain the wiki.
 </div>
 </div>
 == Reference ==
-{| class="wikitable"
+{| class="wikitable wiki-table"
 ! Topic !! Description
 |-
 | [[Help:Editing|Editing]] || Learn how to contribute

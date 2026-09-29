@@ -1,0 +1,4 @@
+# Line endings: LF everywhere. It is the MediaWiki convention, and the shell scripts in dev/ break with CRLF.
+* text=auto eol=lf
+*.png binary
+*.jpg binary

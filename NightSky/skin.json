@@ -1,6 +1,6 @@
 {
   "name": "NightSky",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "type": "skin",
   "namemsg": "skinname-nightsky",
   "descriptionmsg": "nightsky-desc",
@@ -32,7 +32,6 @@
             "sitetitle",
             "search",
             "tagline",
-            "toolbox",
             "navigation-heading",
             "nightsky-skip",
             "nightsky-page-tools",

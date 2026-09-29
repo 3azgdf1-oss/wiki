@@ -2,13 +2,11 @@
 /**
  * NightSky skin class.
  *
- * The skin is still rendered by the Mustache templates in /templates. This class only does
- * three small things that a template cannot do by itself:
+ * The skin is still rendered by the Mustache templates in /templates. This class only does two
+ * small things that a template cannot do by itself:
  *
  *  1. Removes the stock "Help about MediaWiki" link from the sidebar.
- *  2. Lifts the "Tools" portlet out of the sidebar so the template can place it in its own
- *     column on the opposite side of the page.
- *  3. Marks the <html> element as a night-mode skin so extensions that ship dark styles
+ *  2. Marks the <html> element as a night-mode skin so extensions that ship dark styles
  *     (SyntaxHighlight, TemplateStyles pages from Wikipedia, RCFilters, Echo, VisualEditor,
  *     DiscussionTools ...) switch them on. NightSky is dark-only, so this is unconditional.
  *
@@ -26,12 +24,6 @@ class SkinNightSky extends SkinMustache {
 	 * "Help about MediaWiki" entry that a fresh MediaWiki puts in MediaWiki:Sidebar.
 	 */
 	private const HIDDEN_SIDEBAR_ITEMS = [ 'n-help-mediawiki' ];
-
-	/**
-	 * Id of the portlet that holds the "Tools" links (What links here, Special pages ...).
-	 * Core always maps the TOOLBOX sidebar section to this id.
-	 */
-	private const TOOLS_PORTLET_ID = 'p-tb';
 
 	/**
 	 * @inheritDoc
@@ -54,36 +46,6 @@ class SkinNightSky extends SkinMustache {
 			);
 		}
 		return $sidebar;
-	}
-
-	/**
-	 * @inheritDoc
-	 */
-	public function getTemplateData() {
-		$data = parent::getTemplateData();
-
-		$portlets = $data['data-portlets-sidebar'] ?? [];
-		$first = $portlets['data-portlets-first'] ?? null;
-		$all = array_merge( $first ? [ $first ] : [], $portlets['array-portlets-rest'] ?? [] );
-
-		$tools = null;
-		$rest = [];
-		foreach ( $all as $portlet ) {
-			if ( ( $portlet['id'] ?? '' ) === self::TOOLS_PORTLET_ID ) {
-				$tools = $portlet;
-			} else {
-				$rest[] = $portlet;
-			}
-		}
-
-		$data['data-portlets-sidebar'] = [
-			'data-portlets-first' => $rest[0] ?? null,
-			'array-portlets-rest' => array_slice( $rest, 1 ),
-		];
-		// Rendered by skin.mustache in the tools column; null when a wiki has no tools at all.
-		$data['data-portlet-tools'] = $tools;
-
-		return $data;
 	}
 
 	/**

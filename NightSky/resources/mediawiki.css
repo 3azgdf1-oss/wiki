@@ -21,7 +21,7 @@ body.skin-nightsky { margin: 0; }
 
 /* ── Navigation and tools portlets ── */
 .skin-nightsky .wiki-sidebar-head { font-size: 0.7rem; }
-.skin-nightsky .wiki-sidebar li a { font-size: 0.86rem; min-height: 34px; }
+.skin-nightsky .wiki-sidebar li a { font-size: 0.86rem; min-height: 31px; }
 .skin-nightsky .wiki-sidebar .selected a { border-inline-start: 2px solid var(--amber); color: var(--text-bright); }
 /* core marks a portlet with nothing in it "emptyPortlet" (the pre-1.2.0 rule looked for a class core never emits) */
 .skin-nightsky .emptyPortlet,
@@ -29,18 +29,12 @@ body.skin-nightsky { margin: 0; }
 .skin-nightsky .mw-portlet-body .mw-portlet-body { padding-inline-start: 0.6rem; }
 .skin-nightsky .after-portlet,
 .skin-nightsky .before-portlet { padding: 0.5rem; }
-.skin-nightsky .wiki-sidebar li:not(:has(a)) { padding: 0.5rem 0.85rem; color: var(--text-secondary); }
+.skin-nightsky .wiki-sidebar li:not(:has(a)) { padding: 0.4rem 0.75rem; color: var(--text-secondary); }
 .skin-nightsky #p-logo img[src*="/resources/assets/change-your-logo"] { display: none; }
 .skin-nightsky .wiki-logo-name { font-size: 0.82rem; padding: 1rem 0.4rem; }
 /* The default MediaWiki "Help about MediaWiki" link. SkinNightSky removes it server-side; this keeps
    it hidden if a gadget or hook adds it back. */
 .skin-nightsky #n-help-mediawiki { display: none; }
-
-/* On narrower screens the Tools column sits under the article, so its links flow in rows */
-@media (max-width: 1100px) {
-	.skin-nightsky .wiki-tools ul { display: flex; flex-wrap: wrap; }
-	.skin-nightsky .wiki-tools li { flex: 1 1 160px; margin: 0; }
-}
 
 /* ── Title, subtitle, indicators ── */
 .skin-nightsky #firstHeading {
@@ -136,7 +130,7 @@ body.skin-nightsky { margin: 0; }
 .skin-nightsky .catlinks li { display: inline-block; margin-inline-start: 0.5rem; }
 .skin-nightsky .visualClear { clear: both; }
 /* Wide content (a 40-column table, a fixed-width block, an image) scrolls inside the article instead of
-   stretching the whole page under the tools column. Before 1.2.0 this only happened on phones. The
+   stretching the whole page sideways. Before 1.2.0 this only happened on phones. The
    padding/negative margin leaves room for focus outlines at the edges of the scroll box. */
 .skin-nightsky .mw-body-content { min-width: 0; }
 .skin-nightsky #bodyContent { overflow-x: auto; padding-inline: 6px; margin-inline: -6px; }
@@ -388,7 +382,6 @@ body.skin-nightsky .codeEditor-status-worker > span { color: #b4b6ae; }
 	body.skin-nightsky::before,
 	body.skin-nightsky::after,
 	.skin-nightsky #mw-navigation,
-	.skin-nightsky #mw-tools,
 	.skin-nightsky .wiki-topbar,
 	.skin-nightsky #siteNotice,
 	.skin-nightsky .wiki-skip-link,

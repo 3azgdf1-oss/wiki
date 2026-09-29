@@ -639,7 +639,7 @@ a { color: var(--accent); }
     a.target = '_blank';
     a.rel = 'noopener';
     box.appendChild(a);
-    if (page.shots) {
+    if (page.shots && state.render !== 'shot' && WIDTHS[state.width].shot) {
       const b = el('button', '', 'Show the screenshot instead');
       b.type = 'button';
       b.className = 'pane-open';

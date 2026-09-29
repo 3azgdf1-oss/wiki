@@ -1,6 +1,6 @@
 # NightSky
 
-A standalone MediaWiki skin adapted from your pasted CSS: matte black panels, violet accents, monospaced navigation, a left sidebar and a right-hand Tools column. Version 1.2.0 targets MediaWiki 1.46 using the namespaced SkinMustache API and ResourceLoader. See `UPGRADE.md` when replacing 1.1.0 and `CHANGELOG.md` for everything that changed.
+A standalone MediaWiki skin adapted from your pasted CSS: matte black panels, violet accents, monospaced navigation and a left sidebar. Version 1.2.1 targets MediaWiki 1.46 using the namespaced SkinMustache API and ResourceLoader. See `UPGRADE.md` when replacing 1.1.0 and `CHANGELOG.md` for everything that changed.
 
 ## Install
 
@@ -22,9 +22,8 @@ Requires access to your server's skins directory and LocalSettings.php. This pac
 
 ## Layout
 
-- **Left column:** logo and wiki name, search, and the groups from `MediaWiki:Sidebar` (Navigation and so on), then your account and personal tools.
-- **Centre:** page tabs, then the article, which uses all the width between the two side columns.
-- **Right column:** the Tools box (What links here, Special pages, Printable version ...). It stays in view while you scroll on wide screens, moves under the article below 1100px, and stacks everything in one column on phones.
+- **Left column (200px):** logo and wiki name, search, then the groups from `MediaWiki:Sidebar` (Navigation, then Tools with What links here, Special pages, Printable version and so on), then your account and personal tools. On phones it becomes a collapsible menu above the article.
+- **Centre:** page tabs, then the article, which uses all the width to the right of the sidebar.
 - The stock "Help about MediaWiki" sidebar link is not shown. Remove it for good by deleting that line from `MediaWiki:Sidebar`.
 - The small "Help" links that core adds at the top right of some special pages and forms (Recent changes, for example) are still shown, because they are part of those pages. To hide them as well, add `.mw-helplink { display: none; }` to `MediaWiki:NightSky.css`.
 
@@ -32,7 +31,7 @@ Requires access to your server's skins directory and LocalSettings.php. This pac
 
 - Site name: your existing `$wgSitename` configuration; the displayed brand uses the standard `sitetitle` message.
 - Logo: your existing `$wgLogos['icon']`, falling back to `$wgLogos['1x']`. The skin renders the wiki name beneath it. Example: `$wgLogos['icon'] = "$wgScriptPath/images/my-logo.png";` with an existing image URL.
-- Sidebar links and groups: edit `MediaWiki:Sidebar` using normal MediaWiki sidebar syntax. A `TOOLBOX` entry produces the right-hand Tools column.
+- Sidebar links and groups: edit `MediaWiki:Sidebar` using normal MediaWiki sidebar syntax. The `TOOLBOX` entry is the Tools box.
 - Colours, spacing, page width and fonts: edit the variables at the beginning of `resources/design.css`. `resources/tokens.css` maps them onto the Wikimedia design tokens that core, OOUI, Codex and extensions use, so a palette change reaches all of them. Native MediaWiki adaptations are in `resources/mediawiki.css`; styles for content that comes from templates (infobox, navbox, code) are in `resources/content.css`.
 - Custom per-wiki overrides: `MediaWiki:NightSky.css`, for example `:root { --layout-max: 1600px; }` to cap the page width.
 - Fonts: system fonts work without third-party requests. The supplied Google Fonts import was intentionally omitted from ResourceLoader CSS. To opt in, place the following at the very top of `MediaWiki:NightSky.css` (subject to your wiki's CSP), or self-host those fonts and declare `@font-face` there:

@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.2.1
+
+Layout adjustments requested after 1.2.0 was installed. The install steps are the same as for 1.2.0 (see `UPGRADE.md`).
+
+- **Tools is back in the left sidebar**, between Navigation and Your account, as it was in 1.1.0. The separate right-hand Tools column that 1.2.0 added is removed: the `getTemplateData()` override in `includes/SkinNightSky.php`, the `data-portlet-tools` block in `templates/skin.mustache`, the `.wiki-tools-column` styles and the `toolbox` message.
+- **Slimmer sidebar.** The column is 200px wide instead of 210px (`--sidebar-width` in `resources/design.css`), link rows are 31px instead of 34px, and section headings are about 3px shorter. The search input and button are not smaller: they are still 190px wide (input 34px, button 31px tall), because the search block's side padding shrank by the same 10px.
+- The article uses all the width to the right of the sidebar (about 83% of a 1440px window).
+- `UPGRADE.md` now explains the `filemtime(): stat failed for .../skins/NightSky/skin.json` error, which means the skin folder is in the wrong place or unreadable by the web server.
+- The checks in `dev/check-layout.mjs` follow the new layout and now also assert that the search bar is not smaller than before.
+
 ## 1.2.0
 
 Requires MediaWiki 1.46 or newer, like 1.1.0. See `UPGRADE.md` before replacing 1.1.0.
@@ -7,7 +17,7 @@ Requires MediaWiki 1.46 or newer, like 1.1.0. See `UPGRADE.md` before replacing 
 ### Requested changes
 
 - **"Help about MediaWiki" is removed** from the Navigation menu. It is filtered out in PHP (`SkinNightSky::buildSidebar`, sidebar item id `n-help-mediawiki`), with a CSS fallback in `resources/mediawiki.css`. A link you add yourself under a different label is not affected.
-- **Tools moved to the other side.** The "Tools" portlet is lifted out of the left sidebar and rendered in its own right-hand column (`data-portlet-tools`, `templates/skin.mustache`). The column is sticky on wide screens and drops under the article below 1100px.
+- **Tools moved to the other side.** The "Tools" portlet was lifted out of the left sidebar into its own right-hand column. Reverted in 1.2.1: Tools is in the left sidebar again.
 - **The article fills the page width.** The 1320px cap on the whole page is gone (`--layout-max: none`); the article column is `minmax(0, 1fr)` between the two side columns.
 - **Infobox person (the Goober page).** Wikipedia's infobox renders `table.infobox` with `infobox-label` / `infobox-data` cells. The skin only styled a different, hand-made `div.infobox`, so the real table was squeezed into a fixed 265px box, its own light TemplateStyles colours showed through under light text, and the label column shrank to a letter per line. `resources/content.css` now styles the real markup (both the table and the old div form), and long words and addresses wrap inside their own cell.
 - **Syntax highlighter unreadable.** SyntaxHighlight ships a night palette that only applies under `html.skin-theme-clientpref-night`. The skin never set that class, so colours made for a white page were drawn on black. The class is now set (`SkinNightSky::getHtmlElementAttributes`) and code blocks have explicit text and surface colours.
@@ -18,7 +28,7 @@ Requires MediaWiki 1.46 or newer, like 1.1.0. See `UPGRADE.md` before replacing 
 Layout and width
 
 1. "Help about MediaWiki" sat in the Navigation menu (see above).
-2. Tools lived in the left sidebar (see above).
+2. Tools lived in the left sidebar (moved to its own column in 1.2.0, back in the sidebar in 1.2.1).
 3. The whole page was capped at 1320px, leaving empty margins on wide screens.
 4. Wide tables, code blocks and images only scrolled sideways on phones. `#bodyContent` now scrolls horizontally at every width, so a wide table can no longer stretch the page.
 
@@ -48,7 +58,7 @@ Templates, PHP and manifest
 20. **Footer.** The template skipped the footer's "info" list, where extensions add their own lines, and dropped every list's class name (including `noprint` on the badges). It now renders info, places and icons.
 21. **Search.** The only submit button was named `fulltext`, so pressing Enter always ran a text search and never jumped to an exact title. A hidden `go` button now comes first.
 22. **Landmarks.** `role="banner"` inside an `<aside>` and `role="navigation"` around nested `<nav>` elements created extra, nested regions for screen readers.
-23. **Manifest.** The plain `SkinMustache` class became `MediaWiki\Skins\NightSky\SkinNightSky` (autoloaded from `includes/`), the obsolete `targets` key was removed, and the core style features the CSS relies on are enabled (`accessibility`, `interface-core`, `interface-indicators`, `interface-edit-section-links`, `interface-user-message`, `i18n-ordered-lists`, `i18n-headings`). The `toolbox` message is declared for the Tools column's label.
+23. **Manifest.** The plain `SkinMustache` class became `MediaWiki\Skins\NightSky\SkinNightSky` (autoloaded from `includes/`), the obsolete `targets` key was removed, and the core style features the CSS relies on are enabled (`accessibility`, `interface-core`, `interface-indicators`, `interface-edit-section-links`, `interface-user-message`, `i18n-ordered-lists`, `i18n-headings`).
 
 CSS hygiene
 
@@ -63,7 +73,7 @@ Packaging and docs
 
 ### Added
 
-- `includes/SkinNightSky.php`: the skin class (sidebar filter, Tools column, night-mode flag).
+- `includes/SkinNightSky.php`: the skin class (sidebar filter, night-mode flag).
 - `resources/tokens.css`: the Codex colour tokens mapped onto the NightSky palette.
 - `resources/content.css`: Wikipedia-compatible infobox, navbox, ambox, hatnote, hlist/plainlist, code and syntax-highlight styles.
 - `resources/contrast.js`: the contrast guard described in finding 12.

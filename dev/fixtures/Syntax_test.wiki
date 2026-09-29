@@ -1,0 +1,221 @@
+Syntax highlighting samples using the SyntaxHighlight extension.
+
+== PHP ==
+<syntaxhighlight lang="php" line>
+<?php
+namespace MediaWiki\Skins\NightSky;
+
+use MediaWiki\Title\Title;
+
+/**
+ * Example class with docblock.
+ */
+final class Example extends Base implements \Countable {
+	private const LIMIT = 42;
+	private array $items = [];
+
+	public function __construct( private string $name = 'nightsky' ) {}
+
+	public function count(): int {
+		// Single-line comment
+		return count( $this->items ) + self::LIMIT; # hash comment
+	}
+
+	public function render( Title $title, ?string $extra = null ): string {
+		$html = "<div class=\"box\">{$title->getPrefixedText()}</div>";
+		foreach ( $this->items as $key => $value ) {
+			if ( $value === null || !is_string( $key ) ) {
+				continue;
+			}
+			$html .= sprintf( '%s=%d', $key, (int)$value * 3.14 );
+		}
+		return $html;
+	}
+}
+</syntaxhighlight>
+
+== JavaScript ==
+<syntaxhighlight lang="javascript">
+( function () {
+	'use strict';
+	const items = [ 1, 2, 3 ].map( ( n ) => n * 2 );
+	async function load( url, opts = {} ) {
+		/* block comment */
+		const res = await fetch( url, { ...opts, headers: { Accept: 'application/json' } } );
+		if ( !res.ok ) { throw new Error( `HTTP ${ res.status }` ); }
+		return res.json();
+	}
+	class Widget extends HTMLElement {
+		static observed = [ 'label' ];
+		get label() { return this.getAttribute( 'label' ) ?? 'none'; }
+	}
+	customElements.define( 'x-widget', Widget );
+	console.log( /^[a-z]+$/i.test( 'NightSky' ), 0xFF, 1e3, null, undefined, true );
+}() );
+</syntaxhighlight>
+
+== Lua ==
+<syntaxhighlight lang="lua" line start="10">
+local p = {}
+
+-- build an infobox row
+function p.row( label, data )
+	if data == nil or mw.text.trim( data ) == '' then
+		return ''
+	end
+	local html = mw.html.create( 'tr' )
+	html:tag( 'th' ):addClass( 'infobox-label' ):wikitext( label )
+	html:tag( 'td' ):addClass( 'infobox-data' ):wikitext( data )
+	return tostring( html )
+end
+
+for i, v in ipairs( { 'a', 'b', 'c' } ) do
+	print( i, v, #v, 3.5 * 2 )
+end
+
+return p
+</syntaxhighlight>
+
+== CSS ==
+<syntaxhighlight lang="css">
+/* NightSky variables */
+:root {
+	--amber: #6868d4;
+	--bg-body: #030303;
+}
+.skin-nightsky .infobox > tbody > tr:nth-child(2n) th::after {
+	content: "\2192";
+	margin: 0 .5em 1rem auto;
+	background: linear-gradient(105deg, #fff 0%, rgba(104, 104, 212, .5) 48%);
+}
+@media (max-width: 768px) { .card-grid { display: grid !important; } }
+</syntaxhighlight>
+
+== HTML ==
+<syntaxhighlight lang="html">
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Example</title>
+<style>body { color: #333; }</style></head>
+<body class="home page-1">
+  <!-- a comment -->
+  <a href="https://example.org/?q=1&amp;x=2" title='single'>Link &copy;</a>
+  <script>alert( "hi" );</script>
+</body>
+</html>
+</syntaxhighlight>
+
+== Python ==
+<syntaxhighlight lang="python">
+#!/usr/bin/env python3
+"""Module docstring."""
+import re
+from dataclasses import dataclass, field
+
+@dataclass
+class Row:
+    label: str
+    values: list[int] = field(default_factory=list)
+
+    def total(self) -> int:
+        return sum(v for v in self.values if v % 2 == 0)
+
+def main(argv=None):
+    pat = re.compile(r"^(?P<name>\w+)\s*=\s*(\d+)$")
+    print(f"Total: {Row('x', [1,2,3,4]).total():>5}", end="\n")  # trailing comment
+    return 0 if pat else 1
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+</syntaxhighlight>
+
+== JSON ==
+<syntaxhighlight lang="json">
+{
+  "name": "NightSky",
+  "version": "1.2.0",
+  "requires": { "MediaWiki": ">= 1.46.0" },
+  "menus": [ "views", "actions", true, null, 12, 3.5e2 ]
+}
+</syntaxhighlight>
+
+== Bash ==
+<syntaxhighlight lang="bash">
+#!/bin/bash
+set -euo pipefail
+NAME="${1:-wiki}"   # default name
+for f in skins/*/skin.json; do
+  echo "Found: $f" | tee -a "log-$(date +%F).txt"
+done
+if [[ -d "$NAME" ]]; then cp -r "$NAME" "${NAME}.bak"; fi
+</syntaxhighlight>
+
+== SQL ==
+<syntaxhighlight lang="sql">
+-- recent edits
+SELECT rc_title, COUNT(*) AS edits, MAX(rc_timestamp) AS last_edit
+FROM recentchanges
+WHERE rc_namespace = 0 AND rc_bot = 0
+GROUP BY rc_title
+HAVING COUNT(*) > 1
+ORDER BY edits DESC LIMIT 10;
+</syntaxhighlight>
+
+== C++ ==
+<syntaxhighlight lang="cpp">
+#include <iostream>
+template <typename T>
+class Stack {
+  std::vector<T> data;
+public:
+  void push(const T& v) { data.push_back(v); }
+  T pop() { T v = data.back(); data.pop_back(); return v; }
+};
+int main() { Stack<int> s; s.push(42); std::cout << s.pop() << '\n'; return 0; }
+</syntaxhighlight>
+
+== Wikitext ==
+<syntaxhighlight lang="wikitext">
+== Heading ==
+'''Bold''' and ''italic'' with [[Link|label]] and {{Template|param=value}}.
+{| class="wikitable"
+! A !! B
+|-
+| 1 || 2
+|}
+</syntaxhighlight>
+
+== Diff ==
+<syntaxhighlight lang="diff">
+--- a/skin.json
++++ b/skin.json
+@@ -1,4 +1,4 @@
+-  "version": "1.1.0",
++  "version": "1.2.0",
+   "type": "skin",
+</syntaxhighlight>
+
+== Plain text (no language) ==
+<syntaxhighlight lang="text">
+Just plain text, no tokens at all.
+Nothing here should be invisible: identifiers, punctuation, numbers 12345.
+</syntaxhighlight>
+
+== Inline ==
+Inline code such as <syntaxhighlight lang="php" inline>$x = array( 'a' => 1 );</syntaxhighlight> should also be readable, as should <code>plain code</code>, <kbd>Ctrl</kbd>+<kbd>S</kbd>, <samp>sample output</samp>, <tt>teletype</tt> and <var>variable</var>.
+
+== Preformatted and other blocks ==
+<pre>
+Plain pre block: color and background must be readable.
+    indented line with special chars <>&
+</pre>
+ Leading-space preformatted line one
+ Leading-space preformatted line two
+
+<blockquote>A blockquote with <b>bold</b> and a <a href="/Goober">link</a>.</blockquote>
+
+<div class="mw-code">A mw-code div: legacy light-theme block from MediaWiki core.</div>
+
+<div class="toccolours">A toccolours box (used by many imported templates), with a [[Goober|link]].</div>
+
+[[Category:Development]]

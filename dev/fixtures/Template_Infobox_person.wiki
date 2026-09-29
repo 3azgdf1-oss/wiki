@@ -1,0 +1,38 @@
+{{Infobox
+| styles = {{{styles|classic}}}
+| bodyclass = biography vcard
+| above = <div class="fn" style="display:inline">{{{name|{{PAGENAME}}}}}</div>
+| image = {{#if:{{{image|}}}|[[File:{{{image}}}|frameless|upright=1.0|alt={{{alt|}}}]]}}
+| caption = {{{caption|}}}
+| label1 = Born
+| data1 = {{#if:{{{birth_name|}}}|<div class="nickname">{{{birth_name}}}</div>}}{{{birth_date|}}}{{#if:{{{birth_place|}}}|<div class="birthplace">{{{birth_place}}}</div>}}
+| label2 = Died
+| data2 = {{{death_date|}}}{{#if:{{{death_place|}}}|<br />{{{death_place}}}}}
+| label3 = Nationality
+| data3 = {{{nationality|}}}
+| label4 = Other names
+| data4 = {{{other_names|}}}
+| label5 = Occupation
+| data5 = {{#if:{{{occupation|}}}|<div class="role">{{{occupation}}}</div>}}
+| label6 = Years active
+| data6 = {{{years_active|}}}
+| label7 = Employer
+| data7 = {{{employer|}}}
+| label8 = Known&nbsp;for
+| data8 = {{{known_for|}}}
+| label9 = Notable work
+| data9 = {{{notable_works|}}}
+| label10 = Height
+| data10 = {{{height|}}}
+| label11 = Spouse
+| data11 = {{{spouse|}}}
+| label12 = Children
+| data12 = {{{children|}}}
+| header13 = {{#if:{{{website|}}}{{{signature|}}}|Online presence}}
+| label14 = Website
+| data14 = {{{website|}}}
+| data15 = {{{footer|}}}
+| below = {{{module|}}}
+}}<noinclude>
+Wikipedia-style person infobox (test fixture).
+</noinclude>

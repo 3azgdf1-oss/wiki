@@ -1,0 +1,11 @@
+.ambox { border: 1px solid #a2a9b1; border-left: 10px solid #36c; background-color: #fbfbfb; box-sizing: border-box; margin: 0 10%; width: auto; }
+.ambox .mbox-text { border: none; padding: 0.25em 0.9em; width: 100%; }
+.ambox .mbox-image { border: none; padding: 2px 0 2px 0.9em; text-align: center; }
+.ambox-content { border-left-color: #f28500; }
+.navbox { box-sizing: border-box; border: 1px solid #a2a9b1; width: 100%; clear: both; font-size: 88%; text-align: center; padding: 1px; margin: 1em auto 0; }
+.navbox-title, .navbox-abovebelow, th.navbox-group { background-color: #ccf; }
+.navbox-list { background-color: #fdfdfd; }
+.navbox, .navbox-subgroup { background-color: #fdfdfd; }
+.navbox-group { white-space: nowrap; text-align: right; }
+.hlist ul { margin: 0; padding: 0; }
+.hlist li { display: inline; }

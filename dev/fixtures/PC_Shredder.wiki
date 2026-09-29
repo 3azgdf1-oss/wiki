@@ -1,0 +1,19 @@
+'''PC Shredder''' is the subject of this wiki. It is a fast-paced game about shredding armour, and the community has built a vast catalogue of guides.
+
+== Overview ==
+The game features multiple armour tiers, each with distinct breakpoints. See [[Armor Info]] for details, and the [[Shredder Hub Invitational]] for the yearly tournament. Founder [[Goober]] maintains the hub.
+
+== Gameplay ==
+Players choose a loadout and try to break armour as quickly as possible.
+# Pick a tier
+# Choose a shredder
+# Break the armour
+#* Fastest break wins
+#* Ties are settled by a tiebreaker
+
+; Term
+: Definition of the term used in the game.
+; Another term
+: Another definition.
+
+[[Category:Shredders]]

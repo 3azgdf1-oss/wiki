@@ -1,0 +1,49 @@
+/* Newer Wikipedia flavour: colours come from Wikimedia design-token custom properties with light fallbacks */
+.infobox {
+	background-color: var(--background-color-neutral-subtle, #f8f9fa);
+	border: 1px solid var(--border-color-base, #a2a9b1);
+	border-spacing: 3px;
+	color: var(--color-base, #202122);
+	margin: 0.5em 0 0.5em 1em;
+	padding: 0.2em;
+	float: right;
+	clear: right;
+	font-size: 88%;
+	line-height: 1.5em;
+	width: 22em;
+}
+.infobox-header,
+.infobox-label,
+.infobox-above,
+.infobox-full-data,
+.infobox-data,
+.infobox-below,
+.infobox-subheader,
+.infobox-image,
+.infobox th,
+.infobox td {
+	vertical-align: top;
+}
+.infobox-label,
+.infobox-data,
+.infobox th,
+.infobox td {
+	text-align: left;
+}
+.infobox .infobox-above,
+.infobox .infobox-title,
+.infobox caption {
+	font-size: 125%;
+	font-weight: bold;
+	text-align: center;
+}
+.infobox .infobox-header,
+.infobox .infobox-subheader,
+.infobox .infobox-image,
+.infobox .infobox-full-data,
+.infobox .infobox-below {
+	text-align: center;
+}
+.infobox-header {
+	background-color: var(--background-color-interactive-subtle, #eaecf0);
+}

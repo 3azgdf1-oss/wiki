@@ -1,0 +1,60 @@
+{{Infobox person
+| name = Goober
+| image = Goober.png
+| alt = Cartoon avatar of Goober
+| caption = Goober at the 2025 Shredder Hub Invitational
+| birth_name = Gerald Ubermann-Featherstonehaugh
+| birth_date = {{Birth date and age|1998|4|12}}
+| birth_place = Portland, Oregon, United States
+| nationality = American
+| other_names = "The Goob", "Goober the Unshreddable"
+| occupation = {{Plainlist|
+* Streamer
+* Level designer
+* Tournament organiser
+}}
+| years_active = 2016–present
+| employer = Independent
+| known_for = Founding the Shredder Hub community and setting the record for consecutive armour-break runs
+| notable_works = ''Armor Break 2'', ''Hub Rush'', ''The Supercalifragilisticexpialidocious Build Guide''
+| height = 1.83&nbsp;m (6&nbsp;ft 0&nbsp;in)
+| spouse = Marigold Ubermann (m. 2021)
+| children = 2
+| website = {{URL|https://example.com/goober-the-unshreddable/community/hub/archive/2025/invitational/results|goober-the-unshreddable.example.com}}
+}}
+'''Goober''' (born '''Gerald Ubermann-Featherstonehaugh'''; April 12, 1998) is an American streamer, level designer and tournament organiser best known for founding the '''Shredder Hub''' community and for holding the record for the most consecutive armour-break runs in ''PC Shredder''.<ref name="hub">{{cite web|title=Hub records|url=https://example.com/hub/records}}</ref> He has been described by fans as "the friendliest wall of noise on the internet".
+
+Goober's channel grew rapidly after a viral clip in 2019, and by 2025 he was organising the annual [[Shredder Hub Invitational]]. A very long unbroken identifier such as <code>Pneumonoultramicroscopicsilicovolcanoconiosis_and_other_extremely_long_tokens_that_cannot_wrap</code> is included here on purpose to test overflow handling.
+
+== Early life ==
+Goober was born in [[Portland, Oregon]], and grew up in a house with three computers, two cats and no working printer. He began modifying game levels at the age of eleven.<ref>Personal interview, 2024.</ref> His first community map, "Basement Blitz", attracted a small following on the early Hub forums.
+
+== Career ==
+=== Streaming ===
+Streaming began as a hobby in 2016. By 2019 the channel averaged four hundred concurrent viewers, and a clip of a flawless armour-break run was shared widely.<ref name="hub" />
+
+=== Competitive record ===
+{| class="wikitable sortable"
+! Year !! Event !! Placement !! Notes
+|-
+| 2022 || Hub Open || 3rd || First podium finish
+|-
+| 2023 || Shredder Masters || 1st || Set the consecutive armour-break record
+|-
+| 2024 || World Shred Cup || 2nd || Lost the final on a tiebreaker after a controversial ruling regarding pause buffering
+|-
+| 2025 || Hub Invitational || 1st || Organised and won the event
+|}
+
+== Personal life ==
+Goober lives in [[Portland, Oregon]] with his spouse and two children.
+
+== See also ==
+* [[Shredder Hub Invitational]]
+* [[PC Shredder]]
+
+== References ==
+<references />
+
+[[Category:Shredders]]
+[[Category:Streamers]]

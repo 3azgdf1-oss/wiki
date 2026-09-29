@@ -1,0 +1,828 @@
+<title>NightSky Skin Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a workbench. Page list on the left, and on the right a stage holding one scaled browser window per
+   skin version. Dark first, because the subject is a dark skin; the ink-black and violet come from NightSky itself. */
+:root {
+  --bg: #0a0a0d;
+  --panel: #111116;
+  --panel-2: #191920;
+  --stage: #050507;
+  --line: #262630;
+  --line-2: #3c3c4b;
+  --ink: #e8e8f0;
+  --ink-2: #b6b6c6;
+  --ink-3: #9696a8;
+  --accent: #a8a8f2;
+  --accent-fill: #5a5ac8;
+  --accent-on-fill: #ffffff;
+  --accent-wash: #1a1a34;
+  --before: #e2b24c;
+  --after: #5fd6ae;
+  --font-ui: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg: #f3f3f8;
+    --panel: #ffffff;
+    --panel-2: #ececf4;
+    --stage: #d8d8e4;
+    --line: #d8d8e4;
+    --line-2: #b4b4c8;
+    --ink: #16161e;
+    --ink-2: #444456;
+    --ink-3: #5a5a70;
+    --accent: #3a3aae;
+    --accent-fill: #4a4ac0;
+    --accent-on-fill: #ffffff;
+    --accent-wash: #e8e8fb;
+    --before: #8a5600;
+    --after: #0a7455;
+    color-scheme: light;
+  }
+}
+:root[data-theme="light"] {
+  --bg: #f3f3f8;
+  --panel: #ffffff;
+  --panel-2: #ececf4;
+  --stage: #d8d8e4;
+  --line: #d8d8e4;
+  --line-2: #b4b4c8;
+  --ink: #16161e;
+  --ink-2: #444456;
+  --ink-3: #5a5a70;
+  --accent: #3a3aae;
+  --accent-fill: #4a4ac0;
+  --accent-on-fill: #ffffff;
+  --accent-wash: #e8e8fb;
+  --before: #8a5600;
+  --after: #0a7455;
+  color-scheme: light;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font: 400 0.875rem/1.55 var(--font-ui);
+  -webkit-font-smoothing: antialiased;
+}
+button { font: inherit; color: inherit; }
+a { color: var(--accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.shell {
+  max-width: 1680px;
+  margin-inline: auto;
+  padding-inline: 16px;
+  padding-block: 28px 64px;
+  display: grid;
+  gap: 32px;
+}
+@media (min-width: 900px) { .shell { padding-inline: 32px; } }
+
+.label {
+  font: 500 0.7rem/1.2 var(--font-mono);
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* ---------- masthead ---------- */
+.mast { display: grid; gap: 14px; max-width: 78ch; }
+.mast h1 {
+  margin: 0;
+  font: 600 clamp(1.9rem, 4.6vw, 2.75rem)/1.05 var(--font-ui);
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+.mast h1 small {
+  font: 500 0.9rem/1 var(--font-mono);
+  letter-spacing: 0;
+  color: var(--ink-3);
+  margin-inline-start: 0.6em;
+  white-space: nowrap;
+}
+.mast h1 small s { text-decoration-thickness: 1px; }
+.lede { margin: 0; font-size: 1.0625rem; line-height: 1.55; color: var(--ink-2); text-wrap: pretty; }
+.disclosure {
+  margin: 0;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-inline-start: 3px solid var(--before);
+  background: var(--panel);
+  border-radius: 6px;
+  color: var(--ink-2);
+  text-wrap: pretty;
+}
+.disclosure strong { color: var(--ink); font-weight: 600; }
+
+/* ---------- the six requests ---------- */
+.asks { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr)); }
+.ask {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-rows: auto auto 1fr;
+  gap: 4px 12px;
+  align-items: start;
+  text-align: start;
+  padding: 14px 14px 12px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color 0.15s, background-color 0.15s;
+}
+.ask:hover { border-color: var(--accent); background: var(--accent-wash); }
+.ask-mark {
+  width: 22px; height: 22px; margin-top: 1px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  border: 1.5px solid var(--after);
+  color: var(--after);
+}
+.ask-mark svg { width: 12px; height: 12px; }
+.ask-title { font-weight: 600; color: var(--ink); }
+.ask-result { grid-column: 2; color: var(--ink-2); font-size: 0.8125rem; text-wrap: pretty; }
+.ask-go { grid-column: 2; align-self: end; margin-top: 4px; font: 500 0.72rem/1 var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+
+/* ---------- workbench ---------- */
+.bench { display: grid; grid-template-columns: 252px minmax(0, 1fr); gap: 24px; align-items: start; scroll-margin-top: 12px; }
+.rail { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 12px); display: grid; gap: 10px; min-width: 0; }
+.rail-head { display: grid; gap: 4px; }
+.rail-head p { margin: 0; font-size: 0.75rem; color: var(--ink-3); }
+.pagelist { display: grid; gap: 4px; }
+.page {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0 10px;
+  align-items: center;
+  text-align: start;
+  padding: 8px 10px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.page:hover { background: var(--panel-2); }
+.page[aria-current="true"] { background: var(--accent-wash); border-color: var(--accent-fill); }
+.page-name { font-weight: 500; color: var(--ink); overflow-wrap: anywhere; }
+.page-sub { grid-column: 1; font-size: 0.75rem; color: var(--ink-3); }
+.page-stat {
+  grid-row: 1 / span 2; grid-column: 2;
+  font: 500 0.7rem/1 var(--font-mono);
+  white-space: nowrap;
+  color: var(--ink-3);
+}
+.page-stat b { font-weight: 500; color: var(--before); }
+.page-stat i { font-style: normal; color: var(--after); }
+@media (max-width: 860px) {
+  .bench { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .rail { position: static; }
+  .pagelist { display: flex; overflow-x: auto; gap: 8px; padding-bottom: 6px; scroll-snap-type: x proximity; }
+  .page { flex: 0 0 auto; grid-template-columns: auto auto; gap: 0 12px; border-color: var(--line); background: var(--panel); scroll-snap-align: start; min-width: 148px; }
+  .page[aria-current="true"] { background: var(--accent-wash); border-color: var(--accent-fill); }
+}
+
+.stage { display: grid; gap: 16px; min-width: 0; }
+.controls { display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: end; }
+.control { display: grid; gap: 6px; }
+.seg { display: inline-flex; border: 1px solid var(--line-2); border-radius: 8px; overflow: hidden; background: var(--panel); }
+.seg button {
+  min-height: 38px;
+  padding: 0 14px;
+  background: transparent;
+  border: 0;
+  color: var(--ink-2);
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.seg button + button { border-inline-start: 1px solid var(--line); }
+.seg button small { font: 400 0.7rem/1 var(--font-mono); opacity: 0.8; margin-inline-start: 6px; }
+.seg button:hover:not([disabled]) { background: var(--panel-2); color: var(--ink); }
+.seg button[aria-checked="true"] { background: var(--accent-fill); color: var(--accent-on-fill); }
+.seg button[disabled] { opacity: 0.4; cursor: not-allowed; }
+.seg button:focus-visible { outline-offset: -3px; }
+
+.notes {
+  display: grid;
+  gap: 10px;
+  padding: 16px 18px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+.notes h2 { margin: 0; font: 600 1.25rem/1.2 var(--font-ui); letter-spacing: -0.01em; }
+.notes .scan { margin: 0; color: var(--ink-2); }
+.scan b { font: 500 0.95rem var(--font-mono); }
+.scan .n-old { color: var(--before); }
+.scan .n-new { color: var(--after); }
+.notes ul { margin: 0; padding-inline-start: 1.15em; display: grid; gap: 6px; color: var(--ink-2); max-width: 90ch; }
+.notes li { text-wrap: pretty; }
+.notes li::marker { color: var(--ink-3); }
+.notes code { font: 0.8125rem var(--font-mono); background: var(--panel-2); padding: 1px 5px; border-radius: 4px; }
+
+.panes { display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr); align-items: start; }
+.panes[data-count="2"] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 720px) { .panes[data-count="2"] { grid-template-columns: minmax(0, 1fr); } }
+.pane { margin: 0; min-width: 0; border: 1px solid var(--line); border-radius: 8px; background: var(--stage); overflow: hidden; }
+.pane-head {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px;
+  padding: 9px 12px;
+  background: var(--panel);
+  border-bottom: 1px solid var(--line);
+}
+.tag { font: 500 0.7rem/1 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 7px; border-radius: 4px; border: 1px solid currentColor; }
+.tag[data-ver="old"] { color: var(--before); }
+.tag[data-ver="new"] { color: var(--after); }
+.pane-name { color: var(--ink-2); font-size: 0.8125rem; min-width: 0; overflow-wrap: anywhere; }
+.pane-open { margin-inline-start: auto; font-size: 0.8125rem; white-space: nowrap; }
+.pane-body { min-width: 0; padding: 0; }
+.viewport { position: relative; overflow: hidden; margin-inline: auto; background: var(--stage); }
+.viewport[data-state="loading"], .viewport[data-state="error"] { min-height: 160px; }
+.viewport[data-state="loading"]::after {
+  content: "Loading snapshot";
+  position: absolute; inset: 0; display: grid; place-items: center;
+  font: 500 0.75rem var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3);
+}
+.frame { position: absolute; top: 0; left: 0; display: block; border: 0; transform-origin: 0 0; background: #050507; }
+.shot { display: block; width: 100%; height: auto; }
+.fail { display: grid; gap: 6px; padding: 24px 16px; text-align: center; color: var(--ink-2); }
+.hint { margin: 0; font-size: 0.75rem; color: var(--ink-3); }
+
+/* ---------- audit ---------- */
+.audit { display: grid; gap: 18px; }
+.audit h2 { margin: 0; font: 600 1.5rem/1.2 var(--font-ui); letter-spacing: -0.015em; }
+.audit > p { margin: 0; max-width: 72ch; color: var(--ink-2); text-wrap: pretty; }
+.groups { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); align-items: start; }
+.group { padding: 14px 16px 16px; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; min-width: 0; }
+.group h3 { margin: 0 0 8px; }
+.group ul { margin: 0; padding-inline-start: 1.1em; display: grid; gap: 7px; color: var(--ink-2); }
+.group li { text-wrap: pretty; }
+.group li::marker { color: var(--ink-3); }
+.group li b { color: var(--ink); font-weight: 600; }
+.group code { font: 0.78rem var(--font-mono); background: var(--panel-2); padding: 1px 5px; border-radius: 4px; overflow-wrap: anywhere; }
+
+.next { padding: 16px 18px; border: 1px solid var(--accent-fill); background: var(--accent-wash); border-radius: 8px; max-width: 78ch; }
+.next p { margin: 0; text-wrap: pretty; }
+.next p + p { margin-top: 6px; color: var(--ink-2); }
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
+</style>
+
+<div class="shell">
+  <header class="mast">
+    <p class="label">Preview build · nothing is packaged yet</p>
+    <h1>NightSky 1.2.0 <small>replaces <s>1.1.0</s></small></h1>
+    <p class="lede">Each page below is rendered twice by the same MediaWiki 1.46.0 test wiki: once with the skin exactly as you uploaded it, once with the fixed skin. Pick a page and compare. When it looks right, say so and I will build the installable zip.</p>
+    <p class="disclosure"><strong>About the sample wiki.</strong> pcshredder.wiki cannot be opened from the environment I work in, so I could not test on your live pages. Both versions run on a local MediaWiki 1.46.0 with SyntaxHighlight, TemplateStyles, Scribunto, WikiEditor and CodeEditor, using sample pages that reproduce what you described: a Goober article built with Wikipedia's Infobox person, syntax samples, and Recent changes. Links and forms inside the frames only move between these preview pages.</p>
+  </header>
+
+  <section aria-labelledby="asks-h">
+    <p class="label" id="asks-h" style="margin:0 0 10px">Your six requests</p>
+    <div class="asks" id="asks">
+      <button class="ask" type="button" data-page="main" data-view="new" data-width="desktop">
+        <span class="ask-mark" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.5l2.6 2.6L10 3.4"/></svg></span>
+        <span class="ask-title">Remove "Help about MediaWiki"</span>
+        <span class="ask-result">Gone from the Navigation menu. It is removed on the server, with a CSS fallback for wikis that add it back.</span>
+        <span class="ask-go">See the Main Page →</span>
+      </button>
+      <button class="ask" type="button" data-page="main" data-view="both" data-width="desktop">
+        <span class="ask-mark" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.5l2.6 2.6L10 3.4"/></svg></span>
+        <span class="ask-title">Tools on the other side, content fills the width</span>
+        <span class="ask-result">Tools is a right-hand column that stays in view while you scroll. The article uses all the space between the two columns.</span>
+        <span class="ask-go">Compare layouts →</span>
+      </button>
+      <button class="ask" type="button" data-page="goober" data-view="both" data-width="tablet">
+        <span class="ask-mark" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.5l2.6 2.6L10 3.4"/></svg></span>
+        <span class="ask-title">Fix the Goober infobox</span>
+        <span class="ask-result">Infobox person keeps its table markup and gets a proper dark theme. Labels no longer break, long values wrap inside their cells.</span>
+        <span class="ask-go">Compare the Goober page →</span>
+      </button>
+      <button class="ask" type="button" data-audit="1">
+        <span class="ask-mark" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.5l2.6 2.6L10 3.4"/></svg></span>
+        <span class="ask-title">Scan the skin for mistakes and bugs</span>
+        <span class="ask-result">28 problems found in 1.1.0, from a stylesheet that never loaded to markup that broke extensions. Each one is listed below.</span>
+        <span class="ask-go">Read the audit ↓</span>
+      </button>
+      <button class="ask" type="button" data-page="syntax" data-view="both" data-width="tablet">
+        <span class="ask-mark" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.5l2.6 2.6L10 3.4"/></svg></span>
+        <span class="ask-title">Syntax highlighter is too dark to read</span>
+        <span class="ask-result">Code samples use the extension's own night palette. 985 unreadable text runs on the syntax page are now 0.</span>
+        <span class="ask-go">Compare the code samples →</span>
+      </button>
+      <button class="ask" type="button" data-page="rc" data-view="both" data-width="tablet">
+        <span class="ask-mark" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.5l2.6 2.6L10 3.4"/></svg></span>
+        <span class="ask-title">Recent changes and other unreadable pages</span>
+        <span class="ask-result">No more white boxes with grey text or black on black. Across 43 pages, 1,799 unreadable text runs are now 0.</span>
+        <span class="ask-go">Compare Recent changes →</span>
+      </button>
+    </div>
+  </section>
+
+  <section class="bench" id="bench" aria-label="Page comparison">
+    <aside class="rail">
+      <div class="rail-head">
+        <p class="label">Pages</p>
+        <p>The pair on the right is unreadable text runs on that page, before and after.</p>
+      </div>
+      <nav class="pagelist" id="pagelist" aria-label="Preview pages"></nav>
+    </aside>
+
+    <div class="stage">
+      <div class="controls">
+        <div class="control">
+          <span class="label" id="lbl-view">Compare</span>
+          <div class="seg" id="seg-view" role="radiogroup" aria-labelledby="lbl-view">
+            <button type="button" role="radio" data-v="old">Before</button>
+            <button type="button" role="radio" data-v="new">After</button>
+            <button type="button" role="radio" data-v="both">Side by side</button>
+          </div>
+        </div>
+        <div class="control">
+          <span class="label" id="lbl-width">Screen width</span>
+          <div class="seg" id="seg-width" role="radiogroup" aria-labelledby="lbl-width">
+            <button type="button" role="radio" data-v="desktop">Desktop<small>1440</small></button>
+            <button type="button" role="radio" data-v="tablet">Tablet<small>1024</small></button>
+            <button type="button" role="radio" data-v="phone">Phone<small>390</small></button>
+          </div>
+        </div>
+        <div class="control">
+          <span class="label" id="lbl-render">Show as</span>
+          <div class="seg" id="seg-render" role="radiogroup" aria-labelledby="lbl-render">
+            <button type="button" role="radio" data-v="live">Live page</button>
+            <button type="button" role="radio" data-v="shot">Screenshot</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="notes" id="notes" aria-live="polite"></div>
+      <div class="panes" id="panes"></div>
+      <p class="hint" id="hint"></p>
+      <noscript><p class="hint">This preview needs JavaScript. The snapshots can also be opened directly: nightsky/main.html and nightskyold/main.html.</p></noscript>
+    </div>
+  </section>
+
+  <section class="audit" id="audit" aria-labelledby="audit-h">
+    <h2 id="audit-h">What was wrong in 1.1.0</h2>
+    <p>The scan covered the manifest, PHP class loading, all nine templates, all three stylesheets, the script, the LESS entry point and the docs. Every finding below is fixed in 1.2.0. Unreadable text was counted by an automatic check that measures the real contrast of every visible text run on 43 pages: 1,799 runs fell below 4.5:1 in 1.1.0, and none do now.</p>
+    <div class="groups">
+      <div class="group">
+        <h3 class="label">Layout and width</h3>
+        <ul>
+          <li><b>"Help about MediaWiki"</b> sat in the Navigation menu. It is now removed in PHP (<code>SkinNightSky::buildSidebar</code>), with a CSS fallback.</li>
+          <li><b>Tools</b> lived inside the left sidebar. It is now its own right-hand column, sticky on wide screens and under the article below 1100px.</li>
+          <li><b>Width.</b> The whole page was capped at 1320px, leaving empty margins on wide screens. The cap is gone and the article takes all the space between the columns.</li>
+          <li><b>Wide content.</b> Tables, code and images only scrolled sideways on phones. On desktop, a 40-column table made the 1.1.0 page about 2,000 to 2,600px wider than the window. Wide content now scrolls inside the article at every width.</li>
+        </ul>
+      </div>
+      <div class="group">
+        <h3 class="label">Unreadable colours</h3>
+        <ul>
+          <li><b>No design tokens.</b> Core, OOUI, Codex and extensions paint themselves with <code>var(--background-color-base, #fff)</code>. The skin defined none of those variables, so every such box fell back to white while the skin forced light text: the white-box, grey-text look on Recent changes, forms and buttons. <code>tokens.css</code> now defines all 142 colour tokens, and <code>dev/contrast-tokens.py</code> checks their pairs.</li>
+          <li><b>Dead LESS file.</b> <code>mediawiki.skin.variables.less</code> shipped but was never registered with <code>SkinLessImportPaths</code>, so MediaWiki ignored it. It is registered now.</li>
+          <li><b>No night-mode flag.</b> SyntaxHighlight, RCFilters, CodeEditor, Echo, VisualEditor and DiscussionTools only switch to their dark styles under <code>html.skin-theme-clientpref-night</code>. The skin never set it. It does now.</li>
+          <li><b>Syntax highlighter.</b> Light-theme token colours were drawn on the dark background. The extension's own night palette is on, and code blocks have explicit text and surface colours.</li>
+          <li><b>Forced light widgets.</b> OOUI windows, menus and search suggestions were pinned to <code>color-scheme: light</code>. They follow the dark surfaces now.</li>
+          <li><b>Invisible icons.</b> OOUI draws icons as dark SVG backgrounds. They are recoloured for dark surfaces, except a checkbox's tick.</li>
+          <li><b>Controls.</b> Disabled buttons were 1.2:1, unchecked checkboxes and radios were bright white boxes, and the sign-up headings were hard-coded black on black. All fixed.</li>
+          <li><b>Special-page tables.</b> Version, Statistics, group rights and similar pages use the <code>wikitable</code> class outside the article body. 1.1.0 only styled it inside articles, so those tables kept core's light background under light text.</li>
+          <li><b>Imported Wikipedia templates</b> (navbox, ambox, hatnote, sortable tables) hard-code light backgrounds. Dark rules now win over TemplateStyles, and a small script, <code>contrast.js</code>, keeps text legible on any light cell left in a page. Add <code>notheme</code> to opt out.</li>
+        </ul>
+      </div>
+      <div class="group">
+        <h3 class="label">Content markup</h3>
+        <ul>
+          <li><b>Infobox.</b> The skin styled <code>div.infobox</code>. Wikipedia's Infobox person outputs <code>table.infobox</code> with <code>infobox-label</code> and <code>infobox-data</code> cells, so the old rules squeezed the table into a fixed 265px box. Both markups are styled properly now.</li>
+          <li><b>Word wrapping.</b> Long words and web addresses wrap inside their own cell without shrinking a label column to a letter per line, and Recent changes no longer splits ordinary words mid-letter (core sets <code>word-break: break-all</code> there).</li>
+          <li><b>Headings.</b> Level-1 headings inside articles were underlined twice. Now once.</li>
+          <li><b>Main Page.</b> The automatic table of contents landed inside the first card, and <code>.card a</code> turned every link in a card into a call-to-action. The contents box is hidden there and only a card's closing link gets the arrow.</li>
+          <li><b>Article links.</b> Underlines now apply to real links, not red links or images, and red links keep their colour once visited.</li>
+        </ul>
+      </div>
+      <div class="group">
+        <h3 class="label">Templates, PHP and manifest</h3>
+        <ul>
+          <li><b>Extension content dropped.</b> None of the six portlet templates printed <code>html-before-portal</code>, where extensions insert their own markup.</li>
+          <li><b>Footer.</b> The template skipped the footer's "info" list, where extensions add their own lines, and dropped every list's class name (including <code>noprint</code> on the badges). It now renders info, places and icons.</li>
+          <li><b>Search.</b> The only submit button was named <code>fulltext</code>, so pressing Enter always searched the text and never jumped to an exact title. A hidden <code>go</code> button now comes first.</li>
+          <li><b>Landmarks.</b> <code>role="banner"</code> inside an <code>&lt;aside&gt;</code> and <code>role="navigation"</code> around nested <code>&lt;nav&gt;</code> elements gave screen readers extra, nested regions. Fixed.</li>
+          <li><b>Manifest.</b> The plain SkinMustache class became a small subclass with autoloading, the obsolete <code>targets</code> key is gone, and the core style features the CSS relies on are enabled (<code>accessibility</code>, <code>interface-core</code>, <code>interface-indicators</code>, <code>interface-edit-section-links</code>, <code>interface-user-message</code>, <code>i18n-*</code>).</li>
+        </ul>
+      </div>
+      <div class="group">
+        <h3 class="label">CSS hygiene</h3>
+        <ul>
+          <li><b>Repeated rules.</b> The page shell, content box, footer and background layers were each defined two or three times with different values, so the last copy silently overrode the first. They are merged.</li>
+          <li><b>Element selectors.</b> <code>footer</code> restyled any <code>&lt;footer&gt;</code> a page or extension contained. It is now <code>#footer</code>.</li>
+        </ul>
+      </div>
+      <div class="group">
+        <h3 class="label">Packaging and docs</h3>
+        <ul>
+          <li><b>Duplicate folder.</b> The 1.1.0 zip carried a second, older copy of the skin in <code>NightSky/NightSky/</code>. 1.2.0 ships one folder.</li>
+          <li><b>README</b> pointed to a preview file that is not in the package. Removed.</li>
+          <li><b>Test coverage.</b> 1.1.0 was validated against a wiki with no extensions installed, so the styling of SyntaxHighlight, TemplateStyles and the Recent changes filters was never exercised. 1.2.0 is tested with those extensions, and the new VALIDATION file lists only checks that were run.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="next" aria-label="Next step">
+    <p><strong>Next step.</strong> Tell me if this looks right or what to change. After you confirm, I will build <code>NightSky-1.2.0.zip</code> with a single <code>NightSky</code> folder and unchanged install steps.</p>
+    <p>The skin source is on branch <code>claude/pc-shredder-wiki-redesign-skyi0g</code> of your wiki repository, in the <code>NightSky</code> folder, with the test tooling in <code>dev</code>. Nothing has been uploaded to pcshredder.wiki.</p>
+  </section>
+</div>
+
+<script>
+(() => {
+  'use strict';
+  const NONCE = (document.currentScript && document.currentScript.nonce) || '';
+  const STORE = 'nightsky-preview-v1';
+
+  const VERSIONS = {
+    old: { dir: 'nightskyold', tag: 'Before', name: 'NightSky 1.1.0, as uploaded' },
+    new: { dir: 'nightsky', tag: 'After', name: 'NightSky 1.2.0, fixed' }
+  };
+  const WIDTHS = {
+    desktop: { px: 1440, start: 900, shot: 1440 },
+    tablet: { px: 1024, start: 800, shot: 0 },
+    phone: { px: 390, start: 800, shot: 390 }
+  };
+
+  // stat: unreadable text runs [1.1.0, 1.2.0]; shots: screenshots exist for this page
+  const PAGES = [
+    { id: 'main', name: 'Main Page', sub: 'Layout and cards', stat: [19, 0], shots: true, notes: [
+      'Tools is a right-hand column. The left column keeps Search, Navigation, Your account and Personal tools.',
+      '"Help about MediaWiki" is gone from Navigation.',
+      'The article runs the full width between the two columns. In 1.1.0 the whole page stopped at 1320px.',
+      'The contents box no longer lands inside the first card, so the three cards match in height.',
+      'The "Powered by MediaWiki" badge is visible again in the footer.'
+    ] },
+    { id: 'goober', name: 'Goober', sub: 'Infobox person', stat: [55, 0], shots: true, notes: [
+      'Wikipedia\'s table markup is kept and themed. In 1.1.0 the skin styled a different class name, so the template\'s own light grey cells showed through with near-invisible text.',
+      'Labels keep a steady column of about a third of the box. Values wrap inside their own cell, including the long web address and the long work title.',
+      'The box is capped at 22em and floats beside the lead, so the article text flows next to it.',
+      'The sortable Competitive record table keeps its sort arrows.'
+    ] },
+    { id: 'goober-bare', name: 'Goober, bare infobox', sub: 'No template CSS', stat: [3, 0], shots: true, notes: [
+      'The same article on a wiki that does not load the template\'s own stylesheet (no TemplateStyles).',
+      'The skin styles <code>table.infobox</code> by itself, so the box looks the same either way.'
+    ] },
+    { id: 'syntax', name: 'Syntax highlighting', sub: 'Highlighter colours', stat: [985, 0], shots: true, notes: [
+      'Code blocks use the extension\'s own night palette on a dark surface. In 1.1.0 colours made for a white page were drawn on black.',
+      'Every token colour is at least 4.5:1 against its background. The page had 985 unreadable text runs; it has none.',
+      'Line numbers and inline <code>code</code> use the same palette.'
+    ] },
+    { id: 'kitchen', name: 'Kitchen sink', sub: 'Every content element', stat: [72, 0], shots: true, notes: [
+      'One page with headings, lists, tables, quotes, code, images, message boxes, and Wikipedia-style navbox, ambox and hatnote templates.',
+      'Templates that hard-code light backgrounds are re-themed, and a small script keeps text readable on any light cell that remains.'
+    ] },
+    { id: 'rc', name: 'Recent changes', sub: 'Filters and change list', stat: [65, 0], shots: true, notes: [
+      'The filter bar, saved filters, legend, Live updates and the change list use dark surfaces. In 1.1.0 they were white boxes with grey text.',
+      'Size changes such as (+1,070) and the N and ! markers pass 4.5:1 too.',
+      'Rows no longer break words mid-letter (core sets <code>word-break: break-all</code> on these cells).'
+    ] },
+    { id: 'edit', name: 'Edit page', sub: 'WikiEditor', stat: [2, 0], shots: true, notes: [
+      'The toolbar, text area, summary box, checkboxes and buttons follow the dark tokens. Toolbar icons are recoloured for the dark surface.',
+      'Disabled buttons stay readable. They were 1.2:1.'
+    ] },
+    { id: 'prefs', name: 'Preferences', sub: 'Form widgets', stat: [21, 0], shots: true, notes: [
+      'Tabs, dropdowns, checkboxes, the appearance options and the buttons are dark and legible.',
+      'The form widgets get their colours from the shared tokens, so every extension that adds preferences follows along.'
+    ] },
+    { id: 'history', name: 'Page history', sub: 'Revision list', stat: [1, 0], shots: false, notes: [
+      'One unreadable text run in 1.1.0, none now. The rest of this page was already readable, so treat it as a regression check.'
+    ] },
+    { id: 'version', name: 'Special:Version', sub: 'Software tables', stat: [227, 0], shots: false, notes: [
+      'Special pages draw their tables with the <code>wikitable</code> class outside the article body, which 1.1.0 did not style. The software, extension and skin tables kept core\'s light table under light text: 227 unreadable runs.',
+      'They are dark now, and so is every other special page that uses those tables.'
+    ] },
+    { id: 'stats', name: 'Statistics', sub: 'Data tables', stat: [16, 0], shots: false, notes: [
+      'Same cause as Special:Version: a light core table under light text. 16 unreadable runs before, none now.'
+    ] },
+    { id: 'search', name: 'Search results', sub: 'Result list', stat: [7, 0], shots: false, notes: [
+      'Result titles, snippets and metadata are legible.',
+      'Pressing Enter in the sidebar search now jumps straight to an exact title; the Search button still runs a text search.'
+    ] },
+    { id: 'login', name: 'Log in', sub: 'Forms', stat: [0, 0], shots: false, notes: [
+      'This page was already readable in 1.1.0. It is here so you can check nothing regressed.'
+    ] }
+  ];
+  const BY_ID = Object.fromEntries(PAGES.map((p) => [p.id, p]));
+
+  const $ = (s, r = document) => r.querySelector(s);
+  const state = { page: 'main', view: 'both', width: 'desktop', render: 'live' };
+  const narrow = () => window.innerWidth < 700;
+
+  // ---- per-viewer convenience: remember the last choices ----
+  try {
+    const saved = JSON.parse(localStorage.getItem(STORE) || '{}');
+    if (BY_ID[saved.page]) state.page = saved.page;
+    if (['old', 'new', 'both'].includes(saved.view)) state.view = saved.view;
+    if (WIDTHS[saved.width]) state.width = saved.width;
+    if (['live', 'shot'].includes(saved.render)) state.render = saved.render;
+  } catch (e) { /* storage unavailable */ }
+  if (narrow()) state.width = 'phone';
+  const hash = (location.hash || '').slice(1);
+  if (BY_ID[hash]) state.page = hash;
+
+  const persist = () => { try { localStorage.setItem(STORE, JSON.stringify(state)); } catch (e) { /* ignore */ } };
+
+  // ---- code that runs inside each snapshot: reports its height and turns link clicks into messages ----
+  function bridge() {
+    var send = function (m) { m.__nsPreview = true; try { parent.postMessage(m, '*'); } catch (e) { /* ignore */ } };
+    var last = -1;
+    var measure = function () {
+      var de = document.documentElement, b = document.body;
+      var h = Math.ceil(Math.max(de ? de.scrollHeight : 0, b ? b.scrollHeight : 0));
+      if (h && Math.abs(h - last) > 1) { last = h; send({ type: 'height', h: h }); }
+    };
+    window.addEventListener('load', function () { measure(); setTimeout(measure, 300); setTimeout(measure, 1500); });
+    window.addEventListener('resize', measure);
+    if (window.ResizeObserver) { try { new ResizeObserver(measure).observe(document.documentElement); } catch (e) { /* ignore */ } }
+    document.addEventListener('click', function (e) {
+      var a = e.target && e.target.closest ? e.target.closest('a') : null;
+      if (!a) { return; }
+      var href = a.getAttribute('href') || '';
+      var m = /^([a-z0-9-]+)\.html$/.exec(href);
+      e.preventDefault();
+      if (m) { send({ type: 'go', page: m[1] }); return; }
+      if (href.charAt(0) === '#' && href.length > 1) {
+        var el = document.getElementById(decodeURIComponent(href.slice(1)));
+        if (el) { send({ type: 'anchor', y: el.getBoundingClientRect().top + (window.pageYOffset || 0) }); }
+      }
+    }, true);
+  }
+  const BRIDGE = '(' + bridge.toString() + ')();';
+  function prepare(html) {
+    const tag = '<script' + (NONCE ? ' nonce="' + NONCE + '"' : '') + '>' + BRIDGE + '<\/script>';
+    const i = html.lastIndexOf('</body>');
+    return i < 0 ? html + tag : html.slice(0, i) + tag + html.slice(i);
+  }
+
+  // ---- snapshots ----
+  const cache = new Map();
+  function fetchSnap(dir, id) {
+    const key = dir + '/' + id;
+    if (!cache.has(key)) {
+      cache.set(key, fetch(dir + '/' + id + '.html').then((r) => {
+        if (!r.ok) { throw new Error('HTTP ' + r.status); }
+        return r.text();
+      }).catch((err) => { cache.delete(key); throw err; }));
+    }
+    return cache.get(key);
+  }
+
+  let panes = [];
+  let generation = 0;
+
+  function el(tag, cls, text) {
+    const n = document.createElement(tag);
+    if (cls) { n.className = cls; }
+    if (text != null) { n.textContent = text; }
+    return n;
+  }
+
+  function buildPane(ver) {
+    const v = VERSIONS[ver];
+    const page = BY_ID[state.page];
+    const root = el('figure', 'pane');
+    const head = el('figcaption', 'pane-head');
+    const tag = el('span', 'tag', v.tag);
+    tag.dataset.ver = ver;
+    const open = el('a', 'pane-open', 'Full size ↗');
+    open.href = v.dir + '/' + page.id + '.html';
+    open.target = '_blank';
+    open.rel = 'noopener';
+    head.append(tag, el('span', 'pane-name', v.name), open);
+    const body = el('div', 'pane-body');
+    const viewport = el('div', 'viewport');
+    body.appendChild(viewport);
+    root.append(head, body);
+    return { ver, root, body, viewport, frame: null, img: null, frameH: WIDTHS[state.width].start, scale: 1, updates: 0, gotHeight: false, timer: 0 };
+  }
+
+  function layout(p) {
+    const w = WIDTHS[state.width].px;
+    const avail = p.body.clientWidth || w;
+    if (p.img) {
+      p.viewport.style.width = Math.min(avail, WIDTHS[state.width].shot) + 'px';
+      p.viewport.style.height = '';
+      return;
+    }
+    const s = Math.min(1, avail / w);
+    p.scale = s;
+    p.viewport.style.width = Math.round(w * s) + 'px';
+    p.viewport.style.height = Math.round(p.frameH * s) + 'px';
+    if (p.frame) {
+      p.frame.style.width = w + 'px';
+      p.frame.style.height = p.frameH + 'px';
+      p.frame.style.transform = 'scale(' + s + ')';
+    }
+  }
+  const layoutAll = () => panes.forEach(layout);
+
+  function fail(p, page) {
+    p.viewport.dataset.state = 'error';
+    p.viewport.style.width = '';
+    p.viewport.style.height = '';
+    const box = el('div', 'fail');
+    box.append(el('strong', '', 'This snapshot did not load.'));
+    const a = el('a', '', 'Open it in its own tab ↗');
+    a.href = VERSIONS[p.ver].dir + '/' + page.id + '.html';
+    a.target = '_blank';
+    a.rel = 'noopener';
+    box.appendChild(a);
+    if (page.shots) {
+      const b = el('button', '', 'Show the screenshot instead');
+      b.type = 'button';
+      b.className = 'pane-open';
+      b.addEventListener('click', () => { state.render = 'shot'; persist(); render(); });
+      box.appendChild(b);
+    }
+    p.viewport.replaceChildren(box);
+  }
+
+  function mountShot(p, page) {
+    const dev = WIDTHS[state.width].shot;
+    const img = el('img', 'shot');
+    img.alt = VERSIONS[p.ver].tag + ': ' + page.name + ' at ' + dev + 'px wide';
+    img.src = 'shots/' + VERSIONS[p.ver].dir + '/' + page.id + '-' + dev + '.jpg';
+    img.addEventListener('error', () => fail(p, page));
+    p.img = img;
+    p.viewport.dataset.state = 'ready';
+    p.viewport.appendChild(img);
+    layout(p);
+  }
+
+  function mountFrame(p, html) {
+    const f = el('iframe', 'frame');
+    f.title = VERSIONS[p.ver].name + ', ' + BY_ID[state.page].name;
+    f.setAttribute('sandbox', 'allow-scripts');
+    f.setAttribute('scrolling', 'no');
+    f.srcdoc = prepare(html);
+    f.addEventListener('load', () => {
+      p.viewport.dataset.state = 'ready';
+      // no height report means the bridge script was blocked: fall back to a fixed, scrollable window
+      p.timer = setTimeout(() => {
+        if (!p.gotHeight) { p.frameH = WIDTHS[state.width].start; f.setAttribute('scrolling', 'yes'); layout(p); }
+      }, 2500);
+    });
+    p.viewport.appendChild(f);
+    p.frame = f;
+    layout(p);
+  }
+
+  function load(p, gen) {
+    const page = BY_ID[state.page];
+    if (state.render === 'shot' && page.shots && WIDTHS[state.width].shot) { mountShot(p, page); return; }
+    p.viewport.dataset.state = 'loading';
+    fetchSnap(VERSIONS[p.ver].dir, page.id)
+      .then((html) => { if (gen === generation) { mountFrame(p, html); } })
+      .catch(() => { if (gen === generation) { fail(p, page); } });
+  }
+
+  function renderNotes() {
+    const page = BY_ID[state.page];
+    const box = $('#notes');
+    box.replaceChildren();
+    box.appendChild(el('h2', '', page.name));
+    const scan = el('p', 'scan');
+    scan.append('Unreadable text runs on this page: ');
+    const o = el('b', 'n-old', String(page.stat[0]));
+    const n = el('b', 'n-new', String(page.stat[1]));
+    scan.append(o, ' before, ', n, ' after.');
+    box.appendChild(scan);
+    const ul = el('ul');
+    page.notes.forEach((t) => { const li = el('li'); li.innerHTML = t; ul.appendChild(li); });
+    box.appendChild(ul);
+  }
+
+  function renderList() {
+    const list = $('#pagelist');
+    list.replaceChildren();
+    PAGES.forEach((p) => {
+      const b = el('button', 'page');
+      b.type = 'button';
+      b.dataset.id = p.id;
+      b.setAttribute('aria-label', p.name + ', ' + p.sub + '. Unreadable text runs: ' + p.stat[0] + ' before, ' + p.stat[1] + ' after.');
+      b.append(el('span', 'page-name', p.name), el('span', 'page-sub', p.sub));
+      const s = el('span', 'page-stat');
+      s.setAttribute('aria-hidden', 'true');
+      const bb = el('b', '', String(p.stat[0]));
+      const ii = el('i', '', String(p.stat[1]));
+      s.append(bb, ' → ', ii);
+      b.appendChild(s);
+      b.addEventListener('click', () => select(p.id));
+      list.appendChild(b);
+    });
+  }
+
+  function syncControls() {
+    const page = BY_ID[state.page];
+    document.querySelectorAll('#pagelist .page').forEach((b) => {
+      b.setAttribute('aria-current', b.dataset.id === state.page ? 'true' : 'false');
+    });
+    const shotOk = page.shots;
+    if (state.render === 'shot' && !shotOk) { state.render = 'live'; }
+    if (state.render === 'shot' && !WIDTHS[state.width].shot) { state.width = narrow() ? 'phone' : 'desktop'; }
+    const groups = { view: state.view, width: state.width, render: state.render };
+    for (const [key, val] of Object.entries(groups)) {
+      document.querySelectorAll('#seg-' + key + ' button').forEach((b) => {
+        b.setAttribute('aria-checked', String(b.dataset.v === val));
+      });
+    }
+    const shotBtn = $('#seg-render [data-v="shot"]');
+    shotBtn.disabled = !shotOk;
+    shotBtn.title = shotOk ? '' : 'No screenshot for this page; use the live page.';
+    const tabletBtn = $('#seg-width [data-v="tablet"]');
+    tabletBtn.disabled = state.render === 'shot';
+    tabletBtn.title = state.render === 'shot' ? 'Screenshots exist for Desktop and Phone only.' : '';
+    $('#hint').textContent = state.render === 'shot'
+      ? 'Screenshots are full-page captures at the exact screen width.'
+      : 'Live pages are frozen snapshots of the test wiki. Scroll the page, not the frame.';
+  }
+
+  function render() {
+    const gen = ++generation;
+    panes.forEach((p) => clearTimeout(p.timer));
+    syncControls();
+    renderNotes();
+    const host = $('#panes');
+    host.replaceChildren();
+    panes = [];
+    const vers = state.view === 'both' ? ['old', 'new'] : [state.view];
+    host.dataset.count = String(vers.length);
+    vers.forEach((v) => { const p = buildPane(v); panes.push(p); host.appendChild(p.root); });
+    layoutAll();
+    panes.forEach((p) => load(p, gen));
+  }
+
+  function select(id) {
+    if (!BY_ID[id]) { return; }
+    state.page = id;
+    persist();
+    render();
+    const cur = $('#pagelist .page[aria-current="true"]');
+    if (cur && cur.scrollIntoView) { cur.scrollIntoView({ block: 'nearest', inline: 'center' }); }
+  }
+
+  // ---- events ----
+  ['view', 'width', 'render'].forEach((key) => {
+    $('#seg-' + key).addEventListener('click', (e) => {
+      const b = e.target.closest('button');
+      if (!b || b.disabled) { return; }
+      state[key] = b.dataset.v;
+      persist();
+      render();
+    });
+  });
+
+  $('#asks').addEventListener('click', (e) => {
+    const b = e.target.closest('.ask');
+    if (!b) { return; }
+    if (b.dataset.audit) { $('#audit').scrollIntoView({ behavior: 'smooth', block: 'start' }); return; }
+    state.page = b.dataset.page;
+    state.view = narrow() ? 'both' : b.dataset.view;
+    state.width = narrow() ? 'phone' : b.dataset.width;
+    state.render = 'live';
+    persist();
+    render();
+    $('#bench').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  window.addEventListener('message', (e) => {
+    const d = e.data;
+    if (!d || d.__nsPreview !== true) { return; }
+    const p = panes.find((x) => x.frame && x.frame.contentWindow === e.source);
+    if (!p) { return; }
+    if (d.type === 'height' && typeof d.h === 'number') {
+      const h = Math.min(Math.max(Math.round(d.h), 320), 30000);
+      p.gotHeight = true;
+      clearTimeout(p.timer);
+      if (Math.abs(h - p.frameH) < 2 || p.updates > 12) { return; }
+      p.updates += 1;
+      p.frame.setAttribute('scrolling', 'no');
+      p.frameH = h;
+      layout(p);
+    } else if (d.type === 'go' && BY_ID[d.page]) {
+      select(d.page);
+    } else if (d.type === 'anchor' && typeof d.y === 'number') {
+      const top = p.viewport.getBoundingClientRect().top + window.scrollY + d.y * p.scale - 72;
+      window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+    }
+  });
+
+  if (window.ResizeObserver) { new ResizeObserver(layoutAll).observe($('#panes')); }
+  else { window.addEventListener('resize', layoutAll); }
+
+  renderList();
+  render();
+})();
+</script>

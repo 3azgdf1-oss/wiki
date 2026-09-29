@@ -1,0 +1,80 @@
+[
+ {
+  "id": "main",
+  "title": "Main Page",
+  "path": "/Main_Page",
+  "login": false
+ },
+ {
+  "id": "goober",
+  "title": "Goober (Infobox person)",
+  "path": "/Goober",
+  "login": false
+ },
+ {
+  "id": "goober-bare",
+  "title": "Goober (infobox without any CSS)",
+  "path": "/Goober_(no_TemplateStyles)",
+  "login": false
+ },
+ {
+  "id": "syntax",
+  "title": "Syntax highlighting",
+  "path": "/Syntax_test",
+  "login": false
+ },
+ {
+  "id": "kitchen",
+  "title": "Kitchen sink (all content elements)",
+  "path": "/Kitchen_sink",
+  "login": false
+ },
+ {
+  "id": "rc",
+  "title": "Recent changes",
+  "path": "/Special:RecentChanges",
+  "login": true
+ },
+ {
+  "id": "edit",
+  "title": "Edit page (WikiEditor)",
+  "path": "/index.php?title=Goober&action=edit",
+  "login": true
+ },
+ {
+  "id": "prefs",
+  "title": "Preferences",
+  "path": "/Special:Preferences",
+  "login": true
+ },
+ {
+  "id": "history",
+  "title": "Page history",
+  "path": "/index.php?title=Goober&action=history",
+  "login": false
+ },
+ {
+  "id": "version",
+  "title": "Special:Version",
+  "path": "/Special:Version",
+  "login": false
+ },
+ {
+  "id": "stats",
+  "title": "Special:Statistics",
+  "path": "/Special:Statistics",
+  "login": false
+ },
+ {
+  "id": "search",
+  "title": "Search results",
+  "path": "/index.php?title=Special:Search&search=Goober&fulltext=1",
+  "login": false
+ },
+ {
+  "id": "login",
+  "title": "Log in",
+  "path": "/index.php?title=Special:UserLogin",
+  "login": false
+ }
+]

@@ -1,0 +1,22 @@
+{{Infobox person
+| styles = none
+| name = Goober (no TemplateStyles)
+| image = Goober.png
+| caption = Same infobox, but the wiki has no infobox CSS at all
+| birth_name = Gerald Ubermann-Featherstonehaugh
+| birth_date = {{Birth date and age|1998|4|12}}
+| birth_place = Portland, Oregon, United States
+| nationality = American
+| occupation = {{Plainlist|
+* Streamer
+* Level designer
+}}
+| years_active = 2016–present
+| known_for = Founding the Shredder Hub community and setting the record for consecutive armour-break runs
+| notable_works = ''Armor Break 2'', ''Hub Rush''
+| website = {{URL|https://example.com/goober-the-unshreddable/community/hub/archive|goober.example.com}}
+}}
+'''Goober''' page with **no** infobox stylesheet, so the skin's own styles must make the bare table look right.
+
+== Section ==
+Body text next to the infobox. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.

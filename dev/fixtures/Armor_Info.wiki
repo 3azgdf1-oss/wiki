@@ -1,0 +1,17 @@
+'''Armor Info''' lists every armour tier.
+
+{| class="wikitable sortable" style="width:100%"
+! Tier !! HP !! Weak to !! Resist !! Patch introduced !! Notes !! Community rating !! Very long column heading that should wrap gracefully
+|-
+| Bronze || 100 || Slash || Blunt || 1.0 || Starter armour with an unusually long note that forces the table to consider how it wraps text across several lines of the cell || 3.5 || –
+|-
+| Silver || 250 || Pierce || Slash || 1.2 || Common || 4.0 || –
+|-
+| Gold || 600 || Blunt || Pierce || 1.5 || Rare || 4.5 || –
+|-
+| Mythic || 2000 || Everything || Nothing || 2.0 || Endgame || 5.0 || –
+|}
+
+See also [[PC Shredder]].
+
+[[Category:Shredders]]

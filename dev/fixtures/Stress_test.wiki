@@ -1,0 +1,29 @@
+Stress test for overflow handling.
+
+== Very wide table (40 columns) ==
+{| class="wikitable"
+! Column 0 heading !! Column 1 heading !! Column 2 heading !! Column 3 heading !! Column 4 heading !! Column 5 heading !! Column 6 heading !! Column 7 heading !! Column 8 heading !! Column 9 heading !! Column 10 heading !! Column 11 heading !! Column 12 heading !! Column 13 heading !! Column 14 heading !! Column 15 heading !! Column 16 heading !! Column 17 heading !! Column 18 heading !! Column 19 heading !! Column 20 heading !! Column 21 heading !! Column 22 heading !! Column 23 heading !! Column 24 heading !! Column 25 heading !! Column 26 heading !! Column 27 heading !! Column 28 heading !! Column 29 heading !! Column 30 heading !! Column 31 heading !! Column 32 heading !! Column 33 heading !! Column 34 heading !! Column 35 heading !! Column 36 heading !! Column 37 heading !! Column 38 heading !! Column 39 heading
+|-
+| r0c0 value text || r0c1 value text || r0c2 value text || r0c3 value text || r0c4 value text || r0c5 value text || r0c6 value text || r0c7 value text || r0c8 value text || r0c9 value text || r0c10 value text || r0c11 value text || r0c12 value text || r0c13 value text || r0c14 value text || r0c15 value text || r0c16 value text || r0c17 value text || r0c18 value text || r0c19 value text || r0c20 value text || r0c21 value text || r0c22 value text || r0c23 value text || r0c24 value text || r0c25 value text || r0c26 value text || r0c27 value text || r0c28 value text || r0c29 value text || r0c30 value text || r0c31 value text || r0c32 value text || r0c33 value text || r0c34 value text || r0c35 value text || r0c36 value text || r0c37 value text || r0c38 value text || r0c39 value text
+|-
+| r1c0 value text || r1c1 value text || r1c2 value text || r1c3 value text || r1c4 value text || r1c5 value text || r1c6 value text || r1c7 value text || r1c8 value text || r1c9 value text || r1c10 value text || r1c11 value text || r1c12 value text || r1c13 value text || r1c14 value text || r1c15 value text || r1c16 value text || r1c17 value text || r1c18 value text || r1c19 value text || r1c20 value text || r1c21 value text || r1c22 value text || r1c23 value text || r1c24 value text || r1c25 value text || r1c26 value text || r1c27 value text || r1c28 value text || r1c29 value text || r1c30 value text || r1c31 value text || r1c32 value text || r1c33 value text || r1c34 value text || r1c35 value text || r1c36 value text || r1c37 value text || r1c38 value text || r1c39 value text
+|-
+| r2c0 value text || r2c1 value text || r2c2 value text || r2c3 value text || r2c4 value text || r2c5 value text || r2c6 value text || r2c7 value text || r2c8 value text || r2c9 value text || r2c10 value text || r2c11 value text || r2c12 value text || r2c13 value text || r2c14 value text || r2c15 value text || r2c16 value text || r2c17 value text || r2c18 value text || r2c19 value text || r2c20 value text || r2c21 value text || r2c22 value text || r2c23 value text || r2c24 value text || r2c25 value text || r2c26 value text || r2c27 value text || r2c28 value text || r2c29 value text || r2c30 value text || r2c31 value text || r2c32 value text || r2c33 value text || r2c34 value text || r2c35 value text || r2c36 value text || r2c37 value text || r2c38 value text || r2c39 value text
+|}
+
+== Wide fixed-width block ==
+<div style="width:3000px;background:#1a1a2e;padding:1rem">This block is 3000px wide on purpose.</div>
+
+== Long pre line ==
+<pre>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</pre>
+
+== Long unbroken URL and word ==
+https://example.com/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa and a word: WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
+
+== Right-floated infobox next to a wide table ==
+{{Infobox person|name=Float test|birth_place=Somewhere}}
+{| class="wikitable"
+! A !! B !! C
+|-
+| 1 || 2 || 3
+|}

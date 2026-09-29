@@ -1,0 +1,11 @@
+{{Infobox person
+| styles = tokens
+| name = Goober (tokens variant)
+| image = Goober.png
+| caption = Same infobox, newer Wikipedia CSS (design-token variables)
+| birth_date = {{Birth date and age|1998|4|12}}
+| birth_place = Portland, Oregon, United States
+| occupation = Streamer, level designer
+| known_for = Founding the Shredder Hub community
+}}
+'''Goober''' page using the newer token-based infobox stylesheet.

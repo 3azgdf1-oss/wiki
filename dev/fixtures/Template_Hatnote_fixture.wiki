@@ -1,0 +1,1 @@
+<div role="note" class="hatnote navigation-not-searchable">This is a hatnote. For other uses, see [[Goober]].</div><noinclude>Hatnote.</noinclude>

@@ -1,0 +1,45 @@
+<div class="wiki-lead">Welcome to the PC Shredder community knowledge base. Browse the guides, check the latest changes, or help improve an article.</div>
+
+<div class="card-grid">
+<div class="card">
+=== Getting started ===
+Learn the basics of PC Shredder and find your way around the wiki.
+
+[[PC Shredder|Read the guide]]
+</div>
+<div class="card">
+=== Shredder Hub ===
+Meet the contributors and browse community-made shredders.
+
+[[Shredder Hub Invitational|Community hub]]
+</div>
+<div class="card">
+=== Armor info ===
+Stats, breakpoints and patch history for every armor tier.
+
+[[Armor Info|View armor]]
+</div>
+</div>
+
+== Featured people ==
+* [[Goober]] – streamer and Hub founder
+* [[Goober (tokens variant)]] – same infobox, newer CSS
+
+== Reference ==
+{| class="wikitable"
+! Topic !! Description !! Status
+|-
+| [[Armor Info|Armor]] || Damage tables and patch notes || <span class="status-badge status-active">Active</span>
+|-
+| [[Special:RecentChanges|Recent changes]] || See the latest updates || <span class="status-badge status-patched">Patched</span>
+|-
+| [[Syntax test|Syntax highlighting]] || Code sample page || <span class="status-badge status-high">High</span>
+|}
+
+== Site status ==
+<div class="callout callout-note"><strong>Note:</strong> This is a note callout.</div>
+<div class="callout callout-tip"><strong>Tip:</strong> Tips look like this.</div>
+<div class="callout callout-warning"><strong>Warning:</strong> Warnings look like this.</div>
+<div class="callout callout-important"><strong>Important:</strong> Important notes look like this.</div>
+
+[[Category:Shredders]]

@@ -9,7 +9,7 @@ Everything here is for developing and checking the skin. None of it is installed
 | `validate-manifest.py` | Validates `skin.json` against MediaWiki's `extension.schema.v2.json` and checks the files it names exist. |
 | `scan-contrast.mjs` | Measures the real contrast of every visible text node on the given pages. |
 | `scan-all.sh` | Runs the scanner over 43 pages for the skin under test and the 1.1.0 copy, and prints a summary. |
-| `check-layout.mjs` | 44 layout and behaviour checks: columns, widths, no sideways scroll, infobox, syntax colours, search, mobile menu, print, right-to-left. |
+| `check-layout.mjs` | 47 layout and behaviour checks: columns, widths, search-bar size, no sideways scroll, infobox, syntax colours, search, mobile menu, print, right-to-left. |
 | `export-static.mjs` | Saves every preview page as one self-contained HTML file (inline CSS and images, no scripts). |
 | `verify-snapshots.mjs` | Confirms the snapshots load from disk with the network blocked. |
 | `screenshots.mjs` | Full-page JPEG screenshots at 1440px and 390px. |
@@ -61,7 +61,7 @@ The browser scripts use Playwright and Chromium, and read `NODE_PATH` to find th
 ```bash
 export NODE_PATH=$(npm root -g)                         # after `npm i -g playwright && npx playwright install chromium`
 node dev/check-layout.mjs                               # exit status 1 if any check fails
-node dev/check-layout.mjs --skin nightskyold            # the same suite on 1.1.0: 15 failures expected
+node dev/check-layout.mjs --skin nightskyold            # the same suite on 1.1.0: 12 failures expected
 dev/scan-all.sh                                         # contrast of 43 pages, both skins
 node dev/scan-contrast.mjs --pages "Goober,Special:Version" --verbose 1   # a few pages, with detail
 ```

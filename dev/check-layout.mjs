@@ -64,50 +64,60 @@ for ( const p of PAGES ) {
 	check( bad.length === 0, `no horizontal page scroll  ${ p }`, bad.join( ', ' ) || `${ WIDTHS.length } widths` );
 }
 
-// ---------------------------------------------------------------- 2. columns: navigation | content | tools
+// ---------------------------------------------------------------- 2. columns: navigation | content
+// The sidebar (search, navigation, Tools, account) is one column on the left; the article fills the rest.
 await open( '/Main_Page', 1440 );
 {
 	const nav = await rect( '#mw-navigation' );
 	const content = await rect( '#content' );
-	const tools = await rect( '#mw-tools' );
-	check( !!tools, 'Tools column exists' );
 	check( nav && content && nav.right <= content.left, 'navigation is left of the article' );
-	check( tools && content && tools.left >= content.right, 'Tools is right of the article' );
-	const inSidebar = await page.evaluate( () => !!document.querySelector( '#mw-navigation #p-tb' ) );
-	check( !inSidebar, 'Tools is no longer inside the left sidebar' );
-	check( content && content.width / 1440 >= 0.6, 'article uses at least 60% of a 1440px window', content && `${ Math.round( content.width ) }px` );
+	check( !( await rect( '#mw-tools' ) ), 'there is no separate right-hand column' );
+	const order = await page.evaluate( ( sel ) => [ ...document.querySelectorAll( sel + ' > *' ) ].map( ( e ) => e.id ), sidebarSel );
+	const at = ( id ) => order.indexOf( id );
+	check( at( 'p-tb' ) > at( 'p-navigation' ) && at( 'p-navigation' ) > at( 'p-search' ), 'Tools is in the left sidebar, below Navigation', order.join( ' > ' ) );
+	check( nav && nav.width <= 200.5, 'sidebar is at most 200px wide', nav && `${ nav.width }px` );
+	check( content && content.width / 1440 >= 0.8, 'article uses at least 80% of a 1440px window', content && `${ Math.round( content.width ) }px` );
+	// The search bar must not get smaller than it was in 1.2.0 (190px wide, input 34px and button 31px tall)
+	const input = await rect( '#searchInput' );
+	const button = await rect( '#searchButton' );
+	check( input && input.width >= 189.8 && input.height >= 34, 'search input is not smaller than before', input && `${ input.width.toFixed( 1 ) } x ${ input.height.toFixed( 1 ) }px` );
+	check( button && button.width >= 189.8 && button.height >= 31, 'search button is not smaller than before', button && `${ button.width.toFixed( 1 ) } x ${ button.height.toFixed( 1 ) }px` );
+	// Slimmer rows than 1.2.0 (34px links, 30.2px headings)
+	const rows = await page.evaluate( () => ( {
+		link: Math.max( ...[ ...document.querySelectorAll( '#p-navigation li a, #p-tb li a' ) ].map( ( a ) => a.getBoundingClientRect().height ) ),
+		head: Math.max( ...[ ...document.querySelectorAll( '#p-navigation .wiki-sidebar-head, #p-tb .wiki-sidebar-head' ) ].map( ( h ) => h.getBoundingClientRect().height ) )
+	} ) );
+	check( rows.link <= 31.5 && rows.head <= 28, 'sidebar rows and headings are slimmer than 1.2.0', `links ${ rows.link.toFixed( 1 ) }px, headings ${ rows.head.toFixed( 1 ) }px` );
 }
 await open( '/Main_Page', 1920 );
 {
 	const content = await rect( '#content' );
-	check( content && content.width / 1920 >= 0.7, 'article uses at least 70% of a 1920px window', content && `${ Math.round( content.width ) }px` );
+	check( content && content.width / 1920 >= 0.85, 'article uses at least 85% of a 1920px window', content && `${ Math.round( content.width ) }px` );
 }
 await open( '/Main_Page', 1024 );
 {
+	const nav = await rect( '#mw-navigation' );
 	const content = await rect( '#content' );
-	const tools = await rect( '#mw-tools' );
-	check( tools && content && tools.top >= content.bottom - 1, 'below 1100px Tools moves under the article' );
+	check( nav && content && nav.right <= content.left, 'tablet (1024px): sidebar stays on the left' );
 }
 await open( '/Main_Page', 390 );
 {
 	const nav = await rect( '#mw-navigation' );
 	const content = await rect( '#content' );
-	const tools = await rect( '#mw-tools' );
-	check( nav && content && tools && nav.bottom <= content.top + 1 && tools.top >= content.bottom - 1, 'phone: one column, navigation then article then Tools' );
+	check( nav && content && nav.bottom <= content.top + 1, 'phone: one column, navigation above the article' );
 }
 await open( '/Main_Page', 1440, '&uselang=ar' );
 {
 	const nav = await rect( '#mw-navigation' );
 	const content = await rect( '#content' );
-	const tools = await rect( '#mw-tools' );
-	check( nav && content && tools && nav.left >= content.right && tools.right <= content.left, 'right-to-left (Arabic): columns mirror' );
+	check( nav && content && nav.left >= content.right, 'right-to-left (Arabic): the sidebar moves to the right' );
 }
 
 // ---------------------------------------------------------------- 3. Help about MediaWiki is gone
 await open( '/Main_Page', 1440 );
 check( await page.evaluate( () => !document.querySelector( '#n-help-mediawiki' ) ), 'no #n-help-mediawiki element in the page' );
 check( await page.evaluate( () => !/Help about MediaWiki/i.test( document.querySelector( '#mw-navigation' ).innerText ) ), '"Help about MediaWiki" is not shown' );
-check( await page.evaluate( () => document.querySelectorAll( '#mw-navigation #p-tb li, #mw-tools li' ).length > 0 ), 'Tools still has its links' );
+check( await page.evaluate( () => document.querySelectorAll( '#mw-navigation #p-tb li' ).length >= 5 ), 'Tools still has its links' );
 check( await page.evaluate( () => !document.body.innerText.includes( '⧼' ) ), 'no unresolved message placeholders (⧼…⧽)' );
 
 // ---------------------------------------------------------------- 4. skin plumbing

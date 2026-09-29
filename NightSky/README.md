@@ -26,6 +26,7 @@ Requires access to your server's skins directory and LocalSettings.php. This pac
 - **Centre:** page tabs, then the article, which uses all the width between the two side columns.
 - **Right column:** the Tools box (What links here, Special pages, Printable version ...). It stays in view while you scroll on wide screens, moves under the article below 1100px, and stacks everything in one column on phones.
 - The stock "Help about MediaWiki" sidebar link is not shown. Remove it for good by deleting that line from `MediaWiki:Sidebar`.
+- The small "Help" links that core adds at the top right of some special pages and forms (Recent changes, for example) are still shown, because they are part of those pages. To hide them as well, add `.mw-helplink { display: none; }` to `MediaWiki:NightSky.css`.
 
 ## Configure
 
